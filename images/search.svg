@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="70px" height="36px" viewBox="0 0 70 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>搜索</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="资产登记" transform="translate(-285.000000, -80.000000)">
+            <g id="搜索" transform="translate(285.000000, 80.000000)">
+                <rect id="矩形" fill="#0167FF" x="0" y="0" width="70" height="36" rx="18"></rect>
+                <g transform="translate(36.000000, 18.000000) rotate(-45.000000) translate(-36.000000, -18.000000) translate(28.000000, 7.000000)" id="编组-2" stroke="#FFFFFF">
+                    <circle id="椭圆形" stroke-width="2" cx="8" cy="8" r="7"></circle>
+                    <rect id="矩形" x="7.5" y="14.5" width="1" height="7" rx="0.5"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

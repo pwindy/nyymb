@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="45px" height="45px" viewBox="0 0 45 45" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>电网</title>
+    <desc>Created with Sketch.</desc>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="电网">
+            <rect id="矩形备份-13" stroke="#133A6E" fill="#082955" x="0.5" y="0.5" width="44" height="44" rx="2"></rect>
+            <text id="电-网" font-family="SourceHanSansCN-Regular, Source Han Sans CN" font-size="10" font-weight="normal" letter-spacing="0.625" fill="#7F94B2">
+                <tspan x="10.7" y="39.1">电 网</tspan>
+            </text>
+            <g id="编组" transform="translate(9.000000, 4.080000)" fill="#4179CC" fill-rule="nonzero">
+                <path d="M23.706,20.808 L20.79,11.016 L24.3,9.792 L24.3,4.896 L18.9945,4.896 L17.55,0 L9.45,0 L8.0055,4.896 L2.7,4.896 L2.7,9.792 L6.21,11.016 L3.294,20.808 L0,20.808 L0,24.48 L27,24.48 L27,20.808 L23.706,20.808 Z M21.6,7.344 L21.6,8.0784 L20.088,8.568 L19.7235,7.344 L21.6,7.344 Z M13.5,10.74672 L9.45,9.41256 L10.071,7.344 L16.929,7.344 L17.55,9.41256 L13.5,10.74672 Z M11.5155,2.448 L15.4845,2.448 L16.2,4.896 L10.8,4.896 L11.5155,2.448 Z M5.4,8.0784 L5.4,7.344 L7.2765,7.344 L6.912,8.568 L5.4,8.0784 Z M13.5,13.35384 L18.2385,11.78712 L19.9935,17.72352 L13.5,14.96952 L7.0065,17.72352 L8.7615,11.78712 L13.5,13.35384 Z M6.0885,20.808 L13.5,17.67456 L20.898,20.808 L6.0885,20.808 Z" id="形状"></path>
+                <path d="M2.7,2.04 L5.4,2.04 L5.4,8.16 L2.7,8.16 L2.7,2.04 Z M21.6,2.04 L24.3,2.04 L24.3,8.16 L21.6,8.16 L21.6,2.04 Z" id="形状"></path>
+            </g>
+        </g>
+    </g>
+</svg>

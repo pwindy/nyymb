@@ -1,0 +1,273 @@
+@charset "utf-8";
+@charset "utf-8";
+
+/*重置*/
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+dl,
+dd,
+dt,
+p,
+ul,
+li,
+ol {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-weight: normal;
+}
+
+img {
+    border: none;
+}
+
+a {
+    text-decoration: none;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+}
+
+li {
+    list-style-type: none;
+}
+
+body,
+html {
+    width: 100%;
+    height: 100%;
+}
+
+
+html,
+body {
+    overflow: auto;
+}
+
+
+
+input {
+    border: none;
+    margin: 0;
+    outline: none;
+    padding: 0;
+    appearance: none;
+}
+
+
+#container.logo {
+    max-width: 750px;
+    height: 100%;
+    margin: auto;
+    overflow-x: hidden;
+    background-image: linear-gradient(180deg, #001F48 0%, #001534 100%, #001534 100%);
+    /*解决ios上滑动不流畅*/
+    -webkit-overflow-scrolling: touch;
+}
+
+#container.logo::-webkit-scrollbar {
+    /*隐藏滚轮*/
+    display: none;
+    width: 0px;
+}
+
+#container .logo_01 {
+    height: 100%;
+    width: 100%;
+}
+
+/*主屏幕*/
+.logo_screen {
+    height: 100%;
+    margin: 0 12%;
+    width: 76%;
+    position: relative;
+    overflow-x: hidden;
+    /*解决ios上滑动不流畅*/
+    -webkit-overflow-scrolling: touch;
+}
+
+.logo_screen::-webkit-scrollbar {
+    /*隐藏滚轮*/
+    display: none;
+    width: 0px;
+}
+
+.logo_screen .tit_first {
+    width: 100%;
+    font-weight: 320;
+    font-size: 0.6rem;
+    color: #0167FF;
+    letter-spacing: 3.75px;
+    margin: 2.5rem 0 0.1rem 0;
+}
+
+.logo_screen .tit_second {
+    width: 100%;
+    font-weight: 600;
+    font-size: 0.32rem;
+    color: #fff;
+    letter-spacing: 2px;
+}
+
+.logo_screen .dl {
+    width: 100%;
+    font-weight: bold;
+    font-size: 0.48rem;
+    color: #fff;
+    letter-spacing: 3px;
+    margin: 1rem 0 1rem 0;
+}
+
+.logo_screen .inputdiv {
+    width: 100%;
+}
+
+.logo_screen .inputdiv input {
+    width: 100%;
+    border-bottom: 1px solid #1C2C44;
+    height: 0.7rem;
+    display: block;
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    margin-bottom: 0.4rem;
+    text-indent: 0.2rem;
+    background-color: rgb(0, 26, 63);
+    color: #fff;
+    font-size: 0.3rem;
+}
+
+.logo_screen .inputdiv input::-webkit-input-placeholder {
+    color: #66768D;
+    letter-spacing: 1.75px;
+    font-size: 0.28rem;
+}
+
+.logo_screen .inputdiv input::-moz-placeholder {
+    color: #66768D;
+    letter-spacing: 1.75px;
+    font-size: 0.28rem;
+}
+
+.logo_screen .inputdiv input::-ms-input-placeholder {
+    color: #66768D;
+    letter-spacing: 1.75px;
+    font-size: 0.28rem;
+}
+
+.tableAuto {
+    padding-top: 4px;
+    margin: 0 0 14px;
+}
+
+.tableAuto a {
+    color: #999;
+}
+
+.logo_screen .remindme {
+    width: 100%;
+    padding-top: 0.08rem;
+    margin: 0 0 0.28rem;
+    height: 0.35rem;
+}
+
+.logo_screen .remindme div.zdtl {
+    font-size: 0.28rem;
+    color: #7F94B2;
+    letter-spacing: 1.5px;
+    float: right;
+
+}
+
+
+.logo_screen .remindme div.zdtl input.zdinput[type=checkbox] {
+    margin: -0.05rem 0.1rem 0 0;
+    width: 0.35rem;
+    height: 0.35rem;
+    vertical-align: middle;
+}
+
+.logo_screen .remindme div.zdtl input.input[type=checkbox]::after {
+    position: absolute;
+    top: 0;
+    background-color: red;
+    color: #000;
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    visibility: visible;
+    padding-left: 0px;
+    text-align: center;
+    content: ' ';
+    border-radius: 3px
+}
+
+
+.logo_screen .remindme span {
+    float: right;
+    font-size: 0.24rem;
+    color: #666666;
+    letter-spacing: 1.5px;
+    height: 0.3rem;
+}
+
+.logo_screen #regBtn {
+
+    /* width: 100%;
+    display: none;
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+    transition: all .3s cubic-bezier(.645, .045, .355, 1);
+    user-select: none;
+    touch-action: manipulation;
+    height: 0.64rem;
+    line-height: 0.64rem;
+    font-size: 0.28rem;
+    border-radius: 0.08rem;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .12);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, .045);
+    margin-top: 0.3rem; */
+
+
+
+
+
+    width: 100%;
+    text-align: center;
+    padding: 0.3rem 0;
+    background: #0167FF;
+    border-radius: 0.6rem;
+    font-size: 0.36rem;
+    color: #FFFFFF;
+    letter-spacing: 2.25px;
+    margin-top: 0.8rem;
+    border: 0 none;
+
+}
+
+
+.logo_screen #regBtn.btnclass {
+    background-color: rgb(1, 103, 255);
+    border-color: rgb(1, 103, 255);
+}
+
+.logo_screen #regBtn.btnclass_dis {
+    background-color: #bfb4b4;
+    border-color: #bfb4b4;
+
+}

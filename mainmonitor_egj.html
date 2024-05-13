@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <!--如果是IE 就以标准渲染-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <!-- 视窗——————响应式布局 -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+
+    <!--当前页面的三要素-->
+    <title>运维系统</title>
+    <meta name="description" content="聚能优电" />
+    <meta http-equiv="keywords" content="聚能优电" />
+    <script type="text/javascript" src="./js/verify.js"></script>
+    <script type="text/javascript" src="./js/common/commonfuntion.js"></script>
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="./css/common/common.css" />
+    <link rel="stylesheet" type="text/css" href="./css/jquery-accordion-menu.css" />
+    <link rel="stylesheet" type="text/css" href="./css/mainmonitor_sz.css" />
+    <link rel="stylesheet" type="text/css" href="./css/ywzt.css" />
+    <style>
+        .formbody .layoutmap .pcontent .ptitle{width:auto;}
+    </style>
+</head>
+
+<body>
+    <div id="container" class="mainmonitor_sz">
+        <div class="mainmonitor_sz_01">
+            <!--主屏内容-->
+            <div class="mainmonitor_sz_screen">
+                <div class="m_title">
+                    <a href="JavaScript:history.go(-1);" class="back">
+                        <img src="./images/back.svg" alt="" />
+                    </a>
+                    <span class="tit" id="projectNameCN"></span>
+                </div>
+
+                <div class="m_content">
+                    <div class="egj_second" style="display:none;">
+                        <div class="egj_tit" id="egjdevicesecond"
+                        onclick="window.location.href='mainmonitor_egjsecond.html';">
+                        二公局设备二
+                        </div>
+                    </div>
+                    <!-- <header class="tabHead" style="top:2.4rem;"> -->
+                    <header class="tabHead" style="top:1.4rem;">
+                        <span class="active" style="width:25%"><i>项目状态</i></span>
+                        <span style="width:25%"><i>一次系统图</i></span>
+                    </header>
+                    <!-- <article class="khfxWarp khfxWarpaa" style="top:90px;"> -->
+                    <article class="khfxWarp khfxWarpaa" style="top:50px;">
+                        <div class="khfxPane xmzt khfxPaneaa">
+
+                            <div class="zt1 ztdetail firstdetail" id="ywnum">
+                                <div class="tit_tit" id="tit_tit">
+                                    <img src="./images/titicon.svg" alt="" />
+                                    <span>运维人员</span>
+                                </div>
+                                <div class="ywnum" id="ywnumwrap">
+                                </div>
+                            </div>
+
+
+                            <div class="zt1 ztdetail firstdetail">
+                                <div class="tit_tit">
+                                    <img src="./images/titicon.svg" alt="" />
+                                    <span>数据总览</span>
+                                </div>
+
+                                <ul>
+                                    <li>
+                                        <p>发电功率</p>
+                                        <div class="ztdiv">
+                                            <span id="dwgl">0</span><span>kW</span>
+
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>PCS功率</p>
+                                        <div class="ztdiv">
+                                            <span id="pcsgl"></span><span>kW</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>负载功率</p>
+                                        <div class="ztdiv">
+                                            <span id="fzgl"></span><span>kW</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <p>防逆流值</p>
+                                        <div class="ztdiv">
+                                            <span id="fnlz">0</span><span>kW</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>SOC</p>
+                                        <div class="ztdiv">
+                                            <span id="soc">0</span><span>%</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>SOH</p>
+                                        <div class="ztdiv">
+                                            <span id="soh"></span><span>%</span>
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                            <div class="zt2 ztdetail">
+                                <div class="tit_tit">
+                                    <img src="./images/titicon.svg" alt="" />
+                                    <span>储能变流器</span>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <p>总有功功率</p>
+                                        <div class="ztdiv">
+                                            <span id="pcszyggl_sz">0</span><span>kW</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>总视在功率</p>
+                                        <div class="ztdiv">
+                                            <span id="pcszszgl_sz">0</span><span>kVA</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>总无功功率</p>
+                                        <div class="ztdiv">
+                                            <span id="pcszwggl_sz">0</span><span>kVar</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="zt2 ztdetail">
+                                <div class="tit_tit">
+                                    <img src="./images/titicon.svg" alt="" />
+                                    <span>储能电池</span>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <p>SOC</p>
+                                        <div class="ztdiv">
+                                            <span id="bmssoc">0</span><span>%</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>可充电量</p>
+                                        <div class="ztdiv">
+                                            <span id="bmskcdl">0</span><span>kWh</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>可放电量</p>
+                                        <div class="ztdiv">
+                                            <span id="bmskfdl">0</span><span>kWh</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+
+                            <div class="zt3 ztdetail">
+                                <div class="tit_tit">
+                                    <img src="./images/titicon.svg" alt="" />
+                                    <span>设备温度</span>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <p>散热器温度</p>
+                                        <div class="ztdiv">
+                                            <span id="fkwd">24</span><span>℃</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>机柜温度</p>
+                                        <div class="ztdiv">
+                                            <span id="jgwd">15</span><span>℃</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>环境温度</p>
+                                        <div class="ztdiv">
+                                            <span id="hjwd">16</span><span>℃</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <p>电池最高温度</p>
+                                        <div class="ztdiv">
+                                            <span id="dczgwd">23.4</span><span>℃</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>电池最低温度</p>
+                                        <div class="ztdiv">
+                                            <span id="dczdwd">22.2</span><span>℃</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p></p>
+                                        <div class="ztdiv"><span id=""></span><span></span></div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="zt4 ztdetail">
+                                <div class="tit_tit">
+                                    <img src="./images/titicon.svg" alt="" />
+                                    <span>设备状态</span>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <p>交流调度</p>
+                                        <div class="ztdiv jldt">
+                                            <span class="onoff"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>直流调度</p>
+                                        <div class="ztdiv zldd">
+                                            <span class="onoff"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>PCS通讯状态</p>
+                                        <div class="ztdiv pcstxzt">
+                                            <span class="onoff"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>BMS通讯状态</p>
+                                        <div class="ztdiv bmstxzt">
+                                            <span class="onoff"></span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <p>并网</p>
+                                        <div class="ztdiv bw">
+                                            <span class="onoff"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>离网</p>
+                                        <div class="ztdiv lw">
+                                            <span class="onoff"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>系统警告</p>
+                                        <div class="ztdiv xtjg">
+                                            <span class="onoff"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>系统故障</p>
+                                        <div class="ztdiv xtgz">
+                                            <span class="onoff"></span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <p>远程控制</p>
+                                        <div class="ztdiv yckz">
+                                            <span class="onoff"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>BMS一级警告</p>
+                                        <div class="ztdiv yjjg">
+                                            <span class="onoff"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>BMS二级警告</p>
+                                        <div class="ztdiv ejjg">
+                                            <span class="onoff"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>BMS三级警告</p>
+                                        <div class="ztdiv sjjg">
+                                            <span class="onoff"></span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="echarts_wrap">
+                                <div id="echarts1" style="height:4rem;margin-top:0.3rem;"></div>
+                                <div id="echarts2" style="height:4rem;margin-top:0.5rem;"></div>
+                                <div id="echarts3" style="height:4rem;margin-top:0.5rem;"></div>
+                            </div>
+                        </div>
+                        <div class="khfxPane khfxPaneaa">
+                            <div class="formbody">
+
+                                <div class="layoutmap">
+                                    <div id="grightline1" class="hp hpthin goright"
+                                        style="left:8%; top:18%;  width:80%; z-index: 1;"></div>
+                                    <div id="gdownline11" class="vp vpthin gotop"
+                                        style="left:46%; top:18%;  height:28%;z-index: 1;"></div>
+
+                                    <div id="pcs1">
+                                        <!-- pcs的p为正数，箭头方向为从上到下 -->
+                                        <!-- pcs的p为负数，箭头方向为从下到上 -->
+                                    </div>
+
+                                    <!-- <div id="grightline2" class="hp hpthin goright"
+                                        style="left:38%; top:46%;  width:49.5%;z-index: 1;"></div>
+
+                                    <div id="gdownline2" class="vp vpthin godown"
+                                        style="left:63.5%; top:46%;  height:20%;z-index: 1;"></div>
+                                    <div id="gdownline3" class="vp vpthin godown"
+                                        style="left:86.5%; top:46%;  height:20%;z-index: 1;"></div> -->
+
+
+                                    <div onclick="window.location.href='#';" class="layoutimage bordernull" title="电网"
+                                        style="left:0%; top:9.5%; width:13.5%;z-index: 2;">
+                                        <img src="./images/dianwangb.svg" alt=""
+                                            style="width:100%;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);" />
+                                    </div>
+                                    <div class="infobox dianwang" style="left:0%; top:24%;z-index: 2;padding:0;">
+                                        <div class="pcontent">
+                                            <p class="ptitle">U(V):</p>
+                                            <div id="cyj_sxdy"></div>
+                                        </div>
+                                        <div class="pcontent">
+                                            <p class="ptitle">I(A):</p>
+                                            <div id="cyj_sxdl"></div>
+                                        </div>
+                                        <div class="pcontent">
+                                            <p class="ptitle">P(kW):</p>
+                                            <div id="cyj_rp"></div>
+                                        </div>
+                                    </div>
+                                    <!-- <div onclick="window.location.href='/#/zsmainmonitor?id=2';"
+                                        class="layoutimage bordernull" title="TST"
+                                        style="left:23%; top:9.5%; width:10%; z-index: 2;">
+                                        <img src="./images/stsb.png" alt=""
+                                            style="width:100%;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);" />
+                                    </div> -->
+
+                                    <div onclick="window.location.href='#';" class="layoutimage bordernull" title="负载"
+                                        style="left:86%; top:9.5%; width:13.5%;z-index: 2;">
+                                        <img src="./images/fuzaib.svg" alt=""
+                                            style="width:100%;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);" />
+                                    </div>
+                                    <div class="infobox zsfuzai" style="left:86%; top:24%; z-index: 2;padding:0;">
+                                        <div class="pcontent">
+                                            <p class="ptitle">P(kW):</p>
+                                            <div id="load"></div>
+                                        </div>
+                                    </div>
+
+                                    <div onclick="window.location.href='mainmonitoregj/mainmonitor_egjpcs.html';"
+                                        class="layoutimage bordernull" title="PCS"
+                                        style="left:40%; top:42%; width:13.5%;z-index: 2;">
+                                        <img src="./images/pcsb.svg" alt=""
+                                            style="width:100%;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);" />
+                                    </div>
+                                    <div class="infobox zspcs" style="left:34%; top:58%; z-index: 2;padding:0;">
+                                        <div class="pcontent">
+                                            <p style="display:inline-block;width:22%;margin-right:0;" class="ptitle">
+                                                U(V):</p>
+                                            <div style="display:inline-block;width:73%;" id="pcs1_sxdy"></div>
+                                        </div>
+                                        <div class="pcontent">
+                                            <p style="display:inline-block;width:22%;margin-right:0;" class="ptitle">
+                                                I(A):</p>
+                                            <div style="display:inline-block;width:73%;" id="pcs1_sxdl"></div>
+                                        </div>
+
+                                        <div class="pcontent">
+                                            <span>P(kW):</span><span id="pcs1_rp"></span>
+                                            <span>并离网:</span><span id="pcs1_blw"></span>
+                                        </div>
+                                    </div>
+
+                                    <div onclick="window.location.href='mainmonitoregj/mainmonitor_egjbms.html';"
+                                        class="layoutimage bordernull" title="BMS"
+                                        style="left:40%; top:68%; width:13.5%;z-index: 2;">
+                                        <img src="./images/bmsb.svg" alt=""
+                                            style="width:100%;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);" />
+                                    </div>
+                                    <div class="infobox zsbms" style="left:39%; top:83%;z-index: 1;padding:0;width: 40%;">
+                                        <div class="pcontent">
+                                            <p class="ptitle">U(V):</p>
+                                            <div id="bms1_dy"></div>
+                                        </div>
+                                        <div class="pcontent">
+                                            <p class="ptitle">I(A):</p>
+                                            <div id="bms1_dl"></div>
+                                        </div>
+                                        <div class="pcontent">
+                                            <p class="ptitle">SOC:</p>
+                                            <div id="bms1_soc"></div>
+                                        </div>
+                                        <div class="pcontent">
+                                            <p class="ptitle" style="margin-left:-3px;">最高电压(V):</p>
+                                            <div id="mbtid"></div>
+                                        </div>
+                                        <div class="pcontent">
+                                            <p class="ptitle" style="margin-left:-3px;">最低电压(V):</p>
+                                            <div id="lbtid"></div>
+                                        </div>
+                                    </div>
+                                    <!-- <div onclick="window.location.href='mainmonitoregj/mainmonitor_egjac.html';"
+                                        class="layoutimage bordernull" title="AC1"
+                                        style="left:59%; top:58%; width:10%;z-index: 2;">
+                                        <img src="./images/acb.svg" alt=""
+                                            style="width:100%;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);" />
+                                    </div>
+                                    <div class="infobox zsac1" style="left:53%; top:72%; width:40%;z-index: 2;">
+                                        <p class="ptitle">
+                                            T(℃):<br>H:
+                                        </p>
+                                        <p class="pcontent" id="cont_w">
+                                            <span id="ac1_sd"></span><br /><span id="ac1_wd"></span>
+                                        </p>
+                                    </div>
+
+                                    <div onclick="window.location.href='mainmonitoregj/mainmonitor_egjac.html';"
+                                        class="layoutimage bordernull" title="AC2"
+                                        style="left:82%; top:58%; width:10%;z-index: 2;">
+                                        <img src="./images/acb.svg" alt=""
+                                            style="width:100%;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);" />
+                                    </div>
+                                    <div class="infobox zsac2" style="left:76%; top:72%; width:40%;z-index: 2;">
+                                        <p class="ptitle">
+                                            T(℃):<br>H:
+                                        </p>
+                                        <p class="pcontent" id="cont_w">
+                                            <span id="ac2_sd"></span><br /><span id="ac2_wd"></span>
+                                        </p>
+                                    </div> -->
+
+                                    <div onclick="window.location.href='mainmonitoregj/mainmonitor_egjwyq.html';"
+                                        class="layoutimage bordernull" title="稳压器"
+                                        style="left:0%; top:68%; width:13.5%;z-index: 2;">
+                                        <img src="./images/wyqb.svg" alt=""
+                                            style="width:100%;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);" />
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function (win, doc) {
+            var docEl = doc.documentElement || document.body; //获取HTML标签
+
+            var container = doc.getElementById("container"); //container元素
+            //判断是移动端设备还是PC,移动 就采用'orientationchange',横竖屏事件，PC端就采用onresize，窗口改变时间
+            var resize =
+                "onorientationchange" in win ? "orientationchange" : "resize";
+
+            function rem() {
+                docEl.style.fontSize = 100 * (container.clientWidth / 750) + "px";
+            }
+
+            //监听'DOMContent事件:DOM加载完成执行,如果DOMContent事件，那么执行rem函数
+            doc.addEventListener("DOMContentLoaded", rem, false);
+
+            //win下监听resize事件,如果resize事件，那么执行rem函数
+            win.addEventListener(resize, rem, false);
+        })(window, document);
+    </script>
+    <!-- js -->
+    <script type="text/javascript" src="./js/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="js/echarts.js"></script>
+    <script type="text/javascript" src="./layer/layer.js"></script>
+    <script>
+        $(document).ready(function () {
+            var index = layer.load(0, {
+                shade: [0.8, '#fff']
+            }); //0.1透明度的白色背景
+            var projectid = GetQueryString('projectid');
+            var linechartid = GetQueryString('linechartid');
+            var projectNameCN = GetQueryString('projectNameCN');
+            $("#projectNameCN").html(' ');
+            $("#projectNameCN").html(projectNameCN);
+            $("#tit_tit").append(`
+                <div style="position:absolute;top:2px;right:5px;font-size: 0.24rem;color: #435a7a;font-weight: bold;letter-spacing: 0.88px;" id="showtime"></div>
+            `);
+
+
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "http://112.74.169.99:21021/api/services/app/ProjectService/GetYWProjectMemberListByProjectId?id=" + projectid,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+                    xhr.setRequestHeader("Authorization", accessToken);
+                    xhr.setRequestHeader('.AspNetCore.Culture', 'zh-Hans');
+                },
+                success: function (res) {
+                    $("#ywnumwrap").html(` `);
+                    $("#ywnumwrap").html( showywnum(res.result) );
+                },
+                error: function (err) {
+                    console.log("首次请求数据 请求失败");
+                }
+            });
+
+            function showywnum(obj) {
+                var str = '';
+                if (obj.constructor==Array) {
+                    if(obj.length == 0){
+                        str += `<p style="font-weight: bold;font-family: MicrosoftYaHei;font-size: 14px;color: #CDDDF3;margin-left:18px;"><span>无</span></p>`
+                    }else {
+                        for(var i = 0, len = obj.length; i < len; i++){
+                            str += `<p><span>` + obj[i].userName + `</span><span>` + obj[i].phoneNumber + `</span></p>`
+                        }
+                    }
+                    return str
+                }
+                return obj;
+            }
+
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "http://112.74.169.99:21021/api/TokenAuth/GetProjectData?projectid=" +
+                    projectid,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+                    xhr.setRequestHeader("Authorization", accessToken);
+                    xhr.setRequestHeader('.AspNetCore.Culture', 'zh-Hans');
+                },
+                success: function (res) {
+                    var data = res.result;
+                    // var data = [];
+                    if (data.length == 0) {
+                        layer.open({
+                            type: 1,
+                            content: '<div>' + '通讯异常' + '</div>',
+                            btn: '确定',
+                            btnAlign: 'c', //按钮居中
+                            shade: 0, //不显示遮罩
+                            yes: function () {
+                                layer.closeAll();
+                                layer.close(index);
+                            }
+                        });
+                    } else {
+                        let time = data[0].creationTime.split('T');
+
+                        $("#showtime").html(' ');
+                        $("#showtime").html('数据更新时间 ' + time[1].substring(0,8));
+                        
+                        var val_soc_sz = Number(data[1].soc).toFixed(0); //BMS SOC 百分比
+                        $("#soc").html(val_soc_sz); // BMS SOC 百分比
+
+                        var val_soh = data[1].soh / 10;
+                        $("#soh").html(val_soh); // //BMS SOH
+
+                        $("#dwgl").html(dealnumber(data[4].farTAP)); // 发电功率
+                        $("#pcsgl").html(dealnumber(data[4].pcstap)); // PCS总有功功率
+                        $("#fzgl").html(dealnumber(data[4].loadTAP)); // 负载功率
+
+                        $("#fnlz").html(dealnumber(data[4].countercurrentControl)); // 防逆流值
+
+                        // PCS
+                        $("#pcszyggl_sz").html(dealnumber(data[4].pcstap)); //PCS总有功功率
+                        $("#pcszszgl_sz").html(dealnumber(data[4]
+                            .pcstApparentPpower)); //PCS总视在功率
+                        $("#pcszwggl_sz").html(dealnumber(data[4].pcstrp)); //PCS总无功功率
+
+
+                        // BMS
+                        $("#bmssoc").html(val_soc_sz); //BMS SOC 百分比
+                        $("#bmskcdl").html(dealnumber(data[1].group_RC)); //BMS可充电量
+                        $("#bmskfdl").html(dealnumber(data[1].group_DQ)); //BMS可放电量
+
+
+                        // 设备温度
+                        $("#fkwd").html(dealnumber(data[0].radiatorT)); //散热器温度
+                        $("#jgwd").html(dealnumber(data[0].cabinetT)); //机柜温度
+                        $("#hjwd").html(dealnumber(data[0].environmentalT)); //环境温度
+                        $("#dczgwd").html(dealnumber(data[1].mbt)); //电池最高温度
+                        $("#dczdwd").html(dealnumber(data[1].lbt)); //电池最低温度
+
+                        // 设备状态
+                        if (data[0].acDispatch) {
+                            // 交流调度
+                            $(".jldt span").attr('class', 'onoff zton');
+                        } else {
+                            $(".jldt span").attr('class', 'onoff ztoff');
+                        }
+                        if (data[0].dcDispatch) {
+                            // 直流调度
+                            $(".zldd span").attr('class', 'onoff zton');
+                        } else {
+                            $(".zldd span").attr('class', 'onoff ztoff');
+                        }
+                        if (data[0].runState) {
+                            // PCS通讯状态/运行状态
+                            $(".pcstxzt span").attr('class', 'onoff zton');
+                        } else {
+                            $(".pcstxzt span").attr('class', 'onoff ztoff');
+                        }
+                        if (data[1].comState) {
+                            // BMS通讯状态
+                            $(".bmstxzt span").attr('class', 'onoff zton');
+                        } else {
+                            $(".bmstxzt span").attr('class', 'onoff ztoff');
+                        }
+
+                        if (data[0].gridState) {
+                            // 并网、离网
+                            $(".bw span").attr('class', 'onoff ztoff');
+                            $(".lw span").attr('class', 'onoff zton');
+                        } else {
+                            $(".bw span").attr('class', 'onoff zton');
+                            $(".lw span").attr('class', 'onoff ztoff');
+                        }
+                        if (data[0].warnState) {
+                            // 系统告警/告警状态
+                            $(".xtjg span").attr('class', 'onoff zton');
+                        } else {
+                            $(".xtjg span").attr('class', 'onoff ztoff');
+                        }
+                        if (data[0].failureStatus) {
+                            // 系统故障/故障状态
+                            $(".xtgz span").attr('class', 'onoff zton');
+                        } else {
+                            $(".xtgz span").attr('class', 'onoff ztoff');
+                        }
+
+                        if (data[0].remoteControl) {
+                            // 远程控制
+                            $(".yckz span").attr('class', 'onoff zton');
+                        } else {
+                            $(".yckz span").attr('class', 'onoff ztoff');
+                        }
+
+                        if (data[1].primaryAlarm) {
+                            // BMS一级告警
+                            $(".yjjg span").attr('class', 'onoff zton');
+                        } else {
+                            $(".yjjg span").attr('class', 'onoff ztoff');
+                        }
+
+                        if (data[1].secondaryAlarm) {
+                            // BMS二级告警
+                            $(".ejjg span").attr('class', 'onoff zton');
+                        } else {
+                            $(".ejjg span").attr('class', 'onoff ztoff');
+                        }
+
+                        if (data[1].tertiaryAlarm) {
+                            // BMS三级告警
+                            $(".sjjg span").attr('class', 'onoff zton');
+                        } else {
+                            $(".sjjg span").attr('class', 'onoff ztoff');
+                        }
+
+                        layer.close(index);
+                    }
+
+                },
+                error: function (err) {
+                    console.log("首次请求数据 请求失败");
+                }
+            });
+            // return;
+
+
+            // tab选项卡切换
+            $(".tabHead span").on("click", function () {
+                var $this = $(this);
+                var itemIndex = $this.index();
+                $(this).addClass("active").siblings(".tabHead span").removeClass("active");
+                $(".khfxPane").eq(itemIndex).show().siblings(".khfxPane").hide();
+            });
+
+
+            var num_index = 0;
+            var pcs1_rp_1 = '';
+            var pcs1_rp_2 = '';
+            var xData = []; // x轴时间数据
+            var yData1 = []; //实时发电功率的y轴数据
+            var yData2 = []; //实时PCS功率的y轴数据
+            var yData3 = []; //实时负载功率的y轴数据
+
+            // 折线图
+            $.ajax({
+                type: "GET",
+                url: "http://112.74.169.99:21021/api/services/app/ControlDataService/GetListControlDataByID?id=" + linechartid,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Accept","application/json, text/javascript, */*; q=0.01");
+                    xhr.setRequestHeader("Authorization", accessToken);
+                    xhr.setRequestHeader(".AspNetCore.Culture", "zh-Hans");
+                },
+                success: function (res) {
+                    console.log("折线图 请求成功");
+                    var data = res.result;
+                    var szdata = [];
+                    for (var i in data) {
+                        if (data[i].devID === 17) {
+                            szdata.push(data[i]);
+                        }
+                    }
+
+                    for (let i = 0; i < szdata.length; i++) {
+                        let datetime = new Date(szdata[i].creationTime);
+                        let getHours = datetime.getHours() < 10 ? "0" + datetime.getHours() : datetime.getHours();
+                        let getMinutes = datetime.getMinutes() < 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
+                        let getSeconds = datetime.getSeconds() < 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
+
+                        let time = getHours + ":" + getMinutes + ":" + getSeconds;
+                        xData.push(time);
+                        yData1.push(szdata[i].farTAP);
+                        yData2.push(szdata[i].pcstap);
+                        yData3.push(szdata[i].loadTAP);
+                    }
+                    updateData(); // 首次加载立即请求数据
+                    setInterval(updateData, 1000); // 首次加载之后，每1s重新请求一次数据
+
+                },
+                error: function (err) {
+                    console.log("折线图 请求失败");
+                }
+            });
+
+
+            function updateData() { // 请求数据
+                num_index++;
+                var onoff = isPositiveNum(num_index / 15); //一分钟增加一次数据
+                $.ajax({
+                    type: "GET",
+                    url: "http://112.74.169.99:21021/api/TokenAuth/GetProjectData?projectid=3",
+                    success: function (res) {
+                        // console.log("项目状态参数 请求成功");
+                        var data = res.result;
+
+                        let time = data[0].creationTime.split('T');
+
+                        $("#showtime").html(' ');
+                        $("#showtime").html('数据更新时间 ' + time[1].substring(0,8));
+
+                        if (data[4]) {
+                            var val_soc_sz = Number(data[1].soc).toFixed(0); //BMS SOC 百分比
+                            $("#soc").html(val_soc_sz); // BMS SOC 百分比
+
+                            var val_soh = data[1].soh / 10;
+                            $("#soh").html(val_soh); // //BMS SOH
+
+                            $("#dwgl").html(dealnumber(data[4].farTAP)); // 发电功率
+                            $("#pcsgl").html(dealnumber(data[4].pcstap)); // PCS总有功功率
+                            $("#fzgl").html(dealnumber(data[4].loadTAP)); // 负载功率
+
+                            $("#fnlz").html(dealnumber(data[4].countercurrentControl)); // 防逆流值
+
+                            // PCS
+                            $("#pcszyggl_sz").html(dealnumber(data[4].pcstap)); //PCS总有功功率
+                            $("#pcszszgl_sz").html(dealnumber(data[4].pcstApparentPpower)); //PCS总视在功率
+                            $("#pcszwggl_sz").html(dealnumber(data[4].pcstrp)); //PCS总无功功率
+
+                            // BMS
+                            $("#bmssoc").html(val_soc_sz); //BMS SOC 百分比
+                            $("#bmskcdl").html(dealnumber(data[1].group_RC)); //BMS可充电量
+                            $("#bmskfdl").html(dealnumber(data[1].group_DQ)); //BMS可放电量
+
+                            // 设备温度
+                            $("#fkwd").html(dealnumber(data[0].radiatorT)); //散热器温度
+                            $("#jgwd").html(dealnumber(data[0].cabinetT)); //机柜温度
+                            $("#hjwd").html(dealnumber(data[0].environmentalT)); //环境温度
+                            $("#dczgwd").html(dealnumber(data[1].mbt)); //电池最高温度
+                            $("#dczdwd").html(dealnumber(data[1].lbt)); //电池最低温度
+
+                            // 设备状态
+                            if (data[0].acDispatch) {
+                                // 交流调度
+                                $(".jldt span").attr('class', 'onoff zton');
+                            } else {
+                                $(".jldt span").attr('class', 'onoff ztoff');
+                            }
+                            if (data[0].dcDispatch) {
+                                // 直流调度
+                                $(".zldd span").attr('class', 'onoff zton');
+                            } else {
+                                $(".zldd span").attr('class', 'onoff ztoff');
+                            }
+                            if (data[0].runState) {
+                                // PCS通讯状态/运行状态
+                                $(".pcstxzt span").attr('class', 'onoff zton');
+                            } else {
+                                $(".pcstxzt span").attr('class', 'onoff ztoff');
+                            }
+
+                            if (data[1].comState) {
+                                // BMS通讯状态
+                                $(".bmstxzt span").attr('class', 'onoff zton');
+                            } else {
+                                $(".bmstxzt span").attr('class', 'onoff ztoff');
+                            }
+
+                            if (data[0].gridState) {
+                                // 并网、离网
+                                $(".bw span").attr('class', 'onoff ztoff');
+                                $(".lw span").attr('class', 'onoff zton');
+                            } else {
+                                $(".bw span").attr('class', 'onoff zton');
+                                $(".lw span").attr('class', 'onoff ztoff');
+                            }
+                            if (data[0].warnState) {
+                                // 系统告警/告警状态
+                                $(".xtjg span").attr('class', 'onoff zton');
+                            } else {
+                                $(".xtjg span").attr('class', 'onoff ztoff');
+                            }
+                            if (data[0].failureStatus) {
+                                // 系统故障/故障状态
+                                $(".xtgz span").attr('class', 'onoff zton');
+                            } else {
+                                $(".xtgz span").attr('class', 'onoff ztoff');
+                            }
+
+                            if (data[0].remoteControl) {
+                                // 远程控制
+                                $(".yckz span").attr('class', 'onoff zton');
+                            } else {
+                                $(".yckz span").attr('class', 'onoff ztoff');
+                            }
+
+                            if (data[1].primaryAlarm) {
+                                // BMS一级告警
+                                $(".yjjg span").attr('class', 'onoff zton');
+                            } else {
+                                $(".yjjg span").attr('class', 'onoff ztoff');
+                            }
+
+                            if (data[1].secondaryAlarm) {
+                                // BMS二级告警
+                                $(".ejjg span").attr('class', 'onoff zton');
+                            } else {
+                                $(".ejjg span").attr('class', 'onoff ztoff');
+                            }
+
+                            if (data[1].tertiaryAlarm) {
+                                // BMS三级告警
+                                $(".sjjg span").attr('class', 'onoff zton');
+                            } else {
+                                $(".sjjg span").attr('class', 'onoff ztoff');
+                            }
+
+                            if (onoff) {
+                                let datetimenew = new Date(data[0].creationTime);
+                                let getHoursnew = datetimenew.getHours() < 10 ? "0" + datetimenew.getHours() : datetimenew.getHours();
+                                let getMinutesnew = datetimenew.getMinutes() < 10 ? "0" + datetimenew.getMinutes() : datetimenew.getMinutes();
+                                let getSecondsnew = datetimenew.getSeconds() < 10 ? "0" + datetimenew.getSeconds() : datetimenew.getSeconds();
+                                let timenew = getHoursnew + ":" + getMinutesnew + ":" + getSecondsnew;
+                                xData.push(timenew);
+                                yData1.push(data[4].farTAP);
+                                yData2.push(data[4].pcstap);
+                                yData3.push(data[4].loadTAP);
+                            }
+
+                            // 实时发电功率
+                            var echarts1 = echarts.init(document.getElementById("echarts1"));
+                            var echarts1_option = {
+                                title: {
+                                    top: "0",
+                                    left: "10px",
+                                    text: "实时发电功率(kW)",
+                                    textStyle: {
+                                        align: "left",
+                                        color: "#7F94B2",
+                                        fontWeight: "800",
+                                        fontSize: 15
+                                    }
+                                },
+                                backgroundColor: "#112957",
+                                grid: {
+                                    right: "0",
+                                    bottom: "0",
+                                    left: "15px",
+                                    top: "40px",
+                                    containLabel: true
+                                },
+                                xAxis: [{
+                                    type: "category",
+                                    data: xData,
+                                    axisLine: {
+                                        //坐标轴轴线相关设置
+                                        lineStyle: {
+                                            color: "#223863",
+                                            width: "1"
+                                        }
+                                    },
+                                    axisTick: {
+                                        //坐标轴刻度相关设置
+                                        show: true,
+                                        lineStyle: {
+                                            color: "#223863",
+                                            width: "1"
+                                        },
+                                        length: 3
+                                    },
+                                    axisLabel: {
+                                        //坐标轴刻度标签的相关设置
+                                        show: true,
+                                        // interval:1,
+                                        textStyle: {
+                                            color: "#7F94B2",
+                                            fontSize: 9
+                                        },
+                                        rotate: 30
+                                    }
+                                }],
+                                yAxis: [{
+                                    type: "value",
+                                    position: "left",
+                                    // interval: 50,
+                                    // max: 350,
+                                    // min: 250,
+                                    axisLine: {
+                                        //坐标轴轴线相关设置
+                                        lineStyle: {
+                                            color: "#223863",
+                                            width: "1"
+                                        }
+                                    },
+                                    splitLine: {
+                                        show: false
+                                    },
+                                    axisTick: {
+                                        //坐标轴刻度相关设置
+                                        show: false
+                                    },
+                                    axisLabel: {
+                                        //坐标轴刻度标签的相关设置
+                                        show: true,
+                                        color: "#7F94B2",
+                                        fontSize: 9
+                                    },
+                                    // scale: true
+                                }],
+                                series: [{
+                                    type: "line",
+                                    yAxisIndex: 0,
+                                    symbolSize: 4,
+                                    itemStyle: {
+                                        normal: {
+                                            color: "#0167FF"
+                                        }
+                                    },
+                                    data: yData1
+                                }]
+                            };
+                            echarts1.setOption(echarts1_option);
+
+                            // 实时PCS功率
+                            var echarts2 = echarts.init(document.getElementById("echarts2"));
+                            var echarts2_option = {
+                                title: {
+                                    top: "0",
+                                    left: "10px",
+                                    text: "实时PCS功率(kW)",
+                                    textStyle: {
+                                        align: "left",
+                                        color: "#7F94B2",
+                                        fontWeight: "800",
+                                        fontSize: 15
+                                    }
+                                },
+                                backgroundColor: "#112957",
+                                grid: {
+                                    right: "0",
+                                    bottom: "0",
+                                    left: "15px",
+                                    top: "40px",
+                                    containLabel: true
+                                },
+                                xAxis: [{
+                                    type: "category",
+                                    data: xData,
+                                    axisLine: {
+                                        //坐标轴轴线相关设置
+                                        lineStyle: {
+                                            color: "#223863",
+                                            width: "1"
+                                        }
+                                    },
+                                    axisTick: {
+                                        //坐标轴刻度相关设置
+                                        show: true,
+                                        lineStyle: {
+                                            color: "#223863",
+                                            width: "1"
+                                        },
+                                        length: 3
+                                    },
+                                    axisLabel: {
+                                        //坐标轴刻度标签的相关设置
+                                        show: true,
+                                        // interval:1,
+                                        textStyle: {
+                                            color: "#7F94B2",
+                                            fontSize: 9
+                                        },
+                                        rotate: 30
+                                    }
+                                }],
+                                yAxis: [{
+                                    type: "value",
+                                    position: "left",
+                                    // interval: 50,
+                                    // max: 150,
+                                    // min: -250,
+                                    axisLine: {
+                                        //坐标轴轴线相关设置
+                                        lineStyle: {
+                                            color: "#223863",
+                                            width: "1"
+                                        }
+                                    },
+                                    splitLine: {
+                                        show: false
+                                    },
+                                    axisTick: {
+                                        //坐标轴刻度相关设置
+                                        show: false
+                                    },
+                                    axisLabel: {
+                                        //坐标轴刻度标签的相关设置
+                                        show: true,
+                                        color: "#7F94B2",
+                                        fontSize: 9
+                                    },
+                                    // scale: true
+                                }],
+                                series: [{
+                                    type: "line",
+                                    yAxisIndex: 0,
+                                    symbolSize: 4,
+                                    itemStyle: {
+                                        normal: {
+                                            color: "#0167FF"
+                                        }
+                                    },
+                                    data: yData2
+                                }]
+                            };
+                            echarts2.setOption(echarts2_option);
+
+                            // 实时负载功率
+                            var echarts3 = echarts.init(document.getElementById("echarts3"));
+                            var echarts3_option = {
+                                title: {
+                                    top: "0",
+                                    left: "10px",
+                                    text: "实时负载功率(kW)",
+                                    textStyle: {
+                                        align: "left",
+                                        color: "#7F94B2",
+                                        fontWeight: "800",
+                                        fontSize: 15
+                                    }
+                                },
+                                backgroundColor: "#112957",
+                                grid: {
+                                    right: "0",
+                                    bottom: "0",
+                                    left: "15px",
+                                    top: "40px",
+                                    containLabel: true
+                                },
+                                xAxis: [{
+                                    type: "category",
+                                    data: xData,
+                                    axisLine: {
+                                        //坐标轴轴线相关设置
+                                        lineStyle: {
+                                            color: "#223863",
+                                            width: "1"
+                                        }
+                                    },
+                                    axisTick: {
+                                        //坐标轴刻度相关设置
+                                        show: true,
+                                        lineStyle: {
+                                            color: "#223863",
+                                            width: "1"
+                                        },
+                                        length: 3
+                                    },
+                                    axisLabel: {
+                                        //坐标轴刻度标签的相关设置
+                                        show: true,
+                                        // interval:1,
+                                        textStyle: {
+                                            color: "#7F94B2",
+                                            fontSize: 9
+                                        },
+                                        rotate: 30
+                                    }
+                                }],
+                                yAxis: [{
+                                    type: "value",
+                                    position: "left",
+                                    // interval: 100,
+                                    // max: 600,
+                                    // min: 100,
+                                    axisLine: {
+                                        //坐标轴轴线相关设置
+                                        lineStyle: {
+                                            color: "#223863",
+                                            width: "1"
+                                        }
+                                    },
+                                    splitLine: {
+                                        show: false
+                                    },
+                                    axisTick: {
+                                        //坐标轴刻度相关设置
+                                        show: false
+                                    },
+                                    axisLabel: {
+                                        //坐标轴刻度标签的相关设置
+                                        show: true,
+                                        color: "#7F94B2",
+                                        fontSize: 9
+                                    },
+                                    // scale: true
+                                }],
+                                series: [{
+                                    type: "line",
+                                    yAxisIndex: 0,
+                                    symbolSize: 4,
+                                    itemStyle: {
+                                        normal: {
+                                            color: "#0167FF"
+                                        }
+                                    },
+                                    data: yData3
+                                }]
+                            };
+                            echarts3.setOption(echarts3_option);
+                        }
+
+                        // 一次系统图
+                        // 一级柜数据
+                        var cyj_rp = data[4].farTAP;
+                        $("#cyj_rp").html(cyj_rp);
+                        var cyj_sxdy = data[4].aFarACV;
+                        cyj_sxdy = cyj_sxdy + "/" + data[4].bFarACV;
+                        cyj_sxdy = cyj_sxdy + "/" + data[4].cFarACV;
+                        $("#cyj_sxdy").html(cyj_sxdy);
+                        var cyj_sxdl = data[4].aFarACA;
+                        cyj_sxdl = cyj_sxdl + "/" + data[4].bFarACA;
+                        cyj_sxdl = cyj_sxdl + "/" + data[4].cFarACA;
+                        $("#cyj_sxdl").html(cyj_sxdl);
+
+                        // 负载数据
+                        var load = data[4].loadTAP;
+                        $("#load").html(load);
+
+                        // pcs1
+                        var pcs1_sxdy = data[0].abacv;
+                        pcs1_sxdy = pcs1_sxdy + "/" + data[0].bcacv;
+                        pcs1_sxdy = pcs1_sxdy + "/" + data[0].caacv;
+                        $("#pcs1_sxdy").html(pcs1_sxdy);
+                        var pcs1_sxdl = data[0].aaci;
+                        pcs1_sxdl = pcs1_sxdl + "/" + data[0].baci;
+                        pcs1_sxdl = pcs1_sxdl + "/" + data[0].caci;
+                        $("#pcs1_sxdl").html(pcs1_sxdl);
+
+                        if (num_index === 1) {
+                            pcs1_rp_1 = data[0].tap;
+                            if (pcs1_rp_1 < 0) {
+                                $("#pcs1").html(`<div id="gdownline12" class="vpdif vpthin gotop" style="left:46%; top:50%;  height:30%;z-index: 1;"></div>`);
+                            } else if (pcs1_rp_1 > 0) {
+                                $("#pcs1").html(`<div id="gdownline12" class="vpdif vpthin godown" style="left:46%; top:50%; height:30%;z-index: 1;"></div>`);
+                            } else if (pcs1_rp_1 === 0) {
+                                $("#pcs1").html(`<div id="gdownline12" class="vpdif vpthin" style="left:46%; top:50%; height:30%;z-index: 1;"></div>`);
+                            }
+
+                        } else {
+                            pcs1_rp_2 = data[0].tap;
+                            var pcs1_rp_1_sign = Math.sign(pcs1_rp_1);
+                            var pcs1_rp_2_sign = Math.sign(pcs1_rp_2);
+
+                            if (pcs1_rp_1_sign != pcs1_rp_2_sign) {
+                                if (pcs1_rp_2 < 0) {
+                                    $("#pcs1").html(`<div id="gdownline12" class="vpdif vpthin gotop" style="left:46%; top:50%;  height:30%;z-index: 1;"></div>`);
+                                } else if (pcs1_rp_2 > 0) {
+                                    $("#pcs1").html(`<div id="gdownline12" class="vpdif vpthin godown" style="left:46%; top:50%; height:30%;z-index: 1;"></div>`);
+                                } else if (pcs1_rp_2 === 0) {
+                                    $("#pcs1").html(`<div id="gdownline12" class="vpdif vpthin" style="left:46%; top:50%; height:30%;z-index: 1;"></div>`);
+                                }
+                            }
+                        }
+
+                        var pcs1_rp = data[0].tap;
+                        $("#pcs1_rp").html(pcs1_rp);
+                        if (data[0].gridState == 0) {
+                            var pcs1_blw = "并网";
+                        } else {
+                            var pcs1_blw = "离网";
+                        }
+                        $("#pcs1_blw").html(pcs1_blw);
+
+                        // bms1
+                        var bms1_dl = data[1].group_I;
+                        $("#bms1_dl").html(bms1_dl);
+                        var bms1_dy = data[1].group_V;
+                        $("#bms1_dy").html(bms1_dy);
+                        var bms1_soc = data[1].soc;
+                        $("#bms1_soc").html(bms1_soc);
+                        $("#mbtid").html(data[1].mbtid);
+                        $("#lbtid").html(data[1].lbtid);
+
+                        // ac1
+                        var ac1_sd = data[2].humidity;
+                        $("#ac1_sd").html(ac1_sd);
+                        var ac1_wd = data[2].innerTemperature;
+                        $("#ac1_wd").html(ac1_wd);
+
+                        // ac2
+                        var ac2_sd = data[3].humidity;
+                        $("#ac2_sd").html(ac2_sd);
+                        var ac2_wd = data[3].innerTemperature;
+                        $("#ac2_wd").html(ac2_wd);
+
+                    },
+                    error: function (err) {
+                        console.log("项目状态参数 请求失败");
+                    }
+                });
+            }
+
+        });
+    </script>
+</body>
+
+</html>

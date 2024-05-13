@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="45px" height="45px" viewBox="0 0 45 45" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>稳压器</title>
+    <desc>Created with Sketch.</desc>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="项目详情1-1" transform="translate(-59.000000, -565.000000)">
+            <g id="稳压器" transform="translate(59.000000, 565.000000)">
+                <rect id="矩形备份-16" stroke="#133A6E" fill="#082955" x="0.5" y="0.5" width="44" height="44" rx="2"></rect>
+                <path d="M18.8073613,5 L30.428412,5.13456935 L31,5.58259501 L31,6.1176395 L30.94,6.18 L19,6 L19,26 L30.784,25.224 L30.7847087,26.1296771 L18.4349694,27 L13,25.4662597 L13,5.26913869 L18.8073613,5 Z M19.4480619,6.51351333 L30.784,6.647 L30.784,24.785 L19.4480619,25.5303607 L19.4480619,6.51351333 Z M30,14 L29,14.1277568 L29,18 L30,17.8881477 L30,14 Z M24,12 L21,12.0755729 L21,13 L24,12.8917822 L24,12 Z M21,9 L21,11 L24,10.8011076 L24,9.02587519 L21,9 Z M15.7177827,7 L14.4551266,7 C14.1517089,7.08042847 14,7.24337328 14,7.48883442 C14,7.73429557 14.0758544,7.9046841 14.2275633,8 L15.5198087,8 C15.83553,7.93279472 15.9933906,7.80339204 15.9933906,7.61179194 C16.0265896,7.36875151 15.9347203,7.16482087 15.7177827,7 Z" id="形状结合" fill="#4179CC"></path>
+                <text font-family="SourceHanSansCN-Regular, Source Han Sans CN" font-size="10" font-weight="normal" letter-spacing="0.625" fill="#7F94B2">
+                    <tspan x="6" y="39">稳压器</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <!--如果是IE 就以标准渲染-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <!-- 视窗——————响应式布局 -->
+    <!-- <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes,minimum-scale=0.5" /> -->
+    <meta name='viewport' content='width=device-width,initial-scale=1.0,minimum-scale=0.5, maximum-scale=5.0' />
+
+    <!--当前页面的三要素-->
+    <title>运维系统</title>
+    <meta name="description" content="聚能优电" />
+    <meta http-equiv="keywords" content="聚能优电" />
+    <script type="text/javascript" src="./js/verify.js"></script>
+    <script type="text/javascript" src="./js/common/commonfuntion.js"></script>
+    <!-- <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=bnuIIYxx2iIfYSQtGh3jvA6W0viNQ3GG"></script> -->
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=7a44cb76d3cf44a85fe8394f46048349&plugin=AMap.Geocoder"></script>
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="./css/common/common.css" />
+    <link rel="stylesheet" type="text/css" href="./css/jquery-accordion-menu.css" />
+    <link rel="stylesheet" type="text/css" href="./css/mainmonitor_ynsz.css" />
+
+    <style>
+
+        #ywnum  #ywnumwrap.ywnum{
+            width:100%;
+            font-size:0px;
+        }
+        #ywnum  #ywnumwrap.ywnum p{
+            font-size: 12px;
+            display:inline-block;
+            width:50%;
+        }
+        #ywnum  #ywnumwrap.ywnum p span{
+            display:inline-block;
+            font-size: 12px;
+            height:30px;
+            line-height:30px;
+            font-weight: bold;
+            font-family: MicrosoftYaHei;
+            color: #CDDDF3;
+        }
+        #ywnum  #ywnumwrap.ywnum p span:first-child{
+            margin-left: 5px;
+            width:35%;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <div id="container" class="mainmonitor_sz">
+        <div class="mainmonitor_sz_01">
+            <!--主屏内容-->
+            <div class="mainmonitor_sz_screen">
+                <div class="m_title">
+                    <a href="JavaScript:history.go(-1);" class="back">
+                        <img src="./images/back.svg" alt="" />
+                    </a>
+                    <span class="tit" id="tit"></span>
+                </div>
+                <div class="m_content">
+                    <header class="tabHead" id="tabHead">
+                        <span class="active" style="width:25%"><i>项目状态</i></span>
+                        <span style="width:25%"><i>一次系统图</i></span>
+                        <span style="width:25%"><i>数据报表</i></span>
+                    </header>
+                    <article class="khfxWarp khfxWarpaa" id="khfxWarp" style="background: #112957;box-shadow: 0 6px 12px 0 rgba(0,16,40,0.33);border-radius: 4px;">
+                        <div class="khfxPane xmzt khfxPaneaa" id="firstkhfxPane">
+                            <div class="ztdetail_wrap" id="data_wrap">
+
+                                <div class="zt1 ztdetail firstdetail" id="ywnum">
+
+                                    <div style="font-size: 0.20rem;color: #8a95a5;font-weight: bold;letter-spacing: 0.88px;padding-left:10px;padding-top:10px;">
+                                        <div id="showadd" style="display:block;"></div>
+                                        <div id="showtime"></div>
+                                    </div>
+    
+                                    <div class="tit_tit" id="tit_tit">
+                                        <img src="./images/titicon.svg" alt="" />
+                                        <span>运维人员</span>
+                                    </div>
+                                    <div class="ywnum" id="ywnumwrap">
+                                    </div>
+                                </div>
+
+
+
+                                <div class="zt1 ztdetail " style="padding-top:0.08rem;">
+
+                                    <div class="tit_tit" id="tit_tit">
+                                        <img src="./images/titicon.svg" alt="" />
+                                        <span>数据总览</span>
+                                    </div>
+
+                                    <ul>
+                                        <li>
+                                            <p>负载功率</p>
+                                            <div class="ztdiv">
+                                                <span id="dbitap0"></span><span>kW</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <p>当日用电量</p>
+                                            <div class="ztdiv">
+                                                <span id="trrp0"></span><span>kWh</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <p>发电功率</p>
+                                            <div class="ztdiv">
+                                                <span id="cyjpowerGeneration0">0</span><span>kW</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                    <ul>
+                                        <li>
+                                            <p>PCS功率</p>
+                                            <div class="ztdiv">
+                                                <span id="pcstap0"></span><span>kW</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <p>SOC</p>
+                                            <div class="ztdiv">
+                                                <span id="bmssoc0">0</span><span>%</span>
+                                            </div>
+                                        </li>
+                                        
+                                        <li>
+                                            <p>SOH</p>
+                                            <div class="ztdiv">
+                                                <span id="bmssoh0"></span><span>%</span>
+                                            </div>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+
+
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="khfxPane xmzt khfxPaneaa" id="secondkhfxPane"></div>
+
+                        <div class="khfxPane xmzt khfxPaneaa" id="thirdkhfxPane" style="width: 90%;padding:0 5% 0.4rem;">
+                            <div class="select_wrap">
+                                <select id="selectsb" value=""></select>
+                            </div>
+
+                            <div class="tablist" id="tablist">
+                                <div class="list listcon">
+                                    <div class="nyztab">
+                                        <span class="active">一周</span>
+                                        <span>月份</span>
+                                        <span>一年</span>
+                                    </div>
+                                    <div class="nyz">
+                                        <span class="nyzcon theweek weekyear" id="theweek"></span>
+                                        <span class="nyzcon themounth" id="themounth">
+                                            <div class="selectmonth_wrap">
+                                                <select id="selectmonth" value="">
+                                                </select>
+                                                <!-- <img src="./images/xiala.svg" alt=""> -->
+                                            </div>
+                                            <div class="mounth_wrap" id="thedetailmounth"></div>
+                                        </span>
+                                        <span class="nyzcon theyear weekyear" id="theyear"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function (win, doc) {
+            var docEl = doc.documentElement || document.body; //获取HTML标签
+
+            var container = doc.getElementById("container"); //container元素
+            //判断是移动端设备还是PC,移动 就采用'orientationchange',横竖屏事件，PC端就采用onresize，窗口改变时间
+            var resize =
+                "onorientationchange" in win ? "orientationchange" : "resize";
+
+            function rem() {
+                docEl.style.fontSize = 100 * (container.clientWidth / 750) + "px";
+            }
+
+            //监听'DOMContent事件:DOM加载完成执行,如果DOMContent事件，那么执行rem函数
+            doc.addEventListener("DOMContentLoaded", rem, false);
+
+            //win下监听resize事件,如果resize事件，那么执行rem函数
+            win.addEventListener(resize, rem, false);
+        })(window, document);
+    </script>
+    <!-- js -->
+    <script type="text/javascript" src="./js/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="js/echarts.js"></script>
+    <script type="text/javascript" src="./layer/layer.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+
+            // var index = layer.load(0, {
+            //     shade: [0.8, '#fff']
+            // }); //0.1透明度的白色背景
+           
+
+            var num = 0;
+            var projectid = GetQueryString('projectid');
+            var tit_con = GetQueryString('projectNameCN');
+            var description = GetQueryString('description');
+            $("#tit").html(tit_con);
+          
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "http://112.74.169.99:21021/api/services/app/ProjectService/GetYWProjectMemberListByProjectId?id=" + projectid,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+                    xhr.setRequestHeader("Authorization", accessToken);
+                    xhr.setRequestHeader('.AspNetCore.Culture', 'zh-Hans');
+                },
+                success: function (res) {
+                    console.log(res);
+                    $("#ywnumwrap").html(` `);
+                    $("#ywnumwrap").html( showywnum(res.result) );
+                },
+                error: function (err) {
+                    console.log("首次请求数据 请求失败");
+                }
+            });
+
+            function showywnum(obj) {
+                var str = '';
+                if (obj.constructor==Array) {
+                    if(obj.length == 0){
+                        str += `<p style="font-weight: bold;font-family: MicrosoftYaHei;font-size: 14px;color: #CDDDF3;margin-left:18px;"><span>无</span></p>`
+                    }else {
+                        for(var i = 0, len = obj.length; i < len; i++){
+                            str += `<p><span>` + obj[i].userName + `</span><span>` + obj[i].phoneNumber + `</span></p>`
+                        }
+                    }
+                    return str
+                }
+                return obj;
+            }
+
+
+
+
+            // 项目状态 和一次系统图  数据
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "http://112.74.169.99:21021/api/TokenAuth/GetProjectData?projectid=" + projectid,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+                    xhr.setRequestHeader("Authorization", accessToken);
+                    xhr.setRequestHeader('.AspNetCore.Culture', 'zh-Hans');
+                },
+                success: function (res) {
+                    var data = res.result;
+
+                    // 获取经纬度地址
+                    var longitude = res.result[0][0].longitude.toString();
+                    var latitude = res.result[0][0].latitude.toString();
+                    var newlong = ToDigital(longitude.substring(0,3), longitude.substring(3,5), longitude.substring(5,7));
+                    var newlat = ToDigital(latitude.substring(0,2), latitude.substring(2,4), latitude.substring(4,6));
+
+                    function ToDigital(strDu, strFen, strMiao) {
+                        strDu = (typeof (strDu) == "undefined" || strDu == "") ? 0 : parseFloat(strDu);
+                        strFen = (typeof (strFen) == "undefined" || strFen == "") ? 0 : parseFloat(strFen) / 60;
+                        strMiao = (typeof (strMiao) == "undefined" || strMiao == "") ? 0 : parseFloat(strMiao) / 3600;
+                        var digital = strDu + strFen + strMiao;
+                        if (digital == 0) {
+                            return "";
+                        } else {
+                            return digital;
+                        }
+                    }
+
+                    var lnglat = [newlong,newlat];
+                    function convertFrom(lnglat, type){
+                        AMap.convertFrom(lnglat, type, function (status, result) {
+                            if (result.info === 'ok') {
+                                var geocoder = new AMap.Geocoder();
+                                var lnglats = [result.locations[0].lng, result.locations[0].lat]
+                                geocoder.getAddress(lnglats, function(status, address) {
+                                    if (status === 'complete' && address.info === 'OK') {
+                                        console.log(address.regeocode.formattedAddress);
+                                        $("#showadd").html(address.regeocode.formattedAddress);
+                                    }
+                                })
+                            }
+                        });
+                    }
+                    convertFrom(lnglat,'gps');
+
+
+
+                    if (data.length == 0) {
+                        layer.open({
+                            type: 1,
+                            content: '<div>' + '通讯异常' + '</div>',
+                            btn: '确定',
+                            btnAlign: 'c', //按钮居中
+                            shade: 0, //不显示遮罩
+                            yes: function () {
+                                layer.closeAll();
+                                layer.close(index);
+                            }
+                        });
+                    } else {
+                        let time = data[0][0].creationTime.split('T');
+                        $("#showtime").html(' ');
+                        $("#showtime").html(description + ' 数据更新时间:' + time[1]);
+
+                        $("#data_wrap").append( each(data,num) );
+
+                        // let dbitap0 = 0,trrp0=0,cyjpowerGeneration0 = 0,pcstap0 = 0,bmssoc0 = 0,bmssoh0 = 0;
+                        let trrp0=0,cyjpowerGeneration0 = 0,pcstap0 = 0,bmssoc0 = 0,bmssoh0 = 0;
+                        for(var j=0;j<data.length;j++){
+                            // dbitap0 += data[j][4].itap;//负载功率
+                            trrp0 += data[j][4].trrp;//当日用电量
+                            cyjpowerGeneration0 += data[j][1].powerGeneration;//发电功率
+                            pcstap0 += data[j][2].tap;//pcs功率
+                            
+                            bmssoc0 += data[j][3].soc;//soc
+                            bmssoh0 += data[j][3].soh;//soh
+                            
+                        }
+
+                        $("#dbitap0").html( dealnumber(data[0][5].loadTAP) ); // 负载功率(电表总有功功率)
+                        $("#trrp0").html( dealnumber(trrp0) ); // 当日用电量
+
+                        $("#cyjpowerGeneration0").html( dealnumber(cyjpowerGeneration0) ); // 发电功率(柴油机)
+                        $("#pcstap0").html( dealnumber(pcstap0) ); // PCS总有功功率(pcs)
+
+                        $("#bmssoc0").html( dealnumber(bmssoc0/2) ); // soc(bms)
+                        $("#bmssoh0").html( dealnumber(bmssoh0/2) ); // soh(bms)
+
+
+                        for(var i=0;i<data.length;i++){
+                            // 柴油机
+                            $("#powerGeneration"+i).html( dealnumber(data[i][1].powerGeneration) ); // 发电功率
+                            $("#fuelLevel"+i).html( dealnumber(data[i][1].fuelLevel) ); // 燃油位 百分比
+                            $("#generationPowerFactor"+i).html( dealnumber(data[i][1].generationPowerFactor) ); // 功率因素
+
+                            // 智能电表
+                            $("#itap"+i).html( dealnumber(data[i][4].itap) ); //总有功功率
+                            $("#tpap"+i).html( dealnumber(data[i][4].tpap) ); //正向有功总电量
+
+
+                            // PCS
+                            $("#tap"+i).html( dealnumber(data[i][2].tap) ); //PCS总有功功率
+                            $("#tApparentP"+i).html( dealnumber(data[i][2].tApparentP) ); //PCS总视在功率
+                            $("#trp"+i).html( dealnumber(data[i][2].trp) ); //PCS总无功功率
+
+
+                            // BMS
+                            $("#soc"+i).html(dealnumber(data[i][3].soc)); //BMS SOC
+                            $("#group_V"+i).html(dealnumber(data[i][3].group_V)); //BMS 堆总电压
+                            $("#group_I"+i).html(dealnumber(data[i][3].group_I)); //BMS 堆总电流
+
+
+                            // 温湿度
+                            $("#temperature"+i).html( dealnumber(data[i][0].temperature) ); //EMS温度
+                            $("#environmentalT"+i).html( dealnumber(data[i][2].environmentalT) ); //环境温度
+                            $("#cabinetT"+i).html( dealnumber(data[i][2].cabinetT) ); //模块温度
+
+
+                            // 设备状态
+                            if (data[i][2].acDispatch === 0) {
+                                // 交流调度
+                                $("#jldd"+i).attr('class', 'onoff zton');
+                                // 直流调度
+                                $("#zldd"+i).attr('class', 'onoff ztoff');
+                            } else if(data[i][2].acDispatch === 1) {
+                                // 交流调度
+                                $("#jldd"+i).attr('class', 'onoff ztoff');
+                                // 直流调度
+                                $("#zldd"+i).attr('class', 'onoff zton');
+                            }
+                            if (data[i][2].gridState === 0) {
+                                // 并网
+                                $("#bw"+i).attr('class', 'onoff zton');
+                                // 离网
+                                $("#lw"+i).attr('class', 'onoff ztoff');
+                            } else if(data[i][2].gridState === 1) {
+                                // 并网
+                                $("#bw"+i).attr('class', 'onoff ztoff');
+                                // 离网
+                                $("#lw"+i).attr('class', 'onoff zton');
+                            }
+
+
+
+                            // 等待开机 离网运行 并网切离网 并网运行
+                            if (data[i][0].workMode === 1) {
+                                $("#ddkj"+i).attr('class', 'onoff zton');
+                                $("#lwyx"+i).attr('class', 'onoff ztoff');
+                                $("#bwqlw"+i).attr('class', 'onoff ztoff');
+                                $("#bwyx"+i).attr('class', 'onoff ztoff');
+                            } else if(data[i][0].workMode === 2) {
+                                $("#ddkj"+i).attr('class', 'onoff ztoff');
+                                $("#lwyx"+i).attr('class', 'onoff zton');
+                                $("#bwqlw"+i).attr('class', 'onoff ztoff');
+                                $("#bwyx"+i).attr('class', 'onoff ztoff');
+                            } else if(data[i][0].workMode === 3) {
+                                $("#ddkj"+i).attr('class', 'onoff ztoff');
+                                $("#lwyx"+i).attr('class', 'onoff ztoff');
+                                $("#bwqlw"+i).attr('class', 'onoff zton');
+                                $("#bwyx"+i).attr('class', 'onoff ztoff');
+                            } else if(data[i][0].workMode === 4) {
+                                $("#ddkj"+i).attr('class', 'onoff ztoff');
+                                $("#lwyx"+i).attr('class', 'onoff ztoff');
+                                $("#bwqlw"+i).attr('class', 'onoff ztoff');
+                                $("#bwyx"+i).attr('class', 'onoff zton');
+                            }
+
+
+
+                            // 自动模式 手动模式 紧急停机
+                            if (data[i][0].runMode === 1) {
+                                $("#zdms"+i).attr('class', 'onoff zton');
+                                $("#sdms"+i).attr('class', 'onoff ztoff');
+                                $("#jjtj"+i).attr('class', 'onoff ztoff');
+                            } else if(data[i][0].runMode === 2) {
+                                $("#zdms"+i).attr('class', 'onoff ztoff');
+                                $("#sdms"+i).attr('class', 'onoff zton');
+                                $("#jjtj"+i).attr('class', 'onoff ztoff');
+                            } else if(data[i][0].runMode === 3) {
+                                $("#zdms"+i).attr('class', 'onoff ztoff');
+                                $("#sdms"+i).attr('class', 'onoff ztoff');
+                                $("#jjtj"+i).attr('class', 'onoff zton');
+                            }
+
+
+
+
+
+
+
+
+                            // 分闸运行 合闸运行 停机
+                            let ynstopMode = data[i][1].stopMode;
+                            let yntransferToGenerator = data[i][1].transferToGenerator;
+                            if((ynstopMode == 0) && (yntransferToGenerator == 0)){
+                                $("#fzyx"+i).attr('class', 'onoff zton');
+                                $("#hzyx"+i).attr('class', 'onoff ztoff');
+                                $("#tj"+i).attr('class', 'onoff ztoff');
+                            }else if((ynstopMode == 0) && (yntransferToGenerator == 1)){
+                                $("#fzyx"+i).attr('class', 'onoff ztoff');
+                                $("#hzyx"+i).attr('class', 'onoff zton');
+                                $("#tj"+i).attr('class', 'onoff ztoff');
+                            }else if(ynstopMode === 1){
+                                $("#fzyx"+i).attr('class', 'onoff ztoff');
+                                $("#hzyx"+i).attr('class', 'onoff ztoff');
+                                $("#tj"+i).attr('class', 'onoff zton');
+                            }
+
+                        }
+
+                        var  topmap = `<div class="formbody">
+                                        <div class="layoutmap">
+
+                                            <div class="layoutimage bordernull" title="柴油机1"
+                                                style="left:1%; top:18%; width:13.5%;" onclick="window.location.href='./mainmonitor_cyj.html?projectid=`+projectid+`';">
+                                                <img src="./images/chaiyoujib.svg" alt="" style="width:100%;position: absolute;left: 50%;top: 50%;transform:
+                                                    translate(-50%, -50%);z-index: 2;" />
+                                            </div>
+                                            <div class="infobox chaiyouji" style="left:0%; top:33%;z-index: 2;padding:0;">
+                                                <div class="pcontent">
+                                                    <p class="ptitle">U(V):</p>
+                                                    <div id="yj_sxdy0`+num+`"></div>
+                                                </div>
+                                                <div class="pcontent">
+                                                    <p class="ptitle">P(kW):</p>
+                                                    <div id="yj_rp0`+num+`"></div>
+                                                </div>
+                                                
+                                                <div class="pcontent">
+                                                    <p class="ptitle">频率(Hz):</p>
+                                                    <div id="yj_sxpl0`+num+`"></div>
+                                                </div>
+                                                
+                                            </div>
+
+
+                                            <div id="leftwrap`+num+`"></div>
+                                            
+                                            <div id="middlewrap`+num+`"></div>
+                                            
+                                            <div id="rightwrap`+num+`"></div>
+
+
+                                            <div class="layoutimage bordernull" title="柴油机2"
+                                                style="left: 85%; top:18%;  width:13.5%;" onclick="window.location.href='./mainmonitor_cyj.html?projectid=`+projectid+`';">
+                                                <img src="./images/chaiyoujib.svg" alt="" style="width:100%;position: absolute;left: 50%;top: 50%;transform:
+                                                    translate(-50%, -50%);z-index: 2;" />
+                                            </div>
+                                            <div class="infobox chaiyouji" style="left:65%; top:33%;z-index: 2;padding:0;text-align:right;">
+                                                <div class="pcontent">
+                                                    <p class="ptitle">U(V):</p>
+                                                    <div id="yj_sxdy1`+num+`"></div>
+                                                </div>
+                                                <div class="pcontent">
+                                                    <p class="ptitle">P(kW):</p>
+                                                    <div id="yj_rp1`+num+`"></div>
+                                                </div>
+                                                
+                                                <div class="pcontent">
+                                                    <p class="ptitle">频率(Hz):</p>
+                                                    <div id="yj_sxpl1`+num+`"></div>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div onclick="window.location.href='#';" class="layoutimage bordernull" title="负载1"
+                                                style="left: 42%; top:0%; width:13.5%;z-index: 2;">
+                                                <img src="./images/fuzaib.svg" alt=""
+                                                    style="width:100%;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);" />
+                                            </div>
+
+                                            <div class="infobox mainfuzai" style="left:40%; top:14%;z-index: 2;padding:0;transform: scale(0.8);">
+                                                <div class="pcontent">
+                                                    <p class="ptitle">负载(kW):</p>
+                                                    <div id="load01`+num+`"></div>
+                                                </div>
+                                            </div>
+
+                                            <div id="leftload_wrap`+num+`"></div>
+
+
+                                            <div id="pcs0`+num+`"></div>
+                                            <div id="pcs1`+num+`"></div>
+
+
+                                            <div class="layoutimage bordernull" title="PCS1"
+                                                style="left:25%; top:38%; width:13.5%;z-index: 2;" onclick="window.location.href='./mainmonitor_pcs.html?projectid=`+projectid+`';">
+                                                <img src="./images/pcsb.svg" alt=""
+                                                    style="width:100%;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);" />
+                                            </div>
+                                            <div class="infobox mainpcs1" style="left:22%; top:53%;z-index: 2;">
+
+                                                <div class="pcontent">
+                                                    <p class="ptitle">U(V):</p>
+                                                    <div id="pcs_sxdy0`+num+`"></div>
+                                                </div>
+                                                <div class="pcontent">
+                                                    <p class="ptitle">I(A):</p>
+                                                    <div id="pcs_sxdl0`+num+`"></div>
+                                                </div>
+                                                <div class="pcontent">
+                                                    <span>P(kW):</span><span id="pcs_rp0`+num+`"></span>
+                                                </div>
+                                                <div class="pcontent">
+                                                    <p class="ptitle">频率(Hz):</p>
+                                                    <div id="pcs_sxpl0`+num+`"></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="layoutimage bordernull" title="PCS2"
+                                                style="left:57%; top:38%; width:13.5%;z-index: 2;" onclick="window.location.href='./mainmonitor_pcs.html?projectid=`+projectid+`';">
+                                                <img src="./images/pcsb.svg" alt=""
+                                                    style="width:100%;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);" />
+                                            </div>
+                                            <div class="infobox mainpcs2" style="left:57%; top:53%;z-index: 2;padding-left:0;">
+
+                                                <div class="pcontent">
+                                                    <p class="ptitle">U(V):</p>
+                                                    <div id="pcs_sxdy1`+num+`"></div>
+                                                </div>
+                                                <div class="pcontent">
+                                                    <p class="ptitle">I(A):</p>
+                                                    <div id="pcs_sxdl1`+num+`"></div>
+                                                </div>
+                                                <div class="pcontent">
+                                                    <span>P(kW):</span><span id="pcs_rp1`+num+`"></span>
+                                                </div>
+                                                <div class="pcontent">
+                                                    <p class="ptitle">频率(Hz):</p>
+                                                    <div id="pcs_sxpl1`+num+`"></div>
+                                                </div>
+                                                
+
+                                            </div>
+
+                                            <div onclick="window.location.href='./mainmonitor_bms.html?projectid=`+projectid+`';"
+                                                class="layoutimage bordernull" title="BMS1"
+                                                style="left:25%; top:72%; width:13.5%;z-index: 2;">
+                                                <img src="./images/bmsb.svg" alt=""
+                                                    style="width:100%;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);" />
+                                            </div>
+
+                                            <div class="infobox mainbms1" style="left:22%; top:86%;z-index: 2;">
+                                                <div class="pcontent">
+                                                    <p class="ptitle">SOC:</p>
+                                                    <div id="bms_soc0`+num+`"></div>
+                                                </div>
+                                                <div class="pcontent">
+                                                    <p class="ptitle">U(V):</p>
+                                                    <div id="bms_dy0`+num+`"></div>
+                                                </div>
+                                                <div class="pcontent">
+                                                    <p class="ptitle">最大电压(mv):</p>
+                                                    <div id="bms_mtosdy0`+num+`"></div>
+                                                </div>
+                                                <div class="pcontent">
+                                                    <p class="ptitle">最小电压(mv):</p>
+                                                    <div id="bms_ltosmdy0`+num+`"></div>
+                                                </div>
+                                                <div class="pcontent">
+                                                    <p class="ptitle">电流(A):</p>
+                                                    <div id="group_I0`+num+`"></div>
+                                                </div>
+                                            </div>
+
+                                            <div onclick="window.location.href='./mainmonitor_bms.html?projectid=`+num+`';"
+                                                class="layoutimage bordernull" title="BMS2"
+                                                style="left:57%; top:72%; width:13.5%;z-index: 2;">
+                                                <img src="./images/bmsb.svg" alt=""
+                                                    style="width:100%;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);" />
+                                            </div>
+                                            <div class="infobox mainbms2" style="left:57%; top:86%;z-index: 2;">
+                                                <div class="pcontent">
+                                                    <p class="ptitle">SOC:</p>
+                                                    <div id="bms_soc1`+num+`"></div>
+                                                </div>
+                                                <div class="pcontent">
+                                                    <p class="ptitle">U(V):</p>
+                                                    <div id="bms_dy1`+num+`"></div>
+                                                </div>
+                                                <div class="pcontent">
+                                                    <p class="ptitle">最大电压(mv):</p>
+                                                    <div id="bms_mtosdy1`+num+`"></div>
+                                                </div>
+                                                <div class="pcontent">
+                                                    <p class="ptitle">最小电压(mv):</p>
+                                                    <div id="bms_ltosmdy1`+num+`"></div>
+                                                </div>
+                                                <div class="pcontent">
+                                                    <p class="ptitle">电流(A):</p>
+                                                    <div id="group_I1`+num+`"></div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                `;
+                        $("#secondkhfxPane").append(topmap);
+                            
+                        // 一次系统图 数据
+                        // 负载数据
+                        let load0 = data[0][4].itap;
+                        let load1 = data[1][4].itap;
+                        // $("#load0"+num).html( dealnumber(load0) );
+                        // $("#load1"+num).html( dealnumber(load1) );
+                        $("#load01"+num).html( dealnumber(data[0][5].loadTAP) );
+
+                        // 油机数据
+                        var yj_rp0 = data[0][1].powerGeneration;
+                        var yj_rp1 = data[1][1].powerGeneration;
+                        $("#yj_rp0"+num).html( dealnumber(yj_rp0) );
+                        $("#yj_rp1"+num).html( dealnumber(yj_rp1) );
+
+                        var yj_sxdy0 = dealnumber(data[0][1].generating12V) + '/' + dealnumber(data[0][1].generating23V) + '/' + dealnumber(data[0][1].generating31V);
+                        var yj_sxdy1 = dealnumber(data[1][1].generating12V) + '/' + dealnumber(data[1][1].generating23V) + '/' + dealnumber(data[1][1].generating31V);
+                        $("#yj_sxdy0"+num).html( yj_sxdy0 );
+                        $("#yj_sxdy1"+num).html( yj_sxdy1 );
+
+                        $("#yj_sxpl0"+num).html( dealnumber(data[0][1].generationFrequency) );
+                        $("#yj_sxpl1"+num).html( dealnumber(data[1][1].generationFrequency) );
+
+                        // pcs
+                        var pcs_sxdy0 = data[0][2].abacv + "/" + data[0][2].bcacv+ "/" + data[0][2].caacv;
+                        var pcs_sxdy1 = data[1][2].abacv + "/" + data[1][2].bcacv+ "/" + data[1][2].caacv;
+                        $("#pcs_sxdy0"+num).html( dealnumber(pcs_sxdy0) );
+                        $("#pcs_sxdy1"+num).html( dealnumber(pcs_sxdy1) );
+                        
+                        var pcs_sxdl0 = data[0][2].aaci + "/" + data[0][2].baci+ "/" + data[0][2].caci;
+                        var pcs_sxdl1 = data[1][2].aaci + "/" + data[1][2].baci+ "/" + data[1][2].caci;
+                        $("#pcs_sxdl0"+num).html( dealnumber(pcs_sxdl0) );
+                        $("#pcs_sxdl1"+num).html( dealnumber(pcs_sxdl1) );
+
+                        var pcs_rp0 = data[0][2].tap;
+                        var pcs_rp1 = data[1][2].tap;
+                        $("#pcs_rp0"+num).html( dealnumber(pcs_rp0) );
+                        $("#pcs_rp1"+num).html( dealnumber(pcs_rp1) );
+
+                        $("#pcs_sxpl0"+num).html( dealnumber(data[0][2].acFrequency));
+                        $("#pcs_sxpl1"+num).html( dealnumber(data[1][2].acFrequency));
+
+                            // bms
+                        $("#bms_soc0"+num).html( dealnumber(data[0][3].soc) );
+                        $("#bms_soc1"+num).html( dealnumber(data[1][3].soc) );
+
+                        $("#bms_dy0"+num).html( dealnumber(data[0][3].group_V) );
+                        $("#bms_dy1"+num).html( dealnumber(data[1][3].group_V) );
+
+                        // 单体最高电压值 
+                        $("#bms_mtosdy0"+num).html( dealnumber(data[0][3].mvosU1) );
+                        $("#bms_mtosdy1"+num).html( dealnumber(data[1][3].mvosU1) );
+                        // 单体最低电压值
+                        $("#bms_ltosmdy0"+num).html( dealnumber(data[0][3].lvosU1) );
+                        $("#bms_ltosmdy1"+num).html( dealnumber(data[1][3].lvosU1));
+
+                        // 电流
+                        $("#group_I0"+num).html(data[0][3].group_I);
+                        $("#group_I1"+num).html(data[1][3].group_I);
+
+
+
+                        //左边负载方向判断---第一次请求
+                        if(data[0][5].loadTAP === 0){
+                            $("#leftload_wrap"+num).html(`
+                                <div id="gdownline11" class="vp vpthin" style="left:48%; top:13.5%;  height:14%;z-index: 1;"></div>
+                            `);
+                        }else{
+                            $("#leftload_wrap"+num).html(`
+                                <div id="gdownline11" class="vp vpthin gotop" style="left:48%; top:13.5%;  height:14%;z-index: 1;"></div>
+                            `);
+                        }
+
+                        //右边负载方向判断---第一次请求
+                        // if(load1 === 0){
+                        //     $("#rightload_wrap"+num).html(`
+                        //         <div id="gdownline21" class="vp vpthin" style="left:63%; top:13.5%;  height:14%;z-index: 1;"></div>
+                        //     `);
+                        // }else{
+                        //     $("#rightload_wrap"+num).html(`
+                        //         <div id="gdownline21" class="vp vpthin gotop" style="left:63%; top:13.5%;  height:14%;z-index: 1;"></div>
+                        //     `);
+                        // }
+
+                        // 油机左边1段方向的判断---第一次请求
+                        if(yj_rp0 === 0){
+                            $("#leftwrap"+num).html(`
+                                <div id="leftline" class="hp hpthin" style="left:8%; top:27%;  width:23%; z-index: 1;"></div>
+                            `);
+                        }else{
+                            $("#leftwrap"+num).html(`
+                                <div id="leftline" class="hp hpthin goright" style="left:8%; top:27%;  width:23%; z-index: 1;"></div>
+                            `);
+                        }
+
+                        // 油机中间2段方向的判断---第一次请求
+                        let yj_middle = yj_rp0 - pcs_rp0 - load0;
+                        if(yj_middle > 0){
+                            $("#middlewrap"+num).html(`
+                                <div id="middleline" class="hp hpthin goright" style="left:31%; top:27%;  width:32%; z-index: 1;"></div>
+                            `);
+                        }else if(yj_middle < 0){
+                            $("#middlewrap"+num).html(`
+                                <div id="middleline" class="hp hpthin goleft" style="left:31%; top:27%;  width:32%; z-index: 1;"></div>
+                            `);
+                        }
+                        if((yj_rp0===0&&pcs_rp0===0&&load0===0) || (yj_rp1===0&&pcs_rp1===0&&load1===0)){
+                            $("#middlewrap"+num).html(`
+                                <div id="middleline" class="hp hpthin" style="left:31%; top:27%;  width:32%; z-index: 1;"></div>
+                            `);
+                        }
+
+                        // 油机右边3段方向的判断---第一次请求
+                        if(yj_rp1 === 0){
+                            $("#rightwrap"+num).html(`
+                                <div id="rightline" class="hp hpthin" style="left:63%; top:27%;  width:25%; z-index: 1;"></div>
+                            `);
+                        }else{
+                            $("#rightwrap"+num).html(`
+                                <div id="rightline" class="hp hpthin goleft" style="left:63%; top:27%;  width:25%; z-index: 1;"></div>
+                            `);
+                        }
+
+                        // 左边pcs方向判断---第一次请求
+                        if(pcs_rp0 < 0){
+                            $("#pcs0"+num).html(`
+                                <div id="pcsline0" class="vp vpthin gotop" style="left:31%; top:27%;  height:55%;z-index: 1;"></div>
+                            `);
+                        }else if(pcs_rp0 > 0){
+                            $("#pcs0"+num).html(`
+                                <div id="pcsline0" class="vp vpthin godown" style="left:31%; top:27%;  height:55%;z-index: 1;"></div>
+                            `);
+                        }else if(pcs_rp0 === 0){
+                            $("#pcs0"+num).html(`
+                                <div id="pcsline0" class="vp vpthin" style="left:31%; top:27%;  height:55%;z-index: 1;"></div>
+                            `);
+                        }
+
+                        // 右边pcs方向判断---第一次请求
+                        if(pcs_rp1 < 0){
+                            $("#pcs1"+num).html(`
+                                <div id="pcsline1" class="vp vpthin gotop" style="left:63%; top:27%;  height:55%;z-index: 1;"></div>0
+                            `);
+                        }else if(pcs_rp1 > 0){
+                            $("#pcs1"+num).html(`
+                                <div id="pcsline1" class="vp vpthin godown" style="left:63%; top:27%;  height:55%;z-index: 1;"></div>
+                            `);
+                        }else if(pcs_rp1 === 0){
+                            $("#pcs1"+num).html(`
+                                <div id="pcsline1" class="vp vpthin" style="left:63%; top:27%;  height:55%;z-index: 1;"></div>
+                            `);
+                        }
+                        setInterval(updateData,1000);
+                    }
+                },
+                error: function (err) {
+                    console.log("首次请求数据 请求失败");
+                }
+            });
+
+
+            // tab选项卡切换
+            $("#tabHead.tabHead span").on("click", function () {
+                var itemIndex = $(this).index();
+                $(this).addClass("active").siblings(".tabHead span").removeClass("active");
+                $(".khfxPane").eq(itemIndex).show().siblings(".khfxPane").hide();
+            });
+
+            // 请求数据报表数据
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "http://112.74.169.99:21021/api/services/app/ReportService/GetReportDLTDGDataByDay?type=1&groupid=1&projectid=" + projectid,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+                    xhr.setRequestHeader("Authorization", accessToken);
+                    xhr.setRequestHeader('.AspNetCore.Culture', 'zh-Hans');
+                },
+                success: function (res) {
+                    if(res.success == true){
+                        let dataall = res.result;
+                        
+
+                        $.ajax({
+                            type: "GET",
+                            dataType: "json",
+                            url: "http://112.74.169.99:21021/api/services/app/DeviceGroupService/GetDeviceGroupsByProjectID?id=" + projectid,
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+                                xhr.setRequestHeader("Authorization", accessToken);
+                                xhr.setRequestHeader('.AspNetCore.Culture', 'zh-Hans');
+                            },
+                            success: function (res) {
+                                
+                                if(res.success == true){
+                                    let data = res.result;
+                                    $("#selectsb").html( selectsbeach(data) );
+                                    $("#theweek").html( selectsbeachcon(dataall) );
+                                    
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+            
+            // 设备下拉框切换
+            $("#selectsb").change(function () {
+                let choicesb = $("#selectsb option:selected").attr('value');
+                $(".tablist .listcon").eq(choicesb).show().siblings(".tablist .listcon").hide();
+                let thetype;
+                if(choicesb == 0){thetype = 1;}
+                else{thetype = 0;}
+
+                var choicewmy = $(this).parent().next().find('.nyztab span');
+                $(choicewmy).each(function(index,item){
+                    if($(item).hasClass('active')){
+
+                        if(index == 0){ //一周
+                            $.ajax({
+                                type: "GET",
+                                dataType: "json",
+                                url: "http://112.74.169.99:21021/api/services/app/ReportService/GetReportDLTDGDataByDay?type="+thetype+"&groupid="+choicesb+"&projectid=" + projectid,
+                                beforeSend: function (xhr) {
+                                    xhr.setRequestHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+                                    xhr.setRequestHeader("Authorization", accessToken);
+                                    xhr.setRequestHeader('.AspNetCore.Culture', 'zh-Hans');
+                                },
+                                success: function (res) {
+                                    if(res.success == true){
+                                        $("#theweek").html('');
+                                        $("#theweek").html( selectsbeachcon(res.result) );
+                                    }
+                                }
+                            });
+
+                        }else if(index == 1){//月份
+                            var index2 = layer.load(0, {
+                                shade: [0.8, '#fff']
+                            }); //0.1透明度的白色背景
+                            var mouthchose = Number($("#selectmonth option:selected").attr('value')) + 1;
+
+                            $.ajax({
+                                type: "GET",
+                                dataType: "json",
+                                url: "http://112.74.169.99:21021/api/services/app/ReportService/GetReportDLTDGDataByMonth?type="+thetype+"&groupid="+choicesb+"&projectid="+projectid+"&month="+ mouthchose,
+                                beforeSend: function (xhr) {
+                                    xhr.setRequestHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+                                    xhr.setRequestHeader("Authorization", accessToken);
+                                    xhr.setRequestHeader('.AspNetCore.Culture', 'zh-Hans');
+                                },
+                                success: function (res) {
+                                    if(res.success == true){
+                                        let data = res.result;
+
+                                        $("#thedetailmounth").html('');
+                                        $("#thedetailmounth").html(selectsbeachcon(data));
+                                        layer.close(index2);
+                                        
+
+                                    }
+                                }
+                            });
+
+                        }
+                    }
+
+                })
+
+
+
+            });
+
+
+
+             // 周月年切换选项卡切换
+             $(".tablist .listcon .nyztab >span").on("click", function () {
+                var groupid = $(this).parents('#tablist').prev().find('select').val();
+                let thetype;
+                if(groupid == 0){
+                    thetype = 1;
+                }else{
+                    thetype = 0;
+                }
+                var itemIndex = $(this).index();
+                $(this).addClass("active").siblings(".tablist .listcon .nyztab >span").removeClass("active"); 
+                let nyzcon = $(this).parent().next().find(".nyzcon");
+                nyzcon.eq(itemIndex).show().siblings(nyzcon).hide();
+
+                if(itemIndex == 1){// 月份选项卡的数据
+                    let nowmonth = Mounthnow();
+                    $.ajax({
+                        type: "GET",
+                        dataType: "json",
+                        url: "http://112.74.169.99:21021/api/services/app/ReportService/GetReportDLTDGDataByMonth?type="+thetype+"&groupid="+groupid+"&projectid="+projectid+"&month="+ nowmonth,
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+                            xhr.setRequestHeader("Authorization", accessToken);
+                            xhr.setRequestHeader('.AspNetCore.Culture', 'zh-Hans');
+                        },
+                        success: function (res) {
+                            if(res.success == true){
+                                let data = res.result;
+                                $("#thedetailmounth").html('');
+                                $("#thedetailmounth").html(selectsbeachcon(data));
+                                $("#selectmonth").html(selectmontheach(nowmonth));
+                                
+                            }
+                        }
+                    });
+
+                }else if(itemIndex == 2){// 年选项卡的数据
+                    console.log("年选项卡的数据");
+                }
+
+            });
+
+
+            // 月份下拉框切换
+            $("#selectmonth").change(function () {
+
+                var index1 = layer.load(0, {
+                    shade: [0.8, '#fff']
+                }); //0.1透明度的白色背景
+
+                var mouthchose = Number($("#selectmonth option:selected").attr('value')) + 1;
+                var groupid = $(this).parents('#tablist').prev().find("select").val();
+                let thetype;
+                if(groupid == 0){thetype = 1;}
+                else{thetype = 0;}
+
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: "http://112.74.169.99:21021/api/services/app/ReportService/GetReportDLTDGDataByMonth?type="+thetype+"&groupid="+groupid+"&projectid="+projectid+"&month="+ mouthchose,
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+                        xhr.setRequestHeader("Authorization", accessToken);
+                        xhr.setRequestHeader('.AspNetCore.Culture', 'zh-Hans');
+                    },
+                    success: function (res) {
+                        if(res.success == true){
+                            let data = res.result;
+                            $("#thedetailmounth").html('');
+                            $("#thedetailmounth").html(selectsbeachcon(data));
+                            layer.close(index1);
+                        }
+                    }
+                });
+                
+            });
+
+
+            let num_index = 0;
+            let load01 = 0,load02 = 0,load11 = 0,load12 = 0;
+            let yj_left1=0,yj_left2=0,yj_middle1=0,yj_middle2=0,yj_right1=0,yj_right2=0;
+            let pcs1_rp0=0,pcs2_rp0=0,pcs1_rp1=0,pcs2_rp1=0;
+
+
+            // 项目状态 和一次系统图  数据更新
+            function updateData() { // 请求数据
+                num_index++;
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: "http://112.74.169.99:21021/api/TokenAuth/GetProjectData?projectid=" + projectid,
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+                        xhr.setRequestHeader("Authorization", accessToken);
+                        xhr.setRequestHeader('.AspNetCore.Culture', 'zh-Hans');
+                    },
+                    success: function (res) {
+                        var data = res.result;
+
+                        let time = data[0][0].creationTime.split('T');
+                        $("#showtime").html(' ');
+                        $("#showtime").html(description + ' 数据更新时间:' + time[1]);
+        
+                        // let dbitap0 = 0,trrp0=0,cyjpowerGeneration0 = 0,pcstap0 = 0,bmssoc0 = 0,bmssoh0 = 0;
+                        let trrp0=0,cyjpowerGeneration0 = 0,pcstap0 = 0,bmssoc0 = 0,bmssoh0 = 0;
+                        for(var j=0;j<data.length;j++){
+                            // dbitap0 += data[j][4].itap;//负载功率
+                            trrp0 += data[j][4].trrp;//当日用电量
+                            cyjpowerGeneration0 += data[j][1].powerGeneration;//发电功率
+                            pcstap0 += data[j][2].tap;//pcs功率
+                            bmssoc0 += data[j][3].soc;//soc
+                            bmssoh0 += data[j][3].soh;//soh
+                        }
+
+                        $("#dbitap0").html( dealnumber(data[0][5].loadTAP) ); // 负载功率(电表总有功功率)
+                        $("#trrp0").html( dealnumber(trrp0) ); // 当日用电量(电表)
+
+                        $("#cyjpowerGeneration0").html( dealnumber(cyjpowerGeneration0) ); // 发电功率(柴油机)
+                        $("#pcstap0").html( dealnumber(pcstap0) ); // PCS总有功功率(pcs)
+
+                        $("#bmssoc0").html( dealnumber(bmssoc0/2) ); // soc(bms)
+                        $("#bmssoh0").html( dealnumber(bmssoh0/2) ); // soh(bms)
+
+                        for(var i=0;i<data.length;i++){
+                            // 柴油机
+                            $("#powerGeneration"+i).html( dealnumber(data[i][1].powerGeneration) ); // 发电功率
+                            $("#fuelLevel"+i).html( dealnumber(data[i][1].fuelLevel) ); // 燃油位 百分比
+                            $("#generationPowerFactor"+i).html( dealnumber(data[i][1].generationPowerFactor) ); // 功率因素
+
+                            // 智能电表
+                            $("#itap"+i).html( dealnumber(data[i][4].itap) ); //总有功功率
+                            $("#tpap"+i).html( dealnumber(data[i][4].tpap) ); //正向有功总电量
+
+
+                            // PCS
+                            $("#tap"+i).html( dealnumber(data[i][2].tap) ); //PCS总有功功率
+                            $("#tApparentP"+i).html( dealnumber(data[i][2].tApparentP) ); //PCS总视在功率
+                            $("#trp"+i).html( dealnumber(data[i][2].trp) ); //PCS总无功功率
+
+
+                            // BMS
+                            $("#soc"+i).html(dealnumber(data[i][3].soc)); //BMS SOC
+                            $("#group_V"+i).html(dealnumber(data[i][3].group_V)); //BMS 堆总电压
+                            $("#group_I"+i).html(dealnumber(data[i][3].group_I)); //BMS 堆总电流
+
+
+                            // 温湿度
+                            $("#temperature"+i).html( dealnumber(data[i][0].temperature) ); //EMS温度
+                            $("#environmentalT"+i).html( dealnumber(data[i][2].environmentalT) ); //环境温度
+                            $("#cabinetT"+i).html( dealnumber(data[i][2].cabinetT) ); //模块温度
+
+
+                            // 设备状态
+                            if (data[i][2].acDispatch === 0) {
+                                // 交流调度
+                                $("#jldd"+i).attr('class', 'onoff zton');
+                                // 直流调度
+                                $("#zldd"+i).attr('class', 'onoff ztoff');
+                            } else if(data[i][2].acDispatch === 1) {
+                                // 交流调度
+                                $("#jldd"+i).attr('class', 'onoff ztoff');
+                                // 直流调度
+                                $("#zldd"+i).attr('class', 'onoff zton');
+                            }
+                            if (data[i][2].gridState === 0) {
+                                // 并网
+                                $("#bw"+i).attr('class', 'onoff zton');
+                                // 离网
+                                $("#lw"+i).attr('class', 'onoff ztoff');
+                            } else if(data[i][2].gridState === 1) {
+                                // 并网
+                                $("#bw"+i).attr('class', 'onoff ztoff');
+                                // 离网
+                                $("#lw"+i).attr('class', 'onoff zton');
+                            }
+
+                            // 等待开机 离网运行 并网切离网 并网运行
+                            if (data[i][0].workMode === 1) {
+                                $("#ddkj"+i).attr('class', 'onoff zton');
+                                $("#lwyx"+i).attr('class', 'onoff ztoff');
+                                $("#bwqlw"+i).attr('class', 'onoff ztoff');
+                                $("#bwyx"+i).attr('class', 'onoff ztoff');
+                            } else if(data[i][0].workMode === 2) {
+                                $("#ddkj"+i).attr('class', 'onoff ztoff');
+                                $("#lwyx"+i).attr('class', 'onoff zton');
+                                $("#bwqlw"+i).attr('class', 'onoff ztoff');
+                                $("#bwyx"+i).attr('class', 'onoff ztoff');
+                            } else if(data[i][0].workMode === 3) {
+                                $("#ddkj"+i).attr('class', 'onoff ztoff');
+                                $("#lwyx"+i).attr('class', 'onoff ztoff');
+                                $("#bwqlw"+i).attr('class', 'onoff zton');
+                                $("#bwyx"+i).attr('class', 'onoff ztoff');
+                            } else if(data[i][0].workMode === 4) {
+                                $("#ddkj"+i).attr('class', 'onoff ztoff');
+                                $("#lwyx"+i).attr('class', 'onoff ztoff');
+                                $("#bwqlw"+i).attr('class', 'onoff ztoff');
+                                $("#bwyx"+i).attr('class', 'onoff zton');
+                            }
+
+
+
+                            // 自动模式 手动模式 紧急停机
+                            if (data[i][0].runMode === 1) {
+                                $("#zdms"+i).attr('class', 'onoff zton');
+                                $("#sdms"+i).attr('class', 'onoff ztoff');
+                                $("#jjtj"+i).attr('class', 'onoff ztoff');
+                            } else if(data[i][0].runMode === 2) {
+                                $("#zdms"+i).attr('class', 'onoff ztoff');
+                                $("#sdms"+i).attr('class', 'onoff zton');
+                                $("#jjtj"+i).attr('class', 'onoff ztoff');
+                            } else if(data[i][0].runMode === 3) {
+                                $("#zdms"+i).attr('class', 'onoff ztoff');
+                                $("#sdms"+i).attr('class', 'onoff ztoff');
+                                $("#jjtj"+i).attr('class', 'onoff zton');
+                            }
+
+
+                            // 分闸运行 合闸运行 停机
+                            let ynstopMode = data[i][1].stopMode;
+                            let yntransferToGenerator = data[i][1].transferToGenerator;
+                            if((ynstopMode == 0) && (yntransferToGenerator == 0)){
+                                $("#fzyx"+i).attr('class', 'onoff zton');
+                                $("#hzyx"+i).attr('class', 'onoff ztoff');
+                                $("#tj"+i).attr('class', 'onoff ztoff');
+                            }else if((ynstopMode == 0) && (yntransferToGenerator == 1)){
+                                $("#fzyx"+i).attr('class', 'onoff ztoff');
+                                $("#hzyx"+i).attr('class', 'onoff zton');
+                                $("#tj"+i).attr('class', 'onoff ztoff');
+                            }else if(ynstopMode === 1){
+                                $("#fzyx"+i).attr('class', 'onoff ztoff');
+                                $("#hzyx"+i).attr('class', 'onoff ztoff');
+                                $("#tj"+i).attr('class', 'onoff zton');
+                            }
+                        }
+
+
+                        // 一次系统图 数据
+                        // 负载数据
+                        let load0 = data[0][4].itap;
+                        let load1 = data[1][4].itap;
+                        // $("#load0"+num).html(load0);
+                        // $("#load1"+num).html(load1);
+                        $("#load01"+num).html( dealnumber(data[0][5].loadTAP) );
+                        // 油机数据
+                        var yj_rp0 = data[0][1].powerGeneration;
+                        var yj_rp1 = data[1][1].powerGeneration;
+                        $("#yj_rp0"+num).html(yj_rp0);
+                        $("#yj_rp1"+num).html(yj_rp1);
+                        
+                        var yj_sxdy0 = dealnumber(data[0][1].generating12V) + '/' + dealnumber(data[0][1].generating23V) + '/' + dealnumber(data[0][1].generating31V);
+                        var yj_sxdy1 = dealnumber(data[1][1].generating12V) + '/' + dealnumber(data[1][1].generating23V) + '/' + dealnumber(data[1][1].generating31V);
+                        $("#yj_sxdy0"+num).html( yj_sxdy0 );
+                        $("#yj_sxdy1"+num).html( yj_sxdy1 );
+
+                        $("#yj_sxpl0"+num).html(data[0][1].generationFrequency);
+                        $("#yj_sxpl1"+num).html(data[1][1].generationFrequency);
+
+                        // pcs
+                        var pcs_sxdy0 = data[0][2].abacv + "/" + data[0][2].bcacv+ "/" + data[0][2].caacv;
+                        var pcs_sxdy1 = data[1][2].abacv + "/" + data[1][2].bcacv+ "/" + data[1][2].caacv;
+                        $("#pcs_sxdy0"+num).html(pcs_sxdy0);
+                        $("#pcs_sxdy1"+num).html(pcs_sxdy1);
+                        
+                        var pcs_sxdl0 = data[0][2].aaci + "/" + data[0][2].baci+ "/" + data[0][2].caci;
+                        var pcs_sxdl1 = data[1][2].aaci + "/" + data[1][2].baci+ "/" + data[1][2].caci;
+                        $("#pcs_sxdl0"+num).html(pcs_sxdl0);
+                        $("#pcs_sxdl1"+num).html(pcs_sxdl1);
+
+                        var pcs_rp0 = data[0][2].tap;
+                        var pcs_rp1 = data[1][2].tap;
+                        $("#pcs_rp0"+num).html(pcs_rp0);
+                        $("#pcs_rp1"+num).html(pcs_rp1);
+
+                        $("#pcs_sxpl0"+num).html(data[0][2].acFrequency);
+                        $("#pcs_sxpl1"+num).html(data[1][2].acFrequency);
+
+                        // bms
+                        $("#bms_soc0"+num).html(data[0][3].soc);
+                        $("#bms_soc1"+num).html(data[1][3].soc);
+
+                        $("#bms_dy0"+num).html(data[0][3].group_V);
+                        $("#bms_dy1"+num).html(data[1][3].group_V);
+
+                        // 单体最高电压值 
+                        $("#bms_mtosdy0"+num).html(data[0][3].mvosU1);
+                        $("#bms_mtosdy1"+num).html(data[1][3].mvosU1);
+                        // 单体最低电压值
+                        $("#bms_ltosmdy0"+num).html(data[0][3].lvosU1);
+                        $("#bms_ltosmdy1"+num).html(data[1][3].lvosU1);
+
+                        // 电流
+                        $("#group_I0"+num).html(data[0][3].group_I);
+                        $("#group_I1"+num).html(data[1][3].group_I);
+
+
+                        //左边负载方向判断---第n次请求
+                        if(num_index === 1){
+                            load01 = data[0][4].itap;
+                            if(data[0][5].loadTAP === 0){
+                                $("#leftload_wrap"+num).html(`
+                                    <div id="gdownline11" class="vp vpthin" style="left:48%; top:13.5%;  height:14%;z-index: 1;"></div>
+                                `);
+                            }else {
+                                $("#leftload_wrap"+num).html(`
+                                    <div id="gdownline11" class="vp vpthin gotop" style="left:48%; top:13.5%;  height:14%;z-index: 1;"></div>
+                                `);
+                            }
+                        }else{
+                            load02 = data[0][4].itap;
+                            let load01_sign = Math.sign(load01);
+                            let load02_sign = Math.sign(load02);
+                            if(load01_sign !== load02_sign){
+                                if(load02 === 0){
+                                    $("#leftload_wrap"+num).html(`
+                                        <div id="gdownline11" class="vp vpthin" style="left:48%; top:13.5%;  height:14%;z-index: 1;"></div>
+                                    `);
+                                }else {
+                                    $("#leftload_wrap"+num).html(`
+                                        <div id="gdownline11" class="vp vpthin gotop" style="left:48%; top:13.5%;  height:14%;z-index: 1;"></div>
+                                    `);
+                                }
+                            }
+                            load02 = data[0][4].itap;
+                        }
+
+                        // //右边负载方向判断---第n次请求
+                        // if(num_index === 1){
+                        //     load11 = data[1][4].itap;
+                        //     if(load11 === 0){
+                        //         $("#rightload_wrap"+num).html(`
+                        //             <div id="gdownline21" class="vp vpthin" style="left:63%; top:13.5%;  height:14%;z-index: 1;"></div>
+                        //         `);
+                        //     }else {
+                        //         $("#rightload_wrap"+num).html(`
+                        //             <div id="gdownline21" class="vp vpthin gotop" style="left:63%; top:13.5%;  height:14%;z-index: 1;"></div>
+                        //         `);
+                        //     }
+                        // }else{
+                        //     load12 = data[1][4].itap;
+                        //     let load11_sign = Math.sign(load11);
+                        //     let load12_sign = Math.sign(load12);
+                        //     if(load11_sign !== load12_sign){
+                        //         if(load12 === 0){
+                        //             $("#rightload_wrap"+num).html(`
+                        //                 <div id="gdownline21" class="vp vpthin" style="left:63%; top:13.5%;  height:14%;z-index: 1;"></div>
+                        //             `);
+                        //         }else {
+                        //             $("#rightload_wrap"+num).html(`
+                        //                 <div id="gdownline21" class="vp vpthin gotop" style="left:63%; top:13.5%;  height:14%;z-index: 1;"></div>
+                        //             `);
+                        //         }
+                        //     }
+                        //     load12 = data[1][4].itap;
+                        // }
+
+                        // 油机左边1端方向判断---第n次请求
+                        if(num_index === 1){
+                            yj_left1 = data[0][1].powerGeneration;
+                            if(yj_left1 === 0){
+                                $("#leftwrap"+num).html(`
+                                    <div id="leftline" class="hp hpthin" style="left:8%; top:27%;  width:23%; z-index: 1;"></div>
+                                `);
+                            }else {
+                                $("#leftwrap"+num).html(`
+                                    <div id="leftline" class="hp hpthin goright" style="left:8%; top:27%;  width:23%; z-index: 1;"></div>
+                                `);
+                            }
+                        }else{
+                            yj_left2 = data[0][1].powerGeneration;
+                            let yj_left1_sign = Math.sign(yj_left1);
+                            let yj_left2_sign = Math.sign(yj_left2);
+                            if(yj_left1_sign !== yj_left2_sign){
+                                if(yj_left2 === 0){
+                                    $("#leftwrap"+num).html(`
+                                        <div id="leftline" class="hp hpthin" style="left:8%; top:27%;  width:23%; z-index: 1;"></div>
+                                    `);
+                                }else {
+                                    $("#leftwrap"+num).html(`
+                                        <div id="leftline" class="hp hpthin goright" style="left:8%; top:27%;  width:23%; z-index: 1;"></div>
+                                    `);
+                                }
+                            }
+                            yj_left2 = data[0][1].powerGeneration;
+                        }
+
+
+                        // 油机中间2段方向的判断---第n次请求
+                        if(num_index === 1){
+                            yj_middle1 = yj_rp0 - pcs_rp0 - load0;
+                            if(yj_middle1 > 0){
+                                $("#middlewrap"+num).html(`
+                                    <div id="middleline" class="hp hpthin goright" style="left:31%; top:27%;  width:32%; z-index: 1;"></div>
+                                `);
+                            }else if(yj_middle1 < 0){
+                                $("#middlewrap"+num).html(`
+                                    <div id="middleline" class="hp hpthin goleft" style="left:31%; top:27%;  width:32%; z-index: 1;"></div>
+                                `);
+                            }
+                            if((yj_rp0===0&&pcs_rp0===0&&load0===0) || (yj_rp1===0&&pcs_rp1===0&&load1===0)){
+                                $("#middlewrap"+num).html(`
+                                    <div id="middleline" class="hp hpthin" style="left:31%; top:27%;  width:32%; z-index: 1;"></div>
+                                `);
+                            }
+                        }else{
+                            yj_middle2 = yj_rp0 - pcs_rp0 - load0;
+                            let yj_middle1_sign = Math.sign(yj_middle1);
+                            let yj_middle2_sign = Math.sign(yj_middle2);
+                            if( yj_middle1_sign != yj_middle2_sign ){
+                                if(yj_middle2 > 0){
+                                    $("#middlewrap"+num).html(`
+                                        <div id="middleline" class="hp hpthin goright" style="left:31%; top:27%;  width:32%; z-index: 1;"></div>
+                                    `);
+                                }else if(yj_middle2 < 0){
+                                    $("#middlewrap"+num).html(`
+                                        <div id="middleline" class="hp hpthin goleft" style="left:31%; top:27%;  width:32%; z-index: 1;"></div>
+                                    `);
+                                }
+
+                                if((yj_rp0===0&&pcs_rp0===0&&load0===0) || (yj_rp1===0&&pcs_rp1===0&&load1===0)){
+                                    $("#middlewrap"+num).html(`
+                                        <div id="middleline" class="hp hpthin" style="left:31%; top:27%;  width:32%; z-index: 1;"></div>
+                                    `);
+                                }
+                            }
+                            yj_middle2 = yj_rp0 - pcs_rp0 - load0;
+                        }
+
+                        // 油机右边1端方向判断---第n次请求
+                        if(num_index === 1){
+                            yj_right1 = data[1][1].powerGeneration;
+                            if(yj_right1 === 0){
+                                $("#rightwrap"+num).html(`
+                                    <div id="rightline" class="hp hpthin" style="left:63%; top:27%;  width:25%; z-index: 1;"></div>
+                                `);
+                            }else {
+                                $("#rightwrap"+num).html(`
+                                    <div id="rightline" class="hp hpthin goleft" style="left:63%; top:27%;  width:25%; z-index: 1;"></div>
+                                `);
+                            }
+                        }else{
+                            yj_right2 = data[1][1].powerGeneration;
+                            let yj_right1_sign = Math.sign(yj_right1);
+                            let yj_right2_sign = Math.sign(yj_right2);
+                            if(yj_right1_sign !== yj_right2_sign){
+                                if(yj_right2 === 0){
+                                    $("#rightwrap"+num).html(`
+                                        <div id="rightline" class="hp hpthin" style="left:63%; top:27%;  width:25%; z-index: 1;"></div>
+                                    `);
+                                }else {
+                                    $("#rightwrap"+num).html(`
+                                        <div id="rightline" class="hp hpthin goleft" style="left:63%; top:27%;  width:25%; z-index: 1;"></div>
+                                    `);
+                                }
+                            }
+                            yj_right2 = data[1][1].powerGeneration;
+                        }
+
+                        
+                        // 左边pcs方向判断---第n次请求
+                        if(num_index === 1){
+                            pcs1_rp0 = data[0][2].tap;
+                            if(pcs1_rp0 < 0){
+                                $("#pcs0"+num).html(`
+                                    <div id="pcsline0" class="vp vpthin gotop" style="left:31%;top:27%;height:55%;z-index:1;"></div>
+                                `);
+                            }else if(pcs1_rp0 > 0){
+                                $("#pcs0"+num).html(`
+                                    <div id="pcsline0" class="vp vpthin godown" style="left:31%;top:27%;height:55%;z-index:1;"></div>
+                                `);
+                            }else if(pcs1_rp0 === 0){
+                                $("#pcs0"+num).html(`
+                                    <div id="pcsline0" class="vp vpthin" style="left:31%;top:27%;height:55%;z-index:1;"></div>
+                                `);
+                            }
+                        }else {
+                            pcs2_rp0 = data[0][2].tap;
+                            let pcs1_rp0_sign = Math.sign(pcs1_rp0);
+                            let pcs2_rp0_sign = Math.sign(pcs2_rp0);
+                            if(pcs1_rp0_sign !== pcs2_rp0_sign){
+                                if(pcs2_rp0 < 0){
+                                    $("#pcs0"+num).html(`
+                                        <div id="pcsline0" class="vp vpthin gotop" style="left:31%;top:27%;height:55%;z-index:1;"></div>
+                                    `);
+                                }else if(pcs2_rp0 > 0){
+                                    $("#pcs0"+num).html(`
+                                        <div id="pcsline0" class="vp vpthin godown" style="left:31%;top:27%;height:55%;z-index:1;"></div>
+                                    `);
+                                }else if(pcs2_rp0 == 0){
+                                    $("#pcs0"+num).html(`
+                                        <div id="pcsline0" class="vp vpthin" style="left:31%;top:27%;height:55%;z-index:1;"></div>
+                                    `);
+                                }
+                            }
+                            pcs2_rp0 = data[0][2].tap;
+
+                        }
+
+                        // 右边pcs方向判断---第n次请求
+                        if(num_index === 1){
+                            pcs1_rp1 = data[1][2].tap;
+                            if(pcs1_rp1 < 0){
+                                $("#pcs1"+num).html(`
+                                    <div id="pcsline1" class="vp vpthin gotop" style="left:63%;top:27%;height:55%;z-index:1;"></div>
+                                `);
+                            }else if(pcs1_rp1 > 0){
+                                $("#pcs1"+num).html(`
+                                    <div id="pcsline1" class="vp vpthin godown" style="left:63%;top:27%;height:55%;z-index:1;"></div>
+                                `);
+                            }else if(pcs1_rp1 === 0){
+                                $("#pcs1"+num).html(`
+                                    <div id="pcsline1" class="vp vpthin" style="left:63%; top:27%;height:55%;z-index:1;"></div>
+                                `);
+                            }
+                        }else {
+                            pcs2_rp1 = data[1][2].tap;
+                            let pcs1_rp1_sign = Math.sign(pcs1_rp1);
+                            let pcs2_rp1_sign = Math.sign(pcs2_rp1);
+                            if(pcs1_rp1_sign !== pcs2_rp1_sign){
+                                if(pcs2_rp1 < 0){
+                                    $("#pcs1"+num).html(`
+                                        <div id="pcsline1" class="vp vpthin gotop" style="left:63%; top:27%;height:55%;z-index: 1;"></div>
+                                    `);
+                                }else if(pcs2_rp1 > 0){
+                                    $("#pcs1"+num).html(`
+                                        <div id="pcsline1" class="vp vpthin godown" style="left:63%; top:27%;height:55%;z-index: 1;"></div>
+                                    `);
+                                }else if(pcs2_rp1 === 0){
+                                    $("#pcs1"+num).html(`
+                                        <div id="pcsline1" class="vp vpthin" style="left:63%; top:27%;height:55%;z-index: 1;"></div>
+                                    `);
+                                }
+                            }
+                            pcs2_rp1 = data[1][2].tap;
+                        }
+                    },
+                    error: function (err) {
+                        console.log("项目状态参数 请求失败");
+                    }
+                });
+            }
+
+            function each(obj,num) {
+                var str = '';
+                if (obj.constructor==Array) {
+
+                    // 柴油机
+                    for (var i = 0, len = obj.length; i < len; i++) {
+
+                    str +=  `<div class="zt2 ztdetail">`;
+                        if(i==0){
+                        str +=  `<div class="tit_tit">
+                                    <img src="./images/titicon.svg" alt="" />
+                                    <span>柴油机</span>
+                                </div>`;
+                        };
+
+                                
+                        str +=  `<div class="detail_tit">
+                                    <span>0`+(i+1)+`</span>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <p>发电功率</p>
+                                        <div class="ztdiv">
+                                            <span id="powerGeneration`+i+`">0</span><span>kW</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>燃油位</p>
+                                        <div class="ztdiv">
+                                            <span id="fuelLevel`+i+`">0</span><span>%</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>功率因素</p>
+                                        <div class="ztdiv">
+                                            <span id="generationPowerFactor`+i+`">0</span><span></span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>`;
+                    }
+                    
+                    // 电表
+                    for (var i = 0, len = obj.length; i < len; i++) {
+                        
+                    str += `<div class="zt2 ztdetail">`;
+                        if(i==0){
+                        str +=  `<div class="tit_tit">
+                                    <img src="./images/titicon.svg" alt="" />
+                                    <span>电表</span>
+                                </div>`;
+                        };
+                        str +=  `<div class="detail_tit">
+                                    <span>0`+(i+1)+`</span>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <p>总有功功率</p>
+                                        <div class="ztdiv">
+                                            <span id="itap`+i+`">0</span><span>kW</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>正向有功总电量</p>
+                                        <div class="ztdiv">
+                                            <span id="tpap`+i+`">0</span><span>kWh</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>`;
+                    }
+
+                    // 储能变流器
+                    for (var i = 0, len = obj.length; i < len; i++) {
+                        
+                    str += `<div class="zt2 ztdetail">`;
+                    if(i==0){
+                    str +=  `<div class="tit_tit">
+                                <img src="./images/titicon.svg" alt="" />
+                                <span>储能变流器</span>
+                            </div>`;
+                    };
+                    str +=  `<div class="detail_tit">
+                                    <span>0`+(i+1)+`</span>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <p>总有功功率</p>
+                                        <div class="ztdiv">
+                                            <span id="tap`+i+`">0</span><span>kW</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>总视在功率</p>
+                                        <div class="ztdiv">
+                                            <span id="tApparentP`+i+`">0</span><span>kVA</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>总无功功率</p>
+                                        <div class="ztdiv">
+                                            <span id="trp`+i+`">0</span><span>kVar</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>`;
+                    }
+                    
+                    // 储能电池
+                    for (var i = 0, len = obj.length; i < len; i++) {
+                        
+                    str += `<div class="zt2 ztdetail">`;
+                        if(i==0){
+                        str +=  `<div class="tit_tit">
+                                    <img src="./images/titicon.svg" alt="" />
+                                    <span>储能电池</span>
+                                </div>`;
+                        };
+
+                        str +=  `<div class="detail_tit">
+                                    <span>0`+(i+1)+`</span>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <p>SOC</p>
+                                        <div class="ztdiv">
+                                            <span id="soc`+i+`">0</span><span>%</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>总电压</p>
+                                        <div class="ztdiv">
+                                            <span id="group_V`+i+`">0</span><span>v</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>总电流</p>
+                                        <div class="ztdiv">
+                                            <span id="group_I`+i+`">0</span><span>A</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>`;
+                    }
+
+                    // 温湿度
+                    for (var i = 0, len = obj.length; i < len; i++) {
+                        
+                    str += `<div class="zt2 ztdetail">`;
+                        if(i==0){
+                        str +=  `<div class="tit_tit">
+                                    <img src="./images/titicon.svg" alt="" />
+                                    <span>温湿度</span>
+                                </div>`;
+                        };
+                        str +=  `<div class="detail_tit">
+                                    <span>0`+(i+1)+`</span>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <p>EMS温度</p>
+                                        <div class="ztdiv">
+                                            <span id="temperature`+i+`">0</span><span>℃</span>
+                                        </div>
+                                    </li>
+                                    
+                                    <li>
+                                        <p>环境温度</p>
+                                        <div class="ztdiv">
+                                            <span id="environmentalT`+i+`">0</span><span>℃</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>模块温度</p>
+                                        <div class="ztdiv">
+                                            <span id="cabinetT`+i+`">0</span><span>℃</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>`;
+                    }
+
+                    // 设备状态
+                    for (var i = 0, len = obj.length; i < len; i++) {
+                        
+                    str += `<div class="zt3 ztdetail">`;
+                        if(i==0){
+                        str +=  `<div class="tit_tit">
+                                    <img src="./images/titicon.svg" alt="" />
+                                    <span>设备状态</span>
+                                </div>`;
+                        };
+                        str +=  `<div class="detail_tit">
+                                    <span>0`+(i+1)+`</span>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <p>交流调度</p>
+                                        <div class="ztdiv jldt">
+                                            <span class="onoff" id="jldd`+i+`"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>直流调度</p>
+                                        <div class="ztdiv zldd">
+                                            <span class="onoff" id="zldd`+i+`"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>并网</p>
+                                        <div class="ztdiv pcstxzt">
+                                            <span class="onoff" id="bw`+i+`"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>离网</p>
+                                        <div class="ztdiv bmstxzt">
+                                            <span class="onoff" id="lw`+i+`"></span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <p>等待开机</p>
+                                        <div class="ztdiv jldt">
+                                            <span class="onoff" id="ddkj`+i+`"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>离网运行</p>
+                                        <div class="ztdiv zldd">
+                                            <span class="onoff" id="lwyx`+i+`"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>并网切离网</p>
+                                        <div class="ztdiv pcstxzt">
+                                            <span class="onoff" id="bwqlw`+i+`"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>并网运行</p>
+                                        <div class="ztdiv bmstxzt">
+                                            <span class="onoff" id="bwyx`+i+`"></span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <ul>
+                                    <li>
+                                        <p>自动模式</p>
+                                        <div class="ztdiv jldt">
+                                            <span class="onoff" id="zdms`+i+`"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>手动模式</p>
+                                        <div class="ztdiv zldd">
+                                            <span class="onoff" id="sdms`+i+`"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>紧急停机</p>
+                                        <div class="ztdiv pcstxzt">
+                                            <span class="onoff" id="jjtj`+i+`"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p></p>
+                                        <div class="ztdiv pcstxzt">
+                                            <span class="onoff"></span>
+                                        </div>
+                                    </li>
+                                </ul>`;
+                    if(i==0){
+                        str += `<ul style="border-bottom: 1px dashed #25427A;">`
+                    }else{
+                        str += `<ul>`
+                    }
+
+                            str += `<li>
+                                        <p>分闸运行</p>
+                                        <div class="ztdiv jldt">
+                                            <span class="onoff" id="fzyx`+i+`"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>合闸运行</p>
+                                        <div class="ztdiv zldd">
+                                            <span class="onoff" id="hzyx`+i+`"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>停机</p>
+                                        <div class="ztdiv pcstxzt">
+                                            <span class="onoff" id="tj`+i+`"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p></p>
+                                        <div class="ztdiv pcstxzt">
+                                            <span class="onoff"></span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>`;
+                    }
+
+
+                    return str;
+                }
+
+                if (obj.constructor==Object) {
+                    for (var i in obj) {
+                        // var str;
+                        str += '<span class="data_show"><span data-id='+obj[i].community_id+'>' + obj[i].community_name + '</span><span class="del glyphicon glyphicon-plus-sign"></span></span>';
+                    }
+                    return str;
+                }
+                return obj;
+            }
+
+            function selectsbeach(obj) {
+                var str = '';
+
+                if (obj.constructor==Array) {
+                    str += `<option value="0" >所有设备</option>`;
+                    for(var i = 0, len = obj.length; i < len; i++){
+                        str += `<option value="`+obj[i].id+`">`+obj[i].groupName+`</option>`
+                    }
+                    return str;
+                }
+               
+                return obj;
+            }
+
+            function selectmontheach(nowmonth) {
+                var str = '';
+
+                for(var i = 0, len = nowmonth; i < len; i++){
+                    let showmonth;
+                    if(i==0){showmonth="一月"}
+                    else if(i==1){showmonth="二月"}
+                    else if(i==2){showmonth="三月"}
+                    else if(i==3){showmonth="四月"}
+                    else if(i==4){showmonth="五月"}
+                    else if(i==5){showmonth="六月"}
+                    else if(i==6){showmonth="七月"}
+                    else if(i==7){showmonth="八月"}
+                    else if(i==8){showmonth="九月"}
+                    else if(i==9){showmonth="十月"}
+                    else if(i==10){showmonth="十一月"}
+                    else if(i==11){showmonth="十二月"}
+
+                        
+                    if( i!=(nowmonth-1) ){
+                        str += `<option value="` + i + `">` + showmonth + `</option>`;
+                        
+                    }else if(i==(nowmonth-1)){
+                        str += `<option value="` + i + `" selected>` + showmonth + `</option>`;
+                    }
+                }
+                return str;
+
+            }
+
+            function selectsbeachcon(data) {
+                var str = ``;
+                        
+                for(var i=0;i<data.length;i++){
+                    str += `
+                    <div class="conlist">
+                        <div class="listup">
+                            <span></span><span>`+Mounthdate(data[i].time)+`</span>
+                        </div>
+                        <div class="listdown">
+                            <ul>
+                                <li>
+                                    <p>燃油消耗</p>
+                                    <div class="ztdiv">
+                                        <span>`+data[i].usedAcc+`</span><span>L</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p>发电量</p>
+                                    <div class="ztdiv">
+                                        <span>`+data[i].positiveKWh+`</span><span>kWh</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p>用电量</p>
+                                    <div class="ztdiv">
+                                        <span>`+data[i].tpap+`</span><span>kWh</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    <p>系统效率</p>
+                                    <div class="ztdiv">
+                                        <span>`+data[i].systemEfficiency+`</span><span></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p>单位油耗</p>
+                                    <div class="ztdiv">
+                                        <span>`+data[i].unitConsumption+`</span><span></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p>停电次数</p>
+                                    <div class="ztdiv">
+                                        <span>`+data[i].projectPowerFailure+`</span><span></span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>`;
+                } //for循环结束
+                return str;
+            }// 函数结束
+
+
+
+            // 判断是否为数字
+            function isNumber(val) {
+                if (val == "" || isNaN(val)) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            function numToText(obj){
+                if(obj == 0){
+                    obj = 无效;
+                }else if(obj == 1){
+                    obj = 有效;
+                }
+                return obj;
+            }
+
+
+        });
+    </script>
+</body>
+
+</html>

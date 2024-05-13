@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <!--如果是IE 就以标准渲染-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <!-- 视窗——————响应式布局 -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+
+    <!--当前页面的三要素-->
+    <title>运维系统</title>
+    <meta name="description" content="聚能优电" />
+    <meta http-equiv="keywords" content="聚能优电" />
+    <script type="text/javascript" src="./js/verify.js"></script>
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="./css/common/common.css" />
+    <link rel="stylesheet" type="text/css" href="./css/videomonitor.css" />
+    <style>
+        #iframe-btn-container{
+            bottom:-10px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container" class="video">
+        <div class="video_01">
+            <!--主屏内容-->
+            <div class="video_screen">
+                <div class="m_title">
+                    <a href="index.html" class="back">
+                        <img src="./images/back.svg" alt="">
+                    </a>
+                    <span class="tit">视频监控</span>
+                </div>
+                <div class="m_content">
+                    <div class="sb_tit">
+                        <select id="selectxm" value="" style="width:5rem;">
+                            <!-- <option value="C96990721" selected num="4">中交二公局深中通S06新500K</option>
+                            <option value="C96990637" num="4">中交二航局深中通S04搅拌站</option>
+                            <option value="C42851769" num="4">中交二公局深中通S06旧500K</option>
+                            <option value="C96990811" num="4">云南中铁十局引水采石场</option>
+                            <option value="D98470105" num="4">深中通保利长大s05</option>
+                            <option value="C78005341" num="4">中交二航局深中通S04</option>
+                            <option value="E36270788" num="4">大桥局黄茅海跨海通道项目中栈桥</option>
+                            
+                            <option value="F32813450" num="4">保利长大黄茅海项目西塔1号机</option>
+                            <option value="E36270602" num="4">云南滇中引水工程项目7#支洞7号机</option>
+                            <option value="E36270574" num="4">云南滇中引水工程项目6#支洞9号机</option>
+                            <option value="E36270824" num="4">云南滇中引水工程项目6#支洞10号机</option>
+                            <option value="E67434001" num="4">中铁隧道局深江铁路13号机</option>
+                            <option value="E67434251" num="4">中铁隧道局深江铁路14号机</option>
+                            <option value="E67434071" num="4">中铁二十二局广清北延项目15号机</option>
+                            <option value="E67433875" num="4">中铁一局广州地铁项目17号机</option>
+                            <option value="E71062506" num="4">中铁一局广州地铁项目21号机</option>
+                            <option value="E71062538" num="4">中铁隧道局深江铁路22号机</option>
+                            <option value="E67431977" num="4">中铁隧道局深江铁路23号机</option>
+                            <option value="E68433043" num="4">中交路建黄茅海T3项目25号机</option>
+                            <option value="E71062628" num="4">中交路建黄茅海T3项目26号机</option>
+                            <option value="E71062510" num="4">中铁隧道局生活区27号机</option>
+                            <option value="E71062750" num="4">中铁隧道局深江铁路29号机</option>
+                            <option value="E71062572" num="4">中交路建黄茅海T3项目32号机</option>
+                            <option value="E71062570" num="4">清远中铁一局广清城际项目38号机</option>
+                            <option value="E71062452" num="4">中铁十局广湛七标阳西制梁场39号机</option>
+                            <option value="E71062444" num="4">中铁隧道局清远项目40号机</option> -->
+                        </select>
+                    </div>
+
+                    <!-- 视频部分 -->
+
+                    <div id="vedio_part" style="width:100%;margin-top:30px;">
+                        
+                        <div style="width:98%;">
+                            <iframe src="" width="100%" height="200" id="ysOpenDevice1" allowfullscreen></iframe>
+                        </div>
+
+                        <div style="width:98%;">
+                            <iframe src="" width="100%" height="200" id="ysOpenDevice2" allowfullscreen></iframe>
+                        </div>
+
+                        <div style="width:98%;">
+                            <iframe src="" width="100%" height="200" id="ysOpenDevice3" allowfullscreen></iframe>
+                        </div>
+
+                        <div style="width:98%;">
+                            <iframe src="" width="100%" height="200" id="ysOpenDevice4" allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        (function (win, doc) {
+            var docEl = doc.documentElement || document.body; //获取HTML标签
+
+            var container = doc.getElementById("container"); //container元素
+            //判断是移动端设备还是PC,移动 就采用'orientationchange',横竖屏事件，PC端就采用onresize，窗口改变时间
+            var resize =
+                "onorientationchange" in win ? "orientationchange" : "resize";
+
+            function rem() {
+                docEl.style.fontSize = 100 * (container.clientWidth / 750) + "px";
+            }
+
+            //监听'DOMContent事件:DOM加载完成执行,如果DOMContent事件，那么执行rem函数
+            doc.addEventListener("DOMContentLoaded", rem, false);
+
+            //win下监听resize事件,如果resize事件，那么执行rem函数
+            win.addEventListener(resize, rem, false);
+        })(window, document);
+    </script>
+
+    <!-- js -->
+    <script src="./js/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+
+            let params = {
+                appKey: "5cfbe13c0e5344faa04f3f2b310ca87d",
+                appSecret: "f44aaf48af4440695cd675d262c92789"
+            }
+
+            $.ajax({
+                url: "https://open.ys7.com/api/lapp/token/get",
+                data: params,
+                type: "post",
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader( "Content-Type", "application/x-www-form-urlencoded" );
+                    xhr.setRequestHeader( "Host", "open.ys7.com" );
+                },
+                success: function (res) {
+                    if(res.code == 200){
+                        let accessToken = res.data.accessToken;
+
+
+                        $.ajax({
+                            type: "GET",
+                            dataType: "json",
+                            url: "http://112.74.169.99:21021/api/services/app/DeviceService/GetVideoDeviceByUserID?userid=" +window.localStorage.getItem("id"),
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("Accept",
+                                    "application/json, text/javascript, */*; q=0.01"
+                                );
+                                xhr.setRequestHeader("Authorization",
+                                    accessToken);
+                                xhr.setRequestHeader('.AspNetCore.Culture',
+                                    'zh-Hans');
+                            },
+                            success: function (data) {
+                                console.log(data);
+                                if(data.success){
+
+                                    $("#selectxm").html(` `);
+                                    $("#selectxm").html( eachdata(data.result) );
+
+                                    var xmlchose = $("#selectxm option:selected").attr('value');
+                                    let thesrc1 = "https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/" + xmlchose + "/1.live&autoplay=1&accessToken=" + accessToken;
+                                    let thesrc2 = "https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/" + xmlchose + "/2.live&autoplay=1&accessToken=" + accessToken;
+                                    let thesrc3 = "https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/" + xmlchose + "/3.live&autoplay=1&accessToken=" + accessToken;
+                                    let thesrc4 = "https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/" + xmlchose + "/4.live&autoplay=1&accessToken=" + accessToken;
+                                    
+                                    $("#ysOpenDevice1").attr('src',thesrc1);
+                                    $("#ysOpenDevice2").attr('src',thesrc2);
+                                    $("#ysOpenDevice3").attr('src',thesrc3);
+                                    $("#ysOpenDevice4").attr('src',thesrc4);
+
+
+                                    // 项目切换
+                                    $("#selectxm").change(function () {
+                                        var xmlchosechange = $("#selectxm option:selected").attr('value');
+                                        let thesrcchange1 = "https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/" + xmlchosechange + "/1.live&autoplay=1&accessToken=" + accessToken;
+                                        let thesrcchange2 = "https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/" + xmlchosechange + "/2.live&autoplay=1&accessToken=" + accessToken;
+                                        let thesrcchange3 = "https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/" + xmlchosechange + "/3.live&autoplay=1&accessToken=" + accessToken;
+                                        let thesrcchange4 = "https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/" + xmlchosechange + "/4.live&autoplay=1&accessToken=" + accessToken;
+                                            
+                                        $("#ysOpenDevice1").attr('src',thesrcchange1);
+                                        $("#ysOpenDevice2").attr('src',thesrcchange2);
+                                        $("#ysOpenDevice3").attr('src',thesrcchange3);
+                                        $("#ysOpenDevice4").attr('src',thesrcchange4);
+                                    });
+
+
+                                }
+                            },
+                            error: function (err) {
+                                console.log("请求失败");
+                            }
+                        });
+
+                    }
+                },
+                error: function (err){
+                    console.log("请求accessToken失败");
+                }
+            });
+
+        });
+
+
+        // 遍历数据
+        function eachdata(obj) {
+            var str = '';
+            if (obj.constructor == Array) {
+                for (var i = 0, len = obj.length; i < len; i++) {
+                    var url = '';
+
+                    if (i == 0) {
+                        str += `<option value="` + obj[i].deviceMark + `" selected num="4">` + obj[i].deviceproject + `</option>`;
+                    } else {
+                        str += `<option value="` + obj[i].deviceMark + `" num="4">` + obj[i].deviceproject + `</option>`;
+                    }
+                }
+                return str;
+            }
+        }
+  
+    </script>
+
+</body>
+
+</html>

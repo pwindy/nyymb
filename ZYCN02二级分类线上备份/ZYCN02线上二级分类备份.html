@@ -1,0 +1,1885 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <!--如果是IE 就以标准渲染-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <!-- 视窗——————响应式布局 -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+
+    <!--当前页面的三要素-->
+    <title>运维系统</title>
+    <meta name="description" content="聚能优电" />
+    <meta http-equiv="keywords" content="聚能优电" />
+    <script type="text/javascript" src="./js/verify.js"></script>
+    <script type="text/javascript" src="./js/common/commonfuntion.js"></script>
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="./css/common/common.css" />
+    <link rel="stylesheet" type="text/css" href="./css/jquery-accordion-menu.css" />
+    <link rel="stylesheet" type="text/css" href="./css/mainmonitor_sz.css" />
+
+</head>
+
+<body>
+    <div id="container" class="mainmonitor_sz">
+        <div class="mainmonitor_sz_01">
+            <!--主屏内容-->
+            <div class="mainmonitor_sz_screen">
+                <div class="m_title">
+                    <a href="JavaScript:history.go(-1);" class="back">
+                        <img src="./images/back.svg" alt="" />
+                    </a>
+                    <span class="tit" id="projectNameCN"></span>
+                </div>
+
+                <div class="m_content">
+
+                    <header class="tabHeadaa tabHead">
+                        <span class="active"><i style="font-size:18px;">机组1</i></span>
+                        <span><i style="font-size:18px;">机组2</i></span>
+                        <span><i style="font-size:18px;">机组3</i></span>
+                        <span><i style="font-size:18px;">机组4</i></span>
+                        <span><i style="font-size:18px;">汇总</i></span>
+                        
+                    </header>
+                    <article class="khfxWarpaa khfxWarp" id="khfxWarp">
+                        <div class="khfxPaneaa khfxPane xmzt">
+                            <header class="tabHeadbb tabHead">
+                                <span class="active"><i>NDES03</i></span>
+                                <span><i>NDES04</i></span>
+                                <span><i>一次系统图</i></span>
+                            </header>
+                            <article class="khfxWarpbb khfxWarp">
+                                <!-- <div class="khfxPanebb"></div>
+                                <div class="khfxPanebb"></div> -->
+                            </article>
+
+                        </div>
+                        <div class="khfxPaneaa xmzt khfxPane">
+                            <div class="tabHeadbb tabHead">
+                                <span class="active"><i>NDES05</i></span>
+                                <span><i>NDES06</i></span>
+                                <span><i>一次系统图</i></span>
+                            </div>
+                            <article class="khfxWarpbb">
+
+                            </article>
+
+                        </div>
+                        <div class="khfxPaneaa xmzt khfxPane">
+                            <header class="tabHeadbb tabHead">
+                                <span class="active"><i>NDES07</i></span>
+                                <span><i>NDES08</i></span>
+                                <span><i>一次系统图</i></span>
+                            </header>
+                            <article class="khfxWarpbb">
+
+                            </article>
+
+                        </div>
+                        <div class="khfxPaneaa xmzt khfxPane">
+                            <header class="tabHeadbb tabHead">
+                                <span class="active"><i>NDES09</i></span>
+                                <span><i>NDES10</i></span>
+                                <span><i>一次系统图</i></span>
+                            </header>
+                            <article class="khfxWarpbb">
+
+                            </article>
+
+                        </div>
+                        <div class="khfxPaneaa xmzt khfxPane">
+                            <article class="khfxWarp">
+                                <div class="khfxPane xmzt">
+                                    <div class="zt2 ztdetail" style="margin-top: 0.5rem;">
+                                        <ul>
+                                            <li>
+                                                <p>油机总发电量</p>
+                                                <div class="ztdiv">
+                                                    <span id="allpositiveKWh" style="font-size:0.3rem;">0</span><span>kWh</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <p>油机总实时发电功率</p>
+                                                <div class="ztdiv">
+                                                    <span id="allpowerGeneration" style="font-size:0.3rem;">0</span><span>kW</span>
+                                                </div>
+                                            </li>
+                                            
+                                        </ul>
+
+                                        <ul>
+                                            <li>
+                                                <p>总用电量</p>
+                                                <div class="ztdiv">
+                                                    <span id="alltpap" style="font-size:0.3rem;">0</span><span>kWh</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <p>总用电功率</p>
+                                                <div class="ztdiv">
+                                                    <span id="allitap" style="font-size:0.3rem;">0</span><span>kW</span>
+                                                </div>
+                                            </li>
+                                            
+                                        </ul>
+        
+                                    </div>
+
+                                </div>
+                            </article>
+                        </div>
+
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function (win, doc) {
+            var docEl = doc.documentElement || document.body; //获取HTML标签
+
+            var container = doc.getElementById("container"); //container元素
+            //判断是移动端设备还是PC,移动 就采用'orientationchange',横竖屏事件，PC端就采用onresize，窗口改变时间
+            var resize =
+                "onorientationchange" in win ? "orientationchange" : "resize";
+
+            function rem() {
+                docEl.style.fontSize = 100 * (container.clientWidth / 750) + "px";
+            }
+
+            //监听'DOMContent事件:DOM加载完成执行,如果DOMContent事件，那么执行rem函数
+            doc.addEventListener("DOMContentLoaded", rem, false);
+
+            //win下监听resize事件,如果resize事件，那么执行rem函数
+            win.addEventListener(resize, rem, false);
+        })(window, document);
+    </script>
+    <!-- js -->
+    <script type="text/javascript" src="./js/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="js/echarts.js"></script>
+    <script type="text/javascript" src="./layer/layer.js"></script>
+    <script>
+        $(document).ready(function () {
+            // var index = layer.load(0, {
+            //     shade: [0.8, '#fff']
+            // }); //0.1透明度的白色背景
+            var projectid = GetQueryString('projectid');
+            // var linechartid = GetQueryString('linechartid');
+            var projectNameCN = GetQueryString('projectNameCN');
+            $("#projectNameCN").html(' ');
+            $("#projectNameCN").html(projectNameCN);
+            
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "http://112.74.169.99:21021/api/TokenAuth/GetProjectData?projectid=" + projectid,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Accept", "application/json, text/javascript, */*; q=0.01" );
+                    xhr.setRequestHeader("Authorization", accessToken);
+                    xhr.setRequestHeader('.AspNetCore.Culture', 'zh-Hans');
+                },
+                success: function (res) {
+                    var data = res.result;
+
+                    if (data.length === 0) {
+                        layer.open({
+                            type: 1,
+                            content: '<div>' + '通讯异常' +  '</div>',
+                            btn: '确定',
+                            btnAlign: 'c', //按钮居中
+                            shade: 0, //不显示遮罩
+                            yes: function () {
+                                layer.closeAll();
+                                // layer.close(index);
+                            }
+                        });
+                    } else {
+                        var khfxWarpbb = $("#khfxWarp article.khfxWarpbb");
+                        var allpositiveKWh = 0;
+                        var allpowerGeneration = 0;
+                        var alltpap = 0;
+                        var allitap = 0;
+
+                        var allonoff = 0;
+                        $.each(khfxWarpbb,function(index,item){
+                            allonoff++;
+                            var dataindex = data[index];
+
+                            $(item).html(' ');
+                            $(item).html( each(dataindex,index) );//遍历html
+                        
+                            for(var i=0;i < dataindex.length; i++){
+
+                                // EMS
+                                if(dataindex[i][0].runMode == 1){
+                                    dataindex[i][0].runMode = '油机并储能'
+                                }else if(dataindex[i][0].runMode == 2){
+                                    dataindex[i][0].runMode = '储能并油机'
+                                }else if(dataindex[i][0].runMode == 3){
+                                    dataindex[i][0].runMode = '手动模式'
+                                }else if(dataindex[i][0].runMode == 4){
+                                    dataindex[i][0].runMode = '停机模式'
+                                }
+
+                                $("#runMode"+index+i).html(dataindex[i][0].runMode); // 运行模式
+                                $("#bztemperature"+index+i).html(dataindex[i][0].temperature); // 板载温度
+                                $("#hiEfcyRatio"+index+i).html(dataindex[i][0].hiEfcyRatio); // 油机效率值
+
+                                $("#upPower"+index+i).html(dataindex[i][0].upPower); // 负载上限值
+                                $("#dnPower"+index+i).html(dataindex[i][0].dnPower); // 负载下限值
+                                $("#upUpPower"+index+i).html(dataindex[i][0].upUpPower); // 负载超上限
+
+                                $("#socLow"+index+i).html(dataindex[i][0].socLow); // SOC下限值
+                                $("#turnOnRatio"+index+i).html(dataindex[i][0].turnOnRatio); // 开油机系数
+                                $("#turnOffRatio"+index+i).html(dataindex[i][0].turnOffRatio); // 关油机系数
+
+                                $("#backFlow1"+index+i).html(dataindex[i][0].backFlow1); // 市储防逆流值
+                                $("#backFlow2"+index+i).html(dataindex[i][0].backFlow2); // 市柴储防逆流值
+                                $("#backFlow3"+index+i).html(dataindex[i][0].backFlow3); // 柴储防逆流值
+
+
+                                // 柴油机
+                                $("#powerGeneration"+index+i).html(dataindex[i][1].powerGeneration); // 发电功率
+                                allpowerGeneration += dataindex[i][1].powerGeneration;
+
+                                $("#generationFrequency"+index+i).html(dataindex[i][1].generationFrequency); // 发电频率
+
+                                $("#fuelLevel"+index+i).html(dataindex[i][1].fuelLevel); // 燃油位
+                                $("#rpm"+index+i).html(dataindex[i][1].rpm); // 转速
+                                
+                                $("#oilPressure"+index+i).html(dataindex[i][1].oilPressure); // 油压
+                                $("#wtemperature"+index+i).html(dataindex[i][1].temperature); // 水温
+
+                                $("#positiveKWh"+index+i).html(dataindex[i][1].positiveKWh); // 总发电量
+                                allpositiveKWh += dataindex[i][1].positiveKWh;
+
+                                if(index===2&&i===0){
+                                    $("#na"+index+i).html(dataindex[i][1].na); // 瞬时油耗
+                                    $("#dPlus"+index+i).html(dataindex[i][1].dPlus); // 累计油耗
+                                }
+
+                                //电表
+                                $("#itap"+index+i).html(dataindex[i][4].itap); // 瞬时有功功率
+                                allitap += dataindex[i][4].itap;
+
+                                $("#tpap"+index+i).html(dataindex[i][4].tpap); // 正向有功总电量
+                                alltpap += dataindex[i][4].tpap;
+
+
+                                // PCS
+                                $("#tap"+index+i).html(dataindex[i][2].tap); // 总有功功率
+                                $("#trp"+index+i).html(dataindex[i][2].trp); // 总无功功率
+
+                                $("#tApparentP"+index+i).html(dataindex[i][2].tApparentP); // 总视在功率
+                                $("#tpf"+index+i).html(dataindex[i][2].tpf); // 总功率因素
+
+                                $("#environmentalT"+index+i).html(dataindex[i][2].environmentalT); // 散热器温度
+                                $("#cabinetT"+index+i).html(dataindex[i][2].cabinetT); // 模块温度
+
+                                $("#abacv"+index+i).html(dataindex[i][2].abacv); // AB交流线电压
+                                $("#bcacv"+index+i).html(dataindex[i][2].bcacv); // BC交流线电压
+                                $("#caacv"+index+i).html(dataindex[i][2].caacv); // CA交流线电压
+
+                                $("#aaci"+index+i).html(dataindex[i][2].aaci); // A相交流电流
+                                $("#baci"+index+i).html(dataindex[i][2].baci); // B相交流电流
+                                $("#caci"+index+i).html(dataindex[i][2].caci); // C相交流电流
+
+                                $("#apf"+index+i).html(dataindex[i][2].apf); // A相功率因数
+                                $("#bpf"+index+i).html(dataindex[i][2].bpf); // B相功率因数
+                                $("#cpf"+index+i).html(dataindex[i][2].cpf); // C相功率因数
+
+                                $("#aap"+index+i).html(dataindex[i][2].aap); // A相有功功率
+                                $("#bap"+index+i).html(dataindex[i][2].bap); // B相有功功率
+                                $("#cap"+index+i).html(dataindex[i][2].cap); // C相有功功率
+
+                                $("#arp"+index+i).html(dataindex[i][2].arp); // A相无功功率
+                                $("#brp"+index+i).html(dataindex[i][2].brp); // B相无功功率
+                                $("#crp"+index+i).html(dataindex[i][2].crp); // C相无功功率
+
+                                $("#aApparentP"+index+i).html(dataindex[i][2].aApparentP); // A相视在功率
+                                $("#bApparentP"+index+i).html(dataindex[i][2].bApparentP); // B相视在功率
+                                $("#cApparentP"+index+i).html(dataindex[i][2].cApparentP); // C相视在功率
+
+                                // bms
+                                    // 总值
+                                    $("#soc"+index+i).html(dataindex[i][3].soc); // SOC
+                                    $("#soh"+index+i).html(dataindex[i][3].soh); // SOH
+
+                                    $("#tpc"+index+i).html(dataindex[i][3].tpc); // 堆总电量
+                                    $("#group_V"+index+i).html(dataindex[i][3].group_V); // 堆总电压
+
+                                    $("#group_RC"+index+i).html(dataindex[i][3].group_RC); // 堆可充电量
+                                    $("#group_DQ"+index+i).html(dataindex[i][3].group_DQ); // 堆可放电量
+
+                                    $("#group_MCC"+index+i).html(dataindex[i][3].group_MCC); // 堆允许最大充电电流
+                                    $("#group_MDC"+index+i).html(dataindex[i][3].group_MDC); // 堆允许最大放电电流
+
+                                    $("#msnsV1"+index+i).html(dataindex[i][3].msnsV1); // 单体电压最高节序号
+                                    $("#mvosU1"+index+i).html(dataindex[i][3].mvosU1); // 单体最高电压值
+
+                                    $("#lsnsV1"+index+i).html(dataindex[i][3].lsnsV1); // 单体电压最低节序号
+                                    $("#lvosU1"+index+i).html(dataindex[i][3].lvosU1); // 单体最低电压值
+
+                                    $("#msnsT1"+index+i).html(dataindex[i][3].msnsT1); // 单体温度最高节序号
+                                    $("#mtosU1"+index+i).html(dataindex[i][3].mtosU1); // 单体最高温度值
+
+                                    $("#lsnsT1"+index+i).html(dataindex[i][3].lsnsT1); // 单体温度最低节序号
+                                    $("#ltosU1"+index+i).html(dataindex[i][3].ltosU1); // 单体最低温度值
+
+                                    if(dataindex[i][3].groupState == 0){dataindex[i][3].groupState='正常'}
+                                    else if(dataindex[i][3].groupState == 1){dataindex[i][3].groupState='充满'}
+                                    else if(dataindex[i][3].groupState == 2){dataindex[i][3].groupState='放空'}
+                                    else if(dataindex[i][3].groupState == 3){dataindex[i][3].groupState='待机'}
+                                    else if(dataindex[i][3].groupState == 4){dataindex[i][3].groupState='正常停机'}
+                                    else if(dataindex[i][3].groupState == 5){dataindex[i][3].groupState='故障停机'}
+                                    $("#groupState"+index+i).html(dataindex[i][3].groupState); // 堆运行状态
+
+                                    // 单体1
+                                    $("#tbV2"+index+i).html(dataindex[i][3].tbV2); // 电池总电压
+                                    $("#bmcC2"+index+i).html(dataindex[i][3].bmcC2); // 电池总电流
+
+                                    $("#soC2"+index+i).html(dataindex[i][3].soC2); // SOC
+                                    $("#soH2"+index+i).html(dataindex[i][3].soH2); // SOH
+
+                                    $("#mvosU2"+index+i).html(dataindex[i][3].mvosU2); // 单体最高电压值
+                                    $("#lvosU2"+index+i).html(dataindex[i][3].lvosU2); // 单体最低电压值
+
+                                    $("#mtosU2"+index+i).html(dataindex[i][3].mtosU2); // 单体最高温度值
+                                    $("#ltosU2"+index+i).html(dataindex[i][3].ltosU2); // 单体最低温度值
+
+                                    if(dataindex[i][3].cdI2 == 1){dataindex[i][3].cdI2='放电'}
+                                    else if(dataindex[i][3].cdI2 == 2){dataindex[i][3].cdI2='充电'}
+                                    else if(dataindex[i][3].cdI2 == 3){dataindex[i][3].cdI2='待机'}
+                                    else if(dataindex[i][3].cdI2 == 4){dataindex[i][3].cdI2='报警'}
+                                    else if(dataindex[i][3].cdI2 == 5){dataindex[i][3].cdI2='预充'}
+                                    else if(dataindex[i][3].cdI2 == 6){dataindex[i][3].cdI2='升级'}
+                                    $("#cdI2"+index+i).html(dataindex[i][3].cdI2); // 充放电指示
+
+                                    // 单体2
+                                    $("#tbV3"+index+i).html(dataindex[i][3].tbV3); // 电池总电压
+                                    $("#bmcC3"+index+i).html(dataindex[i][3].bmcC3); // 电池总电流
+
+                                    $("#soC3"+index+i).html(dataindex[i][3].soC3); // SOC
+                                    $("#soH3"+index+i).html(dataindex[i][3].soH3); // SOH
+
+                                    $("#mvosU3"+index+i).html(dataindex[i][3].mvosU3); // 单体最高电压值
+                                    $("#lvosU3"+index+i).html(dataindex[i][3].lvosU3); // 单体最低电压值
+
+                                    $("#mtosU3"+index+i).html(dataindex[i][3].mtosU3); // 单体最高温度值
+                                    $("#ltosU3"+index+i).html(dataindex[i][3].ltosU3); // 单体最低温度值
+                                    
+                                    if(dataindex[i][3].cdI3 == 1){dataindex[i][3].cdI3='放电'}
+                                    else if(dataindex[i][3].cdI3 == 2){dataindex[i][3].cdI3='充电'}
+                                    else if(dataindex[i][3].cdI3 == 3){dataindex[i][3].cdI3='待机'}
+                                    else if(dataindex[i][3].cdI3 == 4){dataindex[i][3].cdI3='报警'}
+                                    else if(dataindex[i][3].cdI3 == 5){dataindex[i][3].cdI3='预充'}
+                                    else if(dataindex[i][3].cdI3 == 6){dataindex[i][3].cdI3='升级'}
+                                    $("#cdI3"+index+i).html(dataindex[i][3].cdI3); // 工作模式
+                            }// for循环结束
+
+                            var  topmap = `
+                                <div class="khfxPanebb khfxPane">
+                                    <div class="formbody">
+                                        <div class="layoutmap">
+
+                                            <div class="layoutimage bordernull" title="柴油机1"
+                                                style="left:1%; top:18%; width:13.5%;" onclick="window.location.href='./mainmonitor_cyj.html?projectid=`+projectid+`';">
+                                                <img src="./images/chaiyoujib.svg" alt="" style="width:100%;position: absolute;left: 50%;top: 50%;transform:
+                                                    translate(-50%, -50%);z-index: 2;" />
+                                            </div>
+                                            <div class="infobox chaiyouji" style="left:0%; top:33%;z-index: 2;padding:0;">
+                                                <div class="pcontent">
+                                                    <p class="ptitle">P(kW):</p>
+                                                    <div id="yj_rp0`+index+`"></div>
+                                                </div>
+                                                <div class="pcontent">
+                                                    <p class="ptitle">U(V):</p>
+                                                    <div id="yj_sxdy0`+index+`"></div>
+                                                </div>
+                                                
+                                            </div>
+
+
+                                            <div id="leftwrap`+index+`"></div>
+                                            
+                                            <div id="middlewrap`+index+`"></div>
+                                            
+                                            <div id="rightwrap`+index+`"></div>
+
+
+                                            <div class="layoutimage bordernull" title="柴油机2"
+                                                style="left: 85%; top:18%;  width:13.5%;" onclick="window.location.href='./mainmonitor_cyj.html?projectid=`+projectid+`';">
+                                                <img src="./images/chaiyoujib.svg" alt="" style="width:100%;position: absolute;left: 50%;top: 50%;transform:
+                                                    translate(-50%, -50%);z-index: 2;" />
+                                            </div>
+                                            <div class="infobox chaiyouji" style="left:85%; top:33%;z-index: 2;padding:0;">
+                                                <div class="pcontent">
+                                                    <p class="ptitle">P(kW):</p>
+                                                    <div id="yj_rp1`+index+`"></div>
+                                                </div>
+                                                <div class="pcontent">
+                                                    <p class="ptitle">U(V):</p>
+                                                    <div id="yj_sxdy1`+index+`"></div>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div onclick="window.location.href='#';" class="layoutimage bordernull" title="负载1"
+                                                style="left: 25%; top:0%; width:13.5%;z-index: 2;">
+                                                <img src="./images/fuzaib.svg" alt=""
+                                                    style="width:100%;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);" />
+                                            </div>
+                                            <div class="infobox mainfuzai" style="left:23%; top:14%;z-index: 2;">
+                                                <div class="pcontent">
+                                                    <p class="ptitle">P(kW):</p>
+                                                    <div id="load0`+index+`"></div>
+                                                </div>
+                                            </div>
+                                        
+                                            <div onclick="window.location.href='#';" class="layoutimage bordernull" title="负载2"
+                                                style="left: 57%; top:0%; width:13.5%;z-index: 2;">
+                                                <img src="./images/fuzaib.svg" alt=""
+                                                    style="width:100%;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);" />
+                                            </div>
+                                            <div class="infobox mainfuzai" style="left:54%; top:14%;z-index: 2;">
+                                                <div class="pcontent">
+                                                    <p class="ptitle">P(kW):</p>
+                                                    <div id="load1`+index+`"></div>
+                                                </div>
+                                            </div>
+
+                                            <div id="leftload_wrap`+index+`"></div>
+                                            <div id="rightload_wrap`+index+`"></div>
+
+
+                                            <div id="pcs0`+index+`"></div>
+                                            <div id="pcs1`+index+`"></div>
+
+
+                                            <div class="layoutimage bordernull" title="PCS1"
+                                                style="left:25%; top:38%; width:13.5%;z-index: 2;" onclick="window.location.href='./mainmonitor_pcs.html?projectid=`+projectid+`';">
+                                                <img src="./images/pcsb.svg" alt=""
+                                                    style="width:100%;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);" />
+                                            </div>
+                                            <div class="infobox mainpcs1" style="left:22%; top:53%;z-index: 2;">
+
+                                                <div class="pcontent">
+                                                    <p class="ptitle">U(V):</p>
+                                                    <div id="pcs_sxdy0`+index+`"></div>
+                                                </div>
+                                                <div class="pcontent">
+                                                    <p class="ptitle">I(A):</p>
+                                                    <div id="pcs_sxdl0`+index+`"></div>
+                                                </div>
+
+                                                <div class="pcontent">
+                                                    <span>P(kW):</span><span id="pcs_rp0`+index+`"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="layoutimage bordernull" title="PCS2"
+                                                style="left:57%; top:38%; width:13.5%;z-index: 2;" onclick="window.location.href='./mainmonitor_pcs.html?projectid=`+projectid+`';">
+                                                <img src="./images/pcsb.svg" alt=""
+                                                    style="width:100%;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);" />
+                                            </div>
+                                            <div class="infobox mainpcs2" style="left:57%; top:53%;z-index: 2;padding-left:0;">
+
+                                                <div class="pcontent">
+                                                    <p class="ptitle">U(V):</p>
+                                                    <div id="pcs_sxdy1`+index+`"></div>
+                                                </div>
+                                                <div class="pcontent">
+                                                    <p class="ptitle">I(A):</p>
+                                                    <div id="pcs_sxdl1`+index+`"></div>
+                                                </div>
+                                                <div class="pcontent">
+                                                    <span>P(kW):</span><span id="pcs_rp1`+index+`"></span>
+                                                </div>
+
+                                            </div>
+
+                                            <div onclick="window.location.href='./mainmonitor_bms.html?projectid=`+projectid+`';"
+                                                class="layoutimage bordernull" title="BMS1"
+                                                style="left:25%; top:72%; width:13.5%;z-index: 2;">
+                                                <img src="./images/bmsb.svg" alt=""
+                                                    style="width:100%;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);" />
+                                            </div>
+
+                                            <div class="infobox mainbms1" style="left:22%; top:86%;z-index: 2;">
+                                                <div class="pcontent">
+                                                    <p class="ptitle">SOC:</p>
+                                                    <div id="bms_soc0`+index+`"></div>
+                                                </div>
+                                                <div class="pcontent">
+                                                    <p class="ptitle">U(V):</p>
+                                                    <div id="bms_dy0`+index+`"></div>
+                                                </div>
+                                                
+                                            </div>
+
+                                            <div onclick="window.location.href='./mainmonitor_bms.html?projectid=`+projectid+`';"
+                                                class="layoutimage bordernull" title="BMS2"
+                                                style="left:57%; top:72%; width:13.5%;z-index: 2;">
+                                                <img src="./images/bmsb.svg" alt=""
+                                                    style="width:100%;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);" />
+                                            </div>
+                                            <div class="infobox mainbms2" style="left:57%; top:86%;z-index: 2;">
+                                                <div class="pcontent">
+                                                    <p class="ptitle">SOC:</p>
+                                                    <div id="bms_soc1`+index+`"></div>
+                                                </div>
+                                                <div class="pcontent">
+                                                    <p class="ptitle">U(V):</p>
+                                                    <div id="bms_dy1`+index+`"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> `;
+                            $(item).append(topmap);
+                        
+                            // 一次系统图 数据
+
+                            // 负载数据
+                            let load0 = dataindex[0][4].itap;
+                            let load1 = dataindex[1][4].itap;
+                            $("#load0"+index).html(load0);
+                            $("#load1"+index).html(load1);
+
+                            // 油机数据
+                            var yj_rp0 = dataindex[0][1].powerGeneration;
+                            var yj_rp1 = dataindex[1][1].powerGeneration;
+                            $("#yj_rp0"+index).html(yj_rp0);
+                            $("#yj_rp1"+index).html(yj_rp1);
+                            
+                            $("#yj_sxdy0"+index).html(dataindex[0][1].oilPressure);
+                            $("#yj_sxdy1"+index).html(dataindex[1][1].oilPressure);
+
+                            // pcs
+                            var pcs_sxdy0 = dataindex[0][2].abacv + "/" + dataindex[0][2].bcacv+ "/" + dataindex[0][2].caacv;
+                            var pcs_sxdy1 = dataindex[1][2].abacv + "/" + dataindex[1][2].bcacv+ "/" + dataindex[1][2].caacv;
+                            $("#pcs_sxdy0"+index).html(pcs_sxdy0);
+                            $("#pcs_sxdy1"+index).html(pcs_sxdy1);
+                            
+                            var pcs_sxdl0 = dataindex[0][2].aaci + "/" + dataindex[0][2].baci+ "/" + dataindex[0][2].caci;
+                            var pcs_sxdl1 = dataindex[1][2].aaci + "/" + dataindex[1][2].baci+ "/" + dataindex[1][2].caci;
+                            $("#pcs_sxdl0"+index).html(pcs_sxdl0);
+                            $("#pcs_sxdl1"+index).html(pcs_sxdl1);
+
+                            var pcs_rp0 = dataindex[0][2].tap;
+                            var pcs_rp1 = dataindex[1][2].tap;
+                            $("#pcs_rp0"+index).html(pcs_rp0);
+                            $("#pcs_rp1"+index).html(pcs_rp1);
+
+                             // bms
+                            $("#bms_soc0"+index).html(dataindex[0][3].soc);
+                            $("#bms_soc1"+index).html(dataindex[1][3].soc);
+
+                            $("#bms_dy0"+index).html(dataindex[0][3].group_V);
+                            $("#bms_dy1"+index).html(dataindex[1][3].group_V);
+
+                            //左边负载方向判断---第一次请求
+                            if(load0 === 0){
+                                $("#leftload_wrap"+index).html(`
+                                    <div id="gdownline11" class="vp vpthin" style="left:31%; top:13.5%;  height:14%;z-index: 1;"></div>
+                                `);
+                            }else{
+                                $("#leftload_wrap"+index).html(`
+                                    <div id="gdownline11" class="vp vpthin gotop" style="left:31%; top:13.5%;  height:14%;z-index: 1;"></div>
+                                `);
+                            }
+
+                            //右边负载方向判断---第一次请求
+                            if(load1 === 0){
+                                $("#rightload_wrap"+index).html(`
+                                    <div id="gdownline21" class="vp vpthin" style="left:63%; top:13.5%;  height:14%;z-index: 1;"></div>
+                                `);
+                            }else{
+                                $("#rightload_wrap"+index).html(`
+                                    <div id="gdownline21" class="vp vpthin gotop" style="left:63%; top:13.5%;  height:14%;z-index: 1;"></div>
+                                `);
+                            }
+
+                            // 油机左边1段方向的判断---第一次请求
+                            if(yj_rp0 === 0){
+                                $("#leftwrap"+index).html(`
+                                    <div id="leftline" class="hp hpthin" style="left:8%; top:27%;  width:23%; z-index: 1;"></div>
+                                `);
+                            }else{
+                                $("#leftwrap"+index).html(`
+                                    <div id="leftline" class="hp hpthin goright" style="left:8%; top:27%;  width:23%; z-index: 1;"></div>
+                                `);
+                            }
+
+                            // 油机中间2段方向的判断---第一次请求
+                            let yj_middle = yj_rp0 - pcs_rp0 - load0;
+                            if(yj_middle > 0){
+                                $("#middlewrap"+index).html(`
+                                    <div id="middleline" class="hp hpthin goright" style="left:31%; top:27%;  width:32%; z-index: 1;"></div>
+                                `);
+                            }else if(yj_middle < 0){
+                                $("#middlewrap"+index).html(`
+                                    <div id="middleline" class="hp hpthin goleft" style="left:31%; top:27%;  width:32%; z-index: 1;"></div>
+                                `);
+                            }
+                            if((yj_rp0===0&&pcs_rp0===0&&load0===0) || (yj_rp1===0&&pcs_rp1===0&&load1===0)){
+                                $("#middlewrap"+index).html(`
+                                    <div id="middleline" class="hp hpthin" style="left:31%; top:27%;  width:32%; z-index: 1;"></div>
+                                `);
+                            }
+
+                            // 油机右边3段方向的判断---第一次请求
+                            if(yj_rp1 === 0){
+                                $("#rightwrap"+index).html(`
+                                    <div id="rightline" class="hp hpthin" style="left:63%; top:27%;  width:25%; z-index: 1;"></div>
+                                `);
+                            }else{
+                                $("#rightwrap"+index).html(`
+                                    <div id="rightline" class="hp hpthin goleft" style="left:63%; top:27%;  width:25%; z-index: 1;"></div>
+                                `);
+                            }
+
+                            // 左边pcs方向判断---第一次请求
+                            if(pcs_rp0 < 0){
+                                $("#pcs0"+index).html(`
+                                    <div id="pcsline0" class="vp vpthin gotop" style="left:31%; top:27%;  height:55%;z-index: 1;"></div>
+                                `);
+                            }else if(pcs_rp0 > 0){
+                                $("#pcs0"+index).html(`
+                                    <div id="pcsline0" class="vp vpthin godown" style="left:31%; top:27%;  height:55%;z-index: 1;"></div>
+                                `);
+                            }else if(pcs_rp0 === 0){
+                                $("#pcs0"+index).html(`
+                                    <div id="pcsline0" class="vp vpthin" style="left:31%; top:27%;  height:55%;z-index: 1;"></div>
+                                `);
+                            }
+
+                            // 右边pcs方向判断---第一次请求
+                            if(pcs_rp1 < 0){
+                                $("#pcs1"+index).html(`
+                                    <div id="pcsline1" class="vp vpthin gotop" style="left:63%; top:27%;  height:55%;z-index: 1;"></div>
+                                `);
+                            }else if(pcs_rp1 > 0){
+                                $("#pcs1"+index).html(`
+                                    <div id="pcsline1" class="vp vpthin godown" style="left:63%; top:27%;  height:55%;z-index: 1;"></div>
+                                `);
+                            }else if(pcs_rp1 === 0){
+                                $("#pcs1"+index).html(`
+                                    <div id="pcsline1" class="vp vpthin" style="left:63%; top:27%;  height:55%;z-index: 1;"></div>
+                                `);
+                            }
+
+                        }); // each循环结束
+
+                        if(allonoff != 0){
+                            $("#allpositiveKWh").html(dealnumber(allpositiveKWh));
+                            $("#allpowerGeneration").html(dealnumber(allpowerGeneration));
+                            $("#alltpap").html(dealnumber(alltpap));
+                            $("#allitap").html(dealnumber(allitap));
+                        }
+
+                        
+
+                        setInterval(updateData,1000);
+
+                    } // if语句结束
+                }, // success函数结束
+                error: function (err) {
+                    console.log("首次请求数据 请求失败");
+                }
+            }); // ajax结束
+
+            // tab选项卡切换
+            $(".tabHeadaa >span").on("click", function () {
+                var itemIndex = $(this).index();
+                $(this).addClass("active").siblings(".tabHeadaa span").removeClass("active");
+                $(this).parent().next().children().eq(itemIndex).show().siblings(".khfxPaneaa").hide();
+            });
+
+            $(".tabHeadbb >span").on("click", function () {
+                var itemIndex = $(this).index();
+                $(this).addClass("active").siblings(".tabHeadbb span").removeClass("active");
+                $(this).parent().next().children().eq(itemIndex).show().siblings(".khfxPanebb").hide();
+            });
+
+            let num_index = 0;
+            let load01 = new Array(4);
+            let load02 = new Array(4);
+            let load11 = new Array(4);
+            let load12 = new Array(4);
+
+            let yj_left1 = new Array(4);
+            let yj_left2 = new Array(4);
+            let yj_middle1 = new Array(4);
+            let yj_middle2 = new Array(4);
+            let yj_right1 = new Array(4);
+            let yj_right2 = new Array(4);
+
+            let pcs1_rp0 = new Array(4);
+            let pcs2_rp0 = new Array(4);
+            let pcs1_rp1 = new Array(4);
+            let pcs2_rp1 = new Array(4);
+            
+
+
+            function updateData() { // 请求数据
+                num_index++;
+
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: "http://112.74.169.99:21021/api/TokenAuth/GetProjectData?projectid=" + projectid,
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+                        xhr.setRequestHeader("Authorization", accessToken);
+                        xhr.setRequestHeader('.AspNetCore.Culture', 'zh-Hans');
+                    },
+                    success: function (res) {
+                        var data = res.result;
+
+                        var khfxWarpbb = $("#khfxWarp article.khfxWarpbb");
+                        var allpositiveKWh = 0;
+                        var allpowerGeneration = 0;
+                        var alltpap = 0;
+                        var allitap = 0;
+                        var allonoff = 0;
+
+                        $.each(khfxWarpbb,function(index,item){
+                            allonoff++;
+                            var dataindex = data[index];
+
+                            for(var i=0;i < dataindex.length; i++){
+
+                                // EMS
+                                if(dataindex[i][0].runMode == 1){
+                                    dataindex[i][0].runMode = '油机并储能'
+                                }else if(dataindex[i][0].runMode == 2){
+                                    dataindex[i][0].runMode = '储能并油机'
+                                }else if(dataindex[i][0].runMode == 3){
+                                    dataindex[i][0].runMode = '手动模式'
+                                }else if(dataindex[i][0].runMode == 4){
+                                    dataindex[i][0].runMode = '停机模式'
+                                }
+
+                                $("#runMode"+index+i).html(dataindex[i][0].runMode); // 运行模式
+                                $("#bztemperature"+index+i).html(dataindex[i][0].temperature); // 板载温度
+                                $("#hiEfcyRatio"+index+i).html(dataindex[i][0].hiEfcyRatio); // 油机效率值
+
+                                $("#upPower"+index+i).html(dataindex[i][0].upPower); // 负载上限值
+                                $("#dnPower"+index+i).html(dataindex[i][0].dnPower); // 负载下限值
+                                $("#upUpPower"+index+i).html(dataindex[i][0].upUpPower); // 负载超上限
+
+                                $("#socLow"+index+i).html(dataindex[i][0].socLow); // SOC下限值
+                                $("#turnOnRatio"+index+i).html(dataindex[i][0].turnOnRatio); // 开油机系数
+                                $("#turnOffRatio"+index+i).html(dataindex[i][0].turnOffRatio); // 关油机系数
+
+                                $("#backFlow1"+index+i).html(dataindex[i][0].backFlow1); // 市储防逆流值
+                                $("#backFlow2"+index+i).html(dataindex[i][0].backFlow2); // 市柴储防逆流值
+                                $("#backFlow3"+index+i).html(dataindex[i][0].backFlow3); // 柴储防逆流值
+
+
+                                // 柴油机
+                                $("#powerGeneration"+index+i).html(dataindex[i][1].powerGeneration); // 发电功率
+                                allpowerGeneration += dataindex[i][1].powerGeneration;
+                                $("#generationFrequency"+index+i).html(dataindex[i][1].generationFrequency); // 发电频率
+
+                                $("#fuelLevel"+index+i).html(dataindex[i][1].fuelLevel); // 燃油位
+                                $("#rpm"+index+i).html(dataindex[i][1].rpm); // 转速
+                                
+                                $("#oilPressure"+index+i).html(dataindex[i][1].oilPressure); // 油压
+                                $("#wtemperature"+index+i).html(dataindex[i][1].temperature); // 水温
+
+                                $("#positiveKWh"+index+i).html(dataindex[i][1].positiveKWh); // 总发电量
+                                allpositiveKWh += dataindex[i][1].positiveKWh;
+
+                                if(index===2&&i===0){
+                                    $("#na"+index+i).html(dataindex[i][1].na); // 瞬时油耗
+                                    $("#dPlus"+index+i).html(dataindex[i][1].dPlus); // 累计油耗
+                                }
+
+                                //电表
+                                $("#itap"+index+i).html(dataindex[i][4].itap); // 瞬时有功功率
+                                allitap += dataindex[i][4].itap;
+                                
+                                $("#tpap"+index+i).html(dataindex[i][4].tpap); // 正向有功总电量
+                                alltpap += dataindex[i][4].tpap;
+
+
+
+                                // PCS
+                                $("#tap"+index+i).html(dataindex[i][2].tap); // 总有功功率
+                                $("#trp"+index+i).html(dataindex[i][2].trp); // 总无功功率
+
+                                $("#tApparentP"+index+i).html(dataindex[i][2].tApparentP); // 总视在功率
+                                $("#tpf"+index+i).html(dataindex[i][2].tpf); // 总功率因素
+
+                                $("#environmentalT"+index+i).html(dataindex[i][2].environmentalT); // 散热器温度
+                                $("#cabinetT"+index+i).html(dataindex[i][2].cabinetT); // 模块温度
+
+                                $("#abacv"+index+i).html(dataindex[i][2].abacv); // AB交流线电压
+                                $("#bcacv"+index+i).html(dataindex[i][2].bcacv); // BC交流线电压
+                                $("#caacv"+index+i).html(dataindex[i][2].caacv); // CA交流线电压
+
+                                $("#aaci"+index+i).html(dataindex[i][2].aaci); // A相交流电流
+                                $("#baci"+index+i).html(dataindex[i][2].baci); // B相交流电流
+                                $("#caci"+index+i).html(dataindex[i][2].caci); // C相交流电流
+
+                                $("#apf"+index+i).html(dataindex[i][2].apf); // A相功率因数
+                                $("#bpf"+index+i).html(dataindex[i][2].bpf); // B相功率因数
+                                $("#cpf"+index+i).html(dataindex[i][2].cpf); // C相功率因数
+
+                                $("#aap"+index+i).html(dataindex[i][2].aap); // A相有功功率
+                                $("#bap"+index+i).html(dataindex[i][2].bap); // B相有功功率
+                                $("#cap"+index+i).html(dataindex[i][2].cap); // C相有功功率
+
+                                $("#arp"+index+i).html(dataindex[i][2].arp); // A相无功功率
+                                $("#brp"+index+i).html(dataindex[i][2].brp); // B相无功功率
+                                $("#crp"+index+i).html(dataindex[i][2].crp); // C相无功功率
+
+                                $("#aApparentP"+index+i).html(dataindex[i][2].aApparentP); // A相视在功率
+                                $("#bApparentP"+index+i).html(dataindex[i][2].bApparentP); // B相视在功率
+                                $("#cApparentP"+index+i).html(dataindex[i][2].cApparentP); // C相视在功率
+
+                                // bms
+                                    // 总值
+                                    $("#soc"+index+i).html(dataindex[i][3].soc); // SOC
+                                    $("#soh"+index+i).html(dataindex[i][3].soh); // SOH
+
+                                    $("#tpc"+index+i).html(dataindex[i][3].tpc); // 堆总电量
+                                    $("#group_V"+index+i).html(dataindex[i][3].group_V); // 堆总电压
+
+                                    $("#group_RC"+index+i).html(dataindex[i][3].group_RC); // 堆可充电量
+                                    $("#group_DQ"+index+i).html(dataindex[i][3].group_DQ); // 堆可放电量
+
+                                    $("#group_MCC"+index+i).html(dataindex[i][3].group_MCC); // 堆允许最大充电电流
+                                    $("#group_MDC"+index+i).html(dataindex[i][3].group_MDC); // 堆允许最大放电电流
+
+                                    $("#msnsV1"+index+i).html(dataindex[i][3].msnsV1); // 单体电压最高节序号
+                                    $("#mvosU1"+index+i).html(dataindex[i][3].mvosU1); // 单体最高电压值
+
+                                    $("#lsnsV1"+index+i).html(dataindex[i][3].lsnsV1); // 单体电压最低节序号
+                                    $("#lvosU1"+index+i).html(dataindex[i][3].lvosU1); // 单体最低电压值
+
+                                    $("#msnsT1"+index+i).html(dataindex[i][3].msnsT1); // 单体温度最高节序号
+                                    $("#mtosU1"+index+i).html(dataindex[i][3].mtosU1); // 单体最高温度值
+
+                                    $("#lsnsT1"+index+i).html(dataindex[i][3].lsnsT1); // 单体温度最低节序号
+                                    $("#ltosU1"+index+i).html(dataindex[i][3].ltosU1); // 单体最低温度值
+
+                                    if(dataindex[i][3].groupState == 0){dataindex[i][3].groupState='正常'}
+                                    else if(dataindex[i][3].groupState == 1){dataindex[i][3].groupState='充满'}
+                                    else if(dataindex[i][3].groupState == 2){dataindex[i][3].groupState='放空'}
+                                    else if(dataindex[i][3].groupState == 3){dataindex[i][3].groupState='待机'}
+                                    else if(dataindex[i][3].groupState == 4){dataindex[i][3].groupState='正常停机'}
+                                    else if(dataindex[i][3].groupState == 5){dataindex[i][3].groupState='故障停机'}
+                                    $("#groupState"+index+i).html(dataindex[i][3].groupState); // 堆运行状态
+
+                                    // 单体1
+                                    $("#tbV2"+index+i).html(dataindex[i][3].tbV2); // 电池总电压
+                                    $("#bmcC2"+index+i).html(dataindex[i][3].bmcC2); // 电池总电流
+
+                                    $("#soC2"+index+i).html(dataindex[i][3].soC2); // SOC
+                                    $("#soH2"+index+i).html(dataindex[i][3].soH2); // SOH
+
+                                    $("#mvosU2"+index+i).html(dataindex[i][3].mvosU2); // 单体最高电压值
+                                    $("#lvosU2"+index+i).html(dataindex[i][3].lvosU2); // 单体最低电压值
+
+                                    $("#mtosU2"+index+i).html(dataindex[i][3].mtosU2); // 单体最高温度值
+                                    $("#ltosU2"+index+i).html(dataindex[i][3].ltosU2); // 单体最低温度值
+
+                                    if(dataindex[i][3].cdI2 == 1){dataindex[i][3].cdI2='放电'}
+                                    else if(dataindex[i][3].cdI2 == 2){dataindex[i][3].cdI2='充电'}
+                                    else if(dataindex[i][3].cdI2 == 3){dataindex[i][3].cdI2='待机'}
+                                    else if(dataindex[i][3].cdI2 == 4){dataindex[i][3].cdI2='报警'}
+                                    else if(dataindex[i][3].cdI2 == 5){dataindex[i][3].cdI2='预充'}
+                                    else if(dataindex[i][3].cdI2 == 6){dataindex[i][3].cdI2='升级'}
+                                    $("#cdI2"+index+i).html(dataindex[i][3].cdI2); // 充放电指示
+
+                                    // 单体2
+                                    $("#tbV3"+index+i).html(dataindex[i][3].tbV3); // 电池总电压
+                                    $("#bmcC3"+index+i).html(dataindex[i][3].bmcC3); // 电池总电流
+
+                                    $("#soC3"+index+i).html(dataindex[i][3].soC3); // SOC
+                                    $("#soH3"+index+i).html(dataindex[i][3].soH3); // SOH
+
+                                    $("#mvosU3"+index+i).html(dataindex[i][3].mvosU3); // 单体最高电压值
+                                    $("#lvosU3"+index+i).html(dataindex[i][3].lvosU3); // 单体最低电压值
+
+                                    $("#mtosU3"+index+i).html(dataindex[i][3].mtosU3); // 单体最高温度值
+                                    $("#ltosU3"+index+i).html(dataindex[i][3].ltosU3); // 单体最低温度值
+                                    
+                                    if(dataindex[i][3].cdI3 == 1){dataindex[i][3].cdI3='放电'}
+                                    else if(dataindex[i][3].cdI3 == 2){dataindex[i][3].cdI3='充电'}
+                                    else if(dataindex[i][3].cdI3 == 3){dataindex[i][3].cdI3='待机'}
+                                    else if(dataindex[i][3].cdI3 == 4){dataindex[i][3].cdI3='报警'}
+                                    else if(dataindex[i][3].cdI3 == 5){dataindex[i][3].cdI3='预充'}
+                                    else if(dataindex[i][3].cdI3 == 6){dataindex[i][3].cdI3='升级'}
+                                    $("#cdI3"+index+i).html(dataindex[i][3].cdI3); // 工作模式
+                                }// for循环结束
+
+                                // 一次系统图 数据
+                                // 负载数据
+                                let load0 = dataindex[0][4].itap;
+                                let load1 = dataindex[1][4].itap;
+                                $("#load0"+index).html(load0);
+                                $("#load1"+index).html(load1);
+
+                                // 油机数据
+                                var yj_rp0 = dataindex[0][1].powerGeneration;
+                                var yj_rp1 = dataindex[1][1].powerGeneration;
+
+                                $("#yj_rp0"+index).html(yj_rp0);
+                                $("#yj_rp1"+index).html(yj_rp1);
+                                
+                                $("#yj_sxdy0"+index).html(dataindex[0][1].oilPressure);
+                                $("#yj_sxdy1"+index).html(dataindex[1][1].oilPressure);
+
+                                // pcs
+                                var pcs_sxdy0 = dataindex[0][2].abacv + "/" + dataindex[0][2].bcacv+ "/" + dataindex[0][2].caacv;
+                                var pcs_sxdy1 = dataindex[1][2].abacv + "/" + dataindex[1][2].bcacv+ "/" + dataindex[1][2].caacv;
+                                $("#pcs_sxdy0"+index).html(pcs_sxdy0);
+                                $("#pcs_sxdy1"+index).html(pcs_sxdy1);
+                                
+                                var pcs_sxdl0 = dataindex[0][2].aaci + "/" + dataindex[0][2].baci+ "/" + dataindex[0][2].caci;
+                                var pcs_sxdl1 = dataindex[1][2].aaci + "/" + dataindex[1][2].baci+ "/" + dataindex[1][2].caci;
+                                $("#pcs_sxdl0"+index).html(pcs_sxdl0);
+                                $("#pcs_sxdl1"+index).html(pcs_sxdl1);
+
+                                var pcs_rp0 = dataindex[0][2].tap;
+                                var pcs_rp1 = dataindex[1][2].tap;
+                                $("#pcs_rp0"+index).html(pcs_rp0);
+                                $("#pcs_rp1"+index).html(pcs_rp1);
+
+                                
+                                // bms
+                                $("#bms_soc0"+index).html(dataindex[0][3].soc);
+                                $("#bms_soc1"+index).html(dataindex[1][3].soc);
+
+                                $("#bms_dy0"+index).html(dataindex[0][3].group_V);
+                                $("#bms_dy1"+index).html(dataindex[1][3].group_V);
+
+                                //左边负载方向判断---第n次请求
+                                if(num_index === 1){
+                                    load01[index] = data[index][0][4].itap;
+                                    if(load01[index] === 0){
+                                        $("#leftload_wrap"+index).html(`
+                                            <div id="gdownline11" class="vp vpthin" style="left:31%; top:13.5%;  height:14%;z-index: 1;"></div>
+                                        `);
+                                    }else {
+                                        $("#leftload_wrap"+index).html(`
+                                            <div id="gdownline11" class="vp vpthin gotop" style="left:31%; top:13.5%;  height:14%;z-index: 1;"></div>
+                                        `);
+                                    }
+                                }else{
+                                    load02[index] = data[index][0][4].itap;
+                                    let load01_sign = Math.sign(load01[index]);
+                                    let load02_sign = Math.sign(load02[index]);
+                                    if(load01_sign !== load02_sign){
+                                        if(load02[index] === 0){
+                                            $("#leftload_wrap"+index).html(`
+                                                <div id="gdownline11" class="vp vpthin" style="left:31%; top:13.5%;  height:14%;z-index: 1;"></div>
+                                            `);
+                                        }else {
+                                            $("#leftload_wrap"+index).html(`
+                                                <div id="gdownline11" class="vp vpthin gotop" style="left:31%; top:13.5%;  height:14%;z-index: 1;"></div>
+                                            `);
+                                        }
+                                    }
+                                    load02[index] = data[index][0][4].itap;
+                                }
+
+                                //右边负载方向判断---第n次请求
+                                if(num_index === 1){
+                                    load11[index] = data[index][1][4].itap;
+                                    if(load11[index] === 0){
+                                        $("#rightload_wrap"+index).html(`
+                                            <div id="gdownline21" class="vp vpthin" style="left:63%; top:13.5%;  height:14%;z-index: 1;"></div>
+                                        `);
+                                    }else {
+                                        $("#rightload_wrap"+index).html(`
+                                            <div id="gdownline21" class="vp vpthin gotop" style="left:63%; top:13.5%;  height:14%;z-index: 1;"></div>
+                                        `);
+                                    }
+                                }else{
+                                    load12[index] = data[index][1][4].itap;
+                                    let load11_sign = Math.sign(load11[index]);
+                                    let load12_sign = Math.sign(load12[index]);
+                                    if(load11_sign !== load12_sign){
+                                        if(load12[index] === 0){
+                                            $("#rightload_wrap"+index).html(`
+                                                <div id="gdownline21" class="vp vpthin" style="left:63%; top:13.5%;  height:14%;z-index: 1;"></div>
+                                            `);
+                                        }else {
+                                            $("#rightload_wrap"+index).html(`
+                                                <div id="gdownline21" class="vp vpthin gotop" style="left:63%; top:13.5%;  height:14%;z-index: 1;"></div>
+                                            `);
+                                        }
+                                    }
+                                    load12[index] = data[index][1][4].itap;
+                                }
+
+                                // 油机左边1端方向判断---第n次请求
+                                if(num_index === 1){
+                                    yj_left1[index] = data[index][0][1].powerGeneration;
+                                    if(yj_left1[index] === 0){
+                                        $("#leftwrap"+index).html(`
+                                            <div id="leftline" class="hp hpthin" style="left:8%; top:27%;  width:23%; z-index: 1;"></div>
+                                        `);
+                                    }else {
+                                        $("#leftwrap"+index).html(`
+                                            <div id="leftline" class="hp hpthin goright" style="left:8%; top:27%;  width:23%; z-index: 1;"></div>
+                                        `);
+                                    }
+                                }else{
+                                    yj_left2[index] = data[index][0][1].powerGeneration;
+                                    let yj_left1_sign = Math.sign(yj_left1[index]);
+                                    let yj_left2_sign = Math.sign(yj_left2[index]);
+                                    if(yj_left1_sign !== yj_left2_sign){
+                                        if(yj_left2[index] === 0){
+                                            $("#leftwrap"+index).html(`
+                                                <div id="leftline" class="hp hpthin" style="left:8%; top:27%;  width:23%; z-index: 1;"></div>
+                                            `);
+                                        }else {
+                                            $("#leftwrap"+index).html(`
+                                                <div id="leftline" class="hp hpthin goright" style="left:8%; top:27%;  width:23%; z-index: 1;"></div>
+                                            `);
+                                        }
+                                    }
+                                    yj_left2[index] = data[index][0][1].powerGeneration;
+                                }
+
+
+                                // 油机中间2段方向的判断---第n次请求
+                                if(num_index === 1){
+                                    yj_middle1[index] = yj_rp0 - pcs_rp0 - load0;
+                                    if(yj_middle1[index] > 0){
+                                        $("#middlewrap"+index).html(`
+                                            <div id="middleline" class="hp hpthin goright" style="left:31%; top:27%;  width:32%; z-index: 1;"></div>
+                                        `);
+                                    }else if(yj_middle1[index] < 0){
+                                        $("#middlewrap"+index).html(`
+                                            <div id="middleline" class="hp hpthin goleft" style="left:31%; top:27%;  width:32%; z-index: 1;"></div>
+                                        `);
+                                    }
+                                    if((yj_rp0===0&&pcs_rp0===0&&load0===0) || (yj_rp1===0&&pcs_rp1===0&&load1===0)){
+                                        $("#middlewrap"+index).html(`
+                                            <div id="middleline" class="hp hpthin" style="left:31%; top:27%;  width:32%; z-index: 1;"></div>
+                                        `);
+                                    }
+                                }else{
+                                    yj_middle2[index] = yj_rp0 - pcs_rp0 - load0;
+                                    let yj_middle1_sign = Math.sign(yj_middle1[index]);
+                                    let yj_middle2_sign = Math.sign(yj_middle2[index]);
+                                    if( yj_middle1_sign != yj_middle2_sign ){
+                                        if(yj_middle2[index] > 0){
+                                            $("#middlewrap"+index).html(`
+                                                <div id="middleline" class="hp hpthin goright" style="left:31%; top:27%;  width:32%; z-index: 1;"></div>
+                                            `);
+                                        }else if(yj_middle2[index] < 0){
+                                            $("#middlewrap"+index).html(`
+                                                <div id="middleline" class="hp hpthin goleft" style="left:31%; top:27%;  width:32%; z-index: 1;"></div>
+                                            `);
+                                        }
+
+                                        if((yj_rp0===0&&pcs_rp0===0&&load0===0) || (yj_rp1===0&&pcs_rp1===0&&load1===0)){
+                                            $("#middlewrap"+index).html(`
+                                                <div id="middleline" class="hp hpthin" style="left:31%; top:27%;  width:32%; z-index: 1;"></div>
+                                            `);
+                                        }
+                                    }
+                                    yj_middle2[index] = yj_rp0 - pcs_rp0 - load0;
+                                }
+
+                                // 油机右边1端方向判断---第n次请求
+                                if(num_index === 1){
+                                    yj_right1[index] = data[index][1][1].powerGeneration;
+                                    if(yj_right1[index] === 0){
+                                        $("#rightwrap"+index).html(`
+                                            <div id="rightline" class="hp hpthin" style="left:63%; top:27%;  width:25%; z-index: 1;"></div>
+                                        `);
+                                    }else {
+                                        $("#rightwrap"+index).html(`
+                                            <div id="rightline" class="hp hpthin goleft" style="left:63%; top:27%;  width:25%; z-index: 1;"></div>
+                                        `);
+                                    }
+                                }else{
+                                    yj_right2[index] = data[index][1][1].powerGeneration;
+                                    let yj_right1_sign = Math.sign(yj_right1[index]);
+                                    let yj_right2_sign = Math.sign(yj_right2[index]);
+                                    if(yj_right1_sign !== yj_right2_sign){
+                                        if(yj_right2[index] === 0){
+                                            $("#rightwrap"+index).html(`
+                                                <div id="rightline" class="hp hpthin" style="left:63%; top:27%;  width:25%; z-index: 1;"></div>
+                                            `);
+                                        }else {
+                                            $("#rightwrap"+index).html(`
+                                                <div id="rightline" class="hp hpthin goleft" style="left:63%; top:27%;  width:25%; z-index: 1;"></div>
+                                            `);
+                                        }
+                                    }
+                                    yj_right2[index] = data[index][1][1].powerGeneration;
+                                }
+
+                                
+                                // 左边pcs方向判断---第n次请求
+                                if(num_index === 1){
+                                    pcs1_rp0[index] = data[index][0][2].tap;
+                                    if(pcs1_rp0[index] < 0){
+                                        $("#pcs0"+index).html(`
+                                            <div id="pcsline0" class="vp vpthin gotop" style="left:31%;top:27%;height:55%;z-index:1;"></div>
+                                        `);
+                                    }else if(pcs1_rp0[index] > 0){
+                                        $("#pcs0"+index).html(`
+                                            <div id="pcsline0" class="vp vpthin godown" style="left:31%;top:27%;height:55%;z-index:1;"></div>
+                                        `);
+                                    }else if(pcs1_rp0[index] === 0){
+                                        $("#pcs0"+index).html(`
+                                            <div id="pcsline0" class="vp vpthin" style="left:31%;top:27%;height:55%;z-index:1;"></div>
+                                        `);
+                                    }
+                                }else {
+                                    pcs2_rp0[index] = data[index][0][2].tap;
+                                    let pcs1_rp0_sign = Math.sign(pcs1_rp0[index]);
+                                    let pcs2_rp0_sign = Math.sign(pcs2_rp0[index]);
+                                    if(pcs1_rp0_sign !== pcs2_rp0_sign){
+                                        if(pcs2_rp0[index] < 0){
+                                            $("#pcs0"+index).html(`
+                                                <div id="pcsline0" class="vp vpthin gotop" style="left:31%;top:27%;height:55%;z-index:1;"></div>
+                                            `);
+                                        }else if(pcs2_rp0[index] > 0){
+                                            $("#pcs0"+index).html(`
+                                                <div id="pcsline0" class="vp vpthin godown" style="left:31%;top:27%;height:55%;z-index:1;"></div>
+                                            `);
+                                        }else if(pcs2_rp0[index] == 0){
+                                            $("#pcs0"+index).html(`
+                                                <div id="pcsline0" class="vp vpthin" style="left:31%;top:27%;height:55%;z-index:1;"></div>
+                                            `);
+                                        }
+                                    }
+                                    pcs2_rp0[index] = data[index][0][2].tap;
+
+                                }
+
+                                // 右边pcs方向判断---第n次请求
+                                if(num_index === 1){
+                                    pcs1_rp1[index] = data[index][1][2].tap;
+                                    if(pcs1_rp1[index] < 0){
+                                        $("#pcs1"+index).html(`
+                                            <div id="pcsline1" class="vp vpthin gotop" style="left:63%;top:27%;height:55%;z-index:1;"></div>
+                                        `);
+                                    }else if(pcs1_rp1[index] > 0){
+                                        $("#pcs1"+index).html(`
+                                            <div id="pcsline1" class="vp vpthin godown" style="left:63%;top:27%;height:55%;z-index:1;"></div>
+                                        `);
+                                    }else if(pcs1_rp1[index] === 0){
+                                        $("#pcs1"+index).html(`
+                                            <div id="pcsline1" class="vp vpthin" style="left:63%; top:27%;height:55%;z-index:1;"></div>
+                                        `);
+                                    }
+                                }else {
+                                    pcs2_rp1[index] = data[index][1][2].tap;
+                                    let pcs1_rp1_sign = Math.sign(pcs1_rp1[index]);
+                                    let pcs2_rp1_sign = Math.sign(pcs2_rp1[index]);
+                                    if(pcs1_rp1_sign !== pcs2_rp1_sign){
+                                        if(pcs2_rp1[index] < 0){
+                                            $("#pcs1"+index).html(`
+                                                <div id="pcsline1" class="vp vpthin gotop" style="left:63%; top:27%;height:55%;z-index: 1;"></div>
+                                            `);
+                                        }else if(pcs2_rp1[index] > 0){
+                                            $("#pcs1"+index).html(`
+                                                <div id="pcsline1" class="vp vpthin godown" style="left:63%; top:27%;height:55%;z-index: 1;"></div>
+                                            `);
+                                        }else if(pcs2_rp1[index] === 0){
+                                            $("#pcs1"+index).html(`
+                                                <div id="pcsline1" class="vp vpthin" style="left:63%; top:27%;height:55%;z-index: 1;"></div>
+                                            `);
+                                        }
+                                    }
+                                    pcs2_rp1[index] = data[index][1][2].tap;
+                                }
+                        });
+                        if(allonoff != 0){
+                            $("#allpositiveKWh").html(dealnumber(allpositiveKWh));
+                            $("#allpowerGeneration").html(dealnumber(allpowerGeneration));
+                            $("#alltpap").html(dealnumber(alltpap));
+                            $("#allitap").html(dealnumber(allitap));
+                        }
+
+                    },
+                    error: function (err) {
+                        console.log("数据请求失败");
+                    }
+                });
+            }
+
+            // 判断是否为数字
+            function isNumber(val) {
+                if (val == "" || isNaN(val)) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            function numToText(obj){
+                if(obj == 0){
+                    obj = 无效;
+                }else if(obj == 1){
+                    obj = 有效;
+                }
+                return obj;
+            }
+        
+
+
+
+            function each(obj,index) {
+                var str = ``;
+                if (obj.constructor==Array) {
+                    // console.log("数组");
+                    for (var i = 0, len = obj.length; i < len; i++) {
+                        str += `
+                        <div class="khfxPanebb khfxPane">
+                            <div class="zt2 ztdetail" style="margin-top: 0.5rem;">
+                                <div class="detail_tit">
+                                    <img src="./images/arrows_blue.svg" alt="" />
+                                    <span>EMS</span>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <p>运行模式</p>
+                                        <div class="ztdiv">
+                                            <span id="runMode`+index+i+`" style="font-size:0.3rem;">0</span><span></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>板载温度</p>
+                                        <div class="ztdiv">
+                                            <span id="bztemperature`+index+i+`">0</span><span>℃</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>油机效率值</p>
+                                        <div class="ztdiv">
+                                            <span id="hiEfcyRatio`+index+i+`">0</span><span></span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <ul>
+                                    <li>
+                                        <p>负载上限值</p>
+                                        <div class="ztdiv">
+                                            <span id="upPower`+index+i+`">0</span><span></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>负载下限值</p>
+                                        <div class="ztdiv">
+                                            <span id="dnPower`+index+i+`">0</span><span></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>负载超上限</p>
+                                        <div class="ztdiv">
+                                            <span id="upUpPower`+index+i+`">0</span><span></span>
+                                        </div>
+                                    </li>
+                                    
+                                </ul>
+
+                                <ul>
+                                    <li>
+                                        <p>SOC下限值</p>
+                                        <div class="ztdiv">
+                                            <span id="socLow`+index+i+`">0</span><span></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>开油机系数</p>
+                                        <div class="ztdiv">
+                                            <span id="turnOnRatio`+index+i+`">0</span><span></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>关油机系数</p>
+                                        <div class="ztdiv">
+                                            <span id="turnOffRatio`+index+i+`">0</span><span></span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <ul>
+                                    <li>
+                                        <p>市储防逆流值</p>
+                                        <div class="ztdiv">
+                                            <span id="backFlow1`+index+i+`">0</span><span></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>市柴储防逆流值</p>
+                                        <div class="ztdiv">
+                                            <span id="backFlow2`+index+i+`">0</span><span></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>柴储防逆流值</p>
+                                        <div class="ztdiv">
+                                            <span id="backFlow3`+index+i+`">0</span><span></span>
+                                        </div>
+                                    </li>
+                                    
+                                </ul>
+
+                            </div>
+
+                            <div class="zt2 ztdetail" style="margin-top: 0.3rem;">
+                                <div class="detail_tit">
+                                    <img src="./images/arrows_orange.svg" alt="" />
+                                    <span>柴油机</span>
+                                </div>
+                                
+                                <ul>
+                                    <li>
+                                        <p>发电功率</p>
+                                        <div class="ztdiv">
+                                            <span id="powerGeneration`+index+i+`">0</span><span>kW</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>发电频率</p>
+                                        <div class="ztdiv">
+                                            <span id="generationFrequency`+index+i+`">0</span><span>Hz</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <p>燃油位</p>
+                                        <div class="ztdiv">
+                                            <span id="fuelLevel`+index+i+`">0</span><span>%</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>转速</p>
+                                        <div class="ztdiv">
+                                            <span id="rpm`+index+i+`">0</span><span>r/min</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <p>油压</p>
+                                        <div class="ztdiv">
+                                            <span id="oilPressure`+index+i+`">0</span><span>v</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>水温</p>
+                                        <div class="ztdiv">
+                                            <span id="wtemperature`+index+i+`">0</span><span>℃</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <p>总发电量</p>
+                                        <div class="ztdiv">
+                                            <span id="positiveKWh`+index+i+`">0</span><span>kWh</span>
+                                        </div>
+                                    </li>
+                                    
+                                </ul>`;
+                                if(index===2&&i===0){
+                                    str += `
+                                    <ul>
+                                        <li>
+                                            <p>瞬时油耗</p>
+                                            <div class="ztdiv">
+                                                <span id="na`+index+i+`">0</span><span></span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <p>累计油耗</p>
+                                            <div class="ztdiv">
+                                                <span id="dPlus`+index+i+`">0</span><span></span>
+                                            </div>
+                                        </li>
+                                        
+                                    </ul>
+                                    `;
+                                }
+                                
+                 str += `</div>
+
+                            <div class="zt2 ztdetail" style="margin-top: 0.3rem;">
+                                <div class="detail_tit">
+                                    <img src="./images/arrows_green.svg" alt="" />
+                                    <span>电表</span>
+                                </div>
+
+                                <ul>
+                                    <li>
+                                        <p>瞬时有功功率</p>
+                                        <div class="ztdiv">
+                                            <span id="itap`+index+i+`">0</span><span>kW</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>正向有功总电量</p>
+                                        <div class="ztdiv">
+                                            <span id="tpap`+index+i+`">0</span><span>kWh</span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+
+                            </div>
+
+                            <div class="zt2 ztdetail" style="margin-top: 0.3rem;">
+                                <div class="detail_tit">
+                                    <img src="./images/arrows_blue.svg" alt="" />
+                                    <span>PCS</span>
+                                </div>
+
+                                <ul>
+                                    <li>
+                                        <p>总有功功率</p>
+                                        <div class="ztdiv">
+                                            <span id="tap`+index+i+`">0</span><span>kW</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>总无功功率</p>
+                                        <div class="ztdiv">
+                                            <span id="trp`+index+i+`">0</span><span>kVar</span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <ul>
+                                    <li>
+                                        <p>总视在功率</p>
+                                        <div class="ztdiv">
+                                            <span id="tApparentP`+index+i+`">0</span><span>kVA</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>总功率因素</p>
+                                        <div class="ztdiv">
+                                            <span id="tpf`+index+i+`">0</span><span></span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <ul>
+                                    <li>
+                                        <p>环境温度</p>
+                                        <div class="ztdiv">
+                                            <span id="environmentalT`+index+i+`">0</span><span>℃</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>模块温度</p>
+                                        <div class="ztdiv">
+                                            <span id="cabinetT`+index+i+`">0</span><span>℃</span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+
+                                <ul>
+                                    <li>
+                                        <p>AB交流线电压</p>
+                                        <div class="ztdiv">
+                                            <span id="abacv`+index+i+`">0</span><span>V</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>BC交流线电压</p>
+                                        <div class="ztdiv">
+                                            <span id="bcacv`+index+i+`">0</span><span>V</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>CA交流线电压</p>
+                                        <div class="ztdiv">
+                                            <span id="caacv`+index+i+`">0</span><span>V</span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <ul>
+                                    <li>
+                                        <p>A相交流电流</p>
+                                        <div class="ztdiv">
+                                            <span id="aaci`+index+i+`">0</span><span>A</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>B相交流电流</p>
+                                        <div class="ztdiv">
+                                            <span id="baci`+index+i+`">0</span><span>A</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>C相交流电流</p>
+                                        <div class="ztdiv">
+                                            <span id="caci`+index+i+`">0</span><span>A</span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <ul>
+                                    <li>
+                                        <p>A相功率因数</p>
+                                        <div class="ztdiv">
+                                            <span id="apf`+index+i+`">0</span><span></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>B相功率因数</p>
+                                        <div class="ztdiv">
+                                            <span id="bpf`+index+i+`">0</span><span></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>C相功率因数</p>
+                                        <div class="ztdiv">
+                                            <span id="cpf`+index+i+`">0</span><span></span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <ul>
+                                    <li>
+                                        <p>A相有功功率</p>
+                                        <div class="ztdiv">
+                                            <span id="aap`+index+i+`">0</span><span>kW</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>B相有功功率</p>
+                                        <div class="ztdiv">
+                                            <span id="bap`+index+i+`">0</span><span>kW</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>C相有功功率</p>
+                                        <div class="ztdiv">
+                                            <span id="cap`+index+i+`">0</span><span>kW</span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <ul>
+                                    <li>
+                                        <p>A相无功功率</p>
+                                        <div class="ztdiv">
+                                            <span id="arp`+index+i+`">0</span><span>kVar</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>B相无功功率</p>
+                                        <div class="ztdiv">
+                                            <span id="brp`+index+i+`">0</span><span>kVar</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>C相无功功率</p>
+                                        <div class="ztdiv">
+                                            <span id="crp`+index+i+`">0</span><span>kVar</span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <ul>
+                                    <li>
+                                        <p>A相视在功率</p>
+                                        <div class="ztdiv">
+                                            <span id="aApparentP`+index+i+`">0</span><span>kVA</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>B相视在功率</p>
+                                        <div class="ztdiv">
+                                            <span id="bApparentP`+index+i+`">0</span><span>kVA</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>C相视在功率</p>
+                                        <div class="ztdiv">
+                                            <span id="cApparentP`+index+i+`">0</span><span>kVA</span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                            </div>
+
+                            <div class="zt2 ztdetail" style="margin-top: 0.3rem;">
+                                <div class="detail_tit">
+                                    <img src="./images/arrows_orange.svg" alt="" />
+                                    <span>BMS</span>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <p>SOC</p>
+                                        <div class="ztdiv">
+                                            <span id="soc`+index+i+`">0</span><span>%</span>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <p>SOH</p>
+                                        <div class="ztdiv">
+                                            <span id="soh`+index+i+`">0</span><span>%</span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <ul>
+                                    <li>
+                                        <p>堆总电量</p>
+                                        <div class="ztdiv">
+                                            <span id="tpc`+index+i+`">0</span><span>kWh</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>堆总电压</p>
+                                        <div class="ztdiv">
+                                            <span id="group_V`+index+i+`">0</span><span>V</span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <ul>
+                                    <li>
+                                        <p>堆可充电量 </p>
+                                        <div class="ztdiv">
+                                            <span id="group_RC`+index+i+`">0</span><span>kWh</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>堆可放电量</p>
+                                        <div class="ztdiv">
+                                            <span id="group_DQ`+index+i+`">0</span><span>kWh</span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <ul>
+                                    <li>
+                                        <p>堆允许最大充电电流 </p>
+                                        <div class="ztdiv">
+                                            <span id="group_MCC`+index+i+`">0</span><span>A</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>堆允许最大放电电流</p>
+                                        <div class="ztdiv">
+                                            <span id="group_MDC`+index+i+`">0</span><span>A</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                
+                                <ul>
+                                    <li>
+                                        <p>单体最高电压值</p>
+                                        <div class="ztdiv">
+                                            <span id="mvosU1`+index+i+`">0</span><span>mV</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>单体最低电压值</p>
+                                        <div class="ztdiv">
+                                            <span id="lvosU1`+index+i+`">0</span><span>mV</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <p>单体最高温度值</p>
+                                        <div class="ztdiv">
+                                            <span id="mtosU1`+index+i+`">0</span><span>℃</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>单体最低温度值</p>
+                                        <div class="ztdiv">
+                                            <span id="ltosU1`+index+i+`">0</span><span>℃</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul style="border-bottom:1px dashed #1B3150;">
+                                    <li>
+                                        <p>堆运行状态</p>
+                                        <div class="ztdiv">
+                                            <span id="groupState`+index+i+`">0</span><span></span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <div style="font-size: 18px;color: #fff;padding-top:10px;">电池簇1</div>
+                                <ul style="padding-top:25px;">
+                                    <li>
+                                        <p>电池总电压</p>
+                                        <div class="ztdiv">
+                                            <span id="tbV2`+index+i+`">0</span><span>V</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>电池总电流</p>
+                                        <div class="ztdiv">
+                                            <span id="bmcC2`+index+i+`">0</span><span>A</span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <ul>
+                                    <li>
+                                        <p>SOC</p>
+                                        <div class="ztdiv">
+                                            <span id="soC2`+index+i+`">0</span><span>%</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>SOH</p>
+                                        <div class="ztdiv">
+                                            <span id="soH2`+index+i+`">0</span><span>%</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <p>单体最高电压值</p>
+                                        <div class="ztdiv">
+                                            <span id="mvosU2`+index+i+`">0</span><span>V</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>单体最低电压值</p>
+                                        <div class="ztdiv">
+                                            <span id="lvosU2`+index+i+`">0</span><span>V</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <p>单体最高温度值</p>
+                                        <div class="ztdiv">
+                                            <span id="mtosU2`+index+i+`">0</span><span>℃</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>单体最低温度值</p>
+                                        <div class="ztdiv">
+                                            <span id="ltosU2`+index+i+`">0</span><span>℃</span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <ul style="border-bottom:1px dashed #1B3150;">
+                                    <li>
+                                        <p>工作模式</p>
+                                        <div class="ztdiv">
+                                            <span id="cdI2`+index+i+`">0</span><span></span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <div style="font-size: 18px;color: #fff;padding-top:10px;">电池簇2</div>
+                                <ul style="padding-top:25px;">
+                                    <li>
+                                        <p>电池总电压</p>
+                                        <div class="ztdiv">
+                                            <span id="tbV3`+index+i+`">0</span><span>V</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>电池总电流</p>
+                                        <div class="ztdiv">
+                                            <span id="bmcC3`+index+i+`">0</span><span>A</span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <ul>
+                                    <li>
+                                        <p>SOC</p>
+                                        <div class="ztdiv">
+                                            <span id="soC3`+index+i+`">0</span><span>%</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>SOH</p>
+                                        <div class="ztdiv">
+                                            <span id="soH3`+index+i+`">0</span><span>%</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <p>单体最高电压值</p>
+                                        <div class="ztdiv">
+                                            <span id="mvosU3`+index+i+`">0</span><span>V</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>单体最低电压值</p>
+                                        <div class="ztdiv">
+                                            <span id="lvosU3`+index+i+`">0</span><span>V</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <p>单体最高温度值</p>
+                                        <div class="ztdiv">
+                                            <span id="mtosU3`+index+i+`">0</span><span>℃</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>单体最低温度值</p>
+                                        <div class="ztdiv">
+                                            <span id="ltosU3`+index+i+`">0</span><span>℃</span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <ul>
+                                    <li>
+                                        <p>工作模式</p>
+                                        <div class="ztdiv">
+                                            <span id="cdI3`+index+i+`">0</span><span></span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+
+                            </div>
+                        </div>`;
+                    }
+                    return str;
+                }
+                if (obj.constructor==Object) {
+                    console.log("对象");
+                    for (var i in obj) {
+                        // var str;
+                        str += '<span class="data_show"><span data-id='+obj[i].community_id+'>' + obj[i].community_name + '</span><span class="del glyphicon glyphicon-plus-sign"></span></span>';
+                    }
+                    return str;
+                }
+                return obj;
+            }
+
+
+        });
+    </script>
+</body>
+
+</html>

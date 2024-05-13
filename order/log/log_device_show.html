@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <!--如果是IE 就以标准渲染-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <!-- 视窗——————响应式布局 -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+
+    <!--当前页面的三要素-->
+    <title>运维系统</title>
+    <meta name="description" content="聚能优电" />
+    <meta http-equiv="keywords" content="聚能优电" />
+    <script type="text/javascript" src="../../js/verify.js"></script>
+    <script type="text/javascript" src="../../js/common/commonfuntion.js"></script>
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="../../css/orderdetail.css" />
+    <link rel="stylesheet" type="text/css" href="../../layui/css/layui.css">
+    
+    <link rel="stylesheet" type="text/css" href="../../css/common/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/alarm.css" />
+
+    <style>
+        #listdata .title{
+            font-family: SourceHanSansCN-Bold;
+            font-size: 0.32rem;
+            color: #7F94B2;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+            font-weight: bold;
+        }
+
+        .gjdata .upfile{
+            font-size: 0.28rem;
+            color: #7F94B2;
+            letter-spacing: 0;
+            margin: 0.4rem 0 0.2rem 0;
+            font-weight:bold;
+        }
+
+        .gjdata .span_wrap{
+            width: 100%;
+            font-size: 0.28rem;
+        }
+        .gjdata .span_wrap span{
+            display: inline-block;
+            padding: 0.1rem 0.2rem;
+            font-family: MicrosoftYaHei;
+            font-size: 0.28rem;
+            color: #0167FF;
+            letter-spacing: 0.88px;
+            background: rgba(35, 62, 106,0.44);
+            border-radius: 2px;
+            margin-bottom: 0.2rem;
+            margin-right: 0.2rem;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <div id="container" class="alarm">
+        <div class="alarm_01">
+            <!--主屏内容-->
+            <div class="alarm_screen">
+                <div class="m_title">
+                    <div class="back" id="back">
+                        <img src="../../images/back.svg" alt="">
+                    </div>
+                    <span class="tit" id="showtime"></span>
+                </div>
+                <div class="m_content">
+
+                    <div class="sb_tit" style="height:50px;">
+                        <p id="showname" style="float:left;line-height:50px;margin:0;font-size:0.32rem;font-family: SourceHanSansCN-Regular;color: #CDDDF3;letter-spacing: 0;"></p>
+
+                    </div>
+                    <div style="color:#CDDDF3;border-bottom:1px dotted #1B3150;">填报人：<span id="tbr"></span></div>
+
+                    <div class="gjdata">
+                        <div class="data_wrap" id="listdata">
+                            <!-- <a href="./order/orderdetail_gj.html" class="datalista">
+                                <span class="dataleft">01021</span>
+                                <span class="dataright">
+                                    <span class="dataleft">工单巡检</span>
+                                    <span class="readyaccept">待填报</span>
+                                    <span class="dataicon">
+                                        <img src="./images/arrowsr.svg" alt="" />
+                                    </span>
+                                </span>
+                            </a>
+                            <a href="order/orderdetail_fj.html" class="datalista">
+                                <span class="dataleft">01022</span>
+                                <span class="dataright">
+                                    <span class="dataleft">运维工单</span>
+                                    <span class="alreadydone">已完成</span>
+                                    <span class="dataicon">
+                                        <img src="./images/arrowsr.svg" alt="" />
+                                    </span>
+                                </span>
+                            </a>
+                            <a href="" class="datalista">
+                                <span class="dataleft">01023</span>
+                                <span class="dataright">
+                                    <span class="dataleft">系统运维</span>
+                                    <span class="bedoing">进行中</span>
+                                    <span class="dataicon">
+                                        <img src="./images/arrowsr.svg" alt="" />
+                                    </span>
+                                </span>
+                            </a> -->
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        (function (win, doc) {
+            var docEl = doc.documentElement || document.body; //获取HTML标签
+
+            var container = doc.getElementById("container"); //container元素
+            //判断是移动端设备还是PC,移动 就采用'orientationchange',横竖屏事件，PC端就采用onresize，窗口改变时间
+            var resize =
+                "onorientationchange" in win ? "orientationchange" : "resize";
+
+            function rem() {
+                docEl.style.fontSize = 100 * (container.clientWidth / 750) + "px";
+            }
+
+            //监听'DOMContent事件:DOM加载完成执行,如果DOMContent事件，那么执行rem函数
+            doc.addEventListener("DOMContentLoaded", rem, false);
+
+            //win下监听resize事件,如果resize事件，那么执行rem函数
+            win.addEventListener(resize, rem, false);
+        })(window, document);
+    </script>
+    <!-- js -->
+    <script type="text/javascript" src="../../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/mobiscroll.custom.min.js"></script>
+    <!-- <script type="text/javascript" src="../../layui/layui.js"></script> -->
+    <script type="text/javascript" src="../../layer/layer.js"></script>
+    
+    <script>
+        $(document).ready(function () {
+
+            var projectID = GetQueryString('projectID');
+            var projectName = GetQueryString('projectName');
+            var projecttime = GetQueryString('projecttime');
+            var inspectionOrderID = GetQueryString('inspectionOrderID');
+            $("#showtime").html(projecttime);
+            $("#showname").html(projectName);
+
+
+            
+
+            $.ajax({
+                url: "http://112.74.169.99:21021/api/services/app/DevOpsService/GetInspectionOrder?id=" + inspectionOrderID,
+                type: "get",
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                    xhr.setRequestHeader(
+                        "Accept",
+                        "application/json, text/plain, */*"
+                    );
+                },
+                success: function (res) {
+
+                    
+
+                    // 填报人
+                    $("#tbr").html(` `);
+                    $("#tbr").html( res.result.remark1 );
+
+                    window.localStorage.setItem('donelocal',res.result.contant);
+                    var contant = JSON.parse(res.result.contant);
+                    $("#listdata").html(` `);
+                    $("#listdata").html( eachdata(projectID,contant) );
+                    
+                    
+
+                    var uplodfile = JSON.parse(res.result.contant).uploadfile;
+                    if(uplodfile.length>0){
+                        $("#listdata").after( eachfile(uplodfile) )
+                    }
+
+                    console.log("请求成功");
+                    
+                },
+                error: function (err) {
+                    console.log("请求失败");
+                }
+            });
+
+            $("#back").click(function(){
+                window.location.href =  "../project_loglist.html?projectid=" + projectID + "&projectname=" + projectName;
+            });
+
+
+            // 遍历数据
+            function eachdata(projectID,contant) {
+                var str = '';
+                for(var j=0;j<11;j++){
+                    str += `<a href="` + `./device_detail_show.html?projectID=` + projectID;
+                    var devicesnum = "devices" + j;
+                    if(j==0){
+                        str += `&name=柴油机&storage=` + devicesnum + `" class="datalista"><span class="dataleft">柴油机</span><span class="dataright">`;
+                    }else if(j==1){
+                        str += `&name=储能系统(含PCS)&storage=` + devicesnum + `" class="datalista"><span class="dataleft">储能系统(含PCS)</span><span class="dataright">`;
+                    }else if(j==2){
+                        str += `&name=智能配电柜(内部)&storage=` + devicesnum + `" class="datalista"><span class="dataleft">智能配电柜(内部)</span><span class="dataright">`;
+                    }else if(j==3){
+                        str += `&name=智能配电柜(外部)&storage=` + devicesnum + `" class="datalista"><span class="dataleft">智能配电柜(外部)</span><span class="dataright">`;
+                    }else if(j==4){
+                        str += `&name=智能控制柜(EMS)&storage=` + devicesnum + `" class="datalista"><span class="dataleft">智能控制柜(EMS)</span><span class="dataright">`;
+                    }else if(j==5){
+                        str += `&name=集装箱&storage=` + devicesnum + `" class="datalista"><span class="dataleft">集装箱</span><span class="dataright">`;
+                    }else if(j==6){
+                        str += `&name=外部电缆&storage=` + devicesnum + `" class="datalista"><span class="dataleft">外部电缆</span><span class="dataright">`;
+                    }else if(j==7){
+                        str += `&name=油箱及配套设施&storage=` + devicesnum + `" class="datalista"><span class="dataleft">油箱及配套设施</span><span class="dataright">`;
+                    }else if(j==8){
+                        str += `&name=视频监控&storage=` + devicesnum + `" class="datalista"><span class="dataleft">视频监控</span><span class="dataright">`;
+                    }else if(j==9){
+                        str += `&name=变压器及其他&storage=` + devicesnum + `" class="datalista"><span class="dataleft">变压器及其他</span><span class="dataright">`;
+                    }
+                    else if(j==10){
+                        str += `&name=全站场地&storage=` + devicesnum + `" class="datalista"><span class="dataleft">全站场地</span><span class="dataright">`;
+                    }
+
+                    if( JSON.parse(contant[devicesnum]).applyto == 'yes' ){
+                        str += `<span class="alreadydone">适用</span>`;
+                        if( JSON.parse(contant[devicesnum]).normalto == 'yes' ){
+                            str += `<span class="alreadydone">正常</span>`;
+                        }else if( JSON.parse(contant[devicesnum]).normalto == 'no' ){
+                            str += `<span class="readyaccept">不正常</span>`;
+                        }
+                    }else if( JSON.parse(contant[devicesnum]).applyto == 'no' ){
+                        str += `<span class="readyaccept">不适用</span>`;
+                    }
+                    str += `<span class="dataicon"><img src="../../images/arrowsr.svg" alt="" /></span></span></a>`;
+                }
+                return str;
+            }
+
+            function eachfile(uplodfile){
+                var str = '';
+
+                str += `<div class="upfile">已上传附件</div>`;
+                str += `<div class="span_wrap">`;
+                for(var k=0;k<uplodfile.length;k++){
+                    str += `<span onclick="window.location.href='http://112.74.169.99:21021/Temp/Upload/` + uplodfile[k][0] + `'">` + uplodfile[k][0] + `</span>`;
+                }
+                str += `</div>`;
+
+                return str;
+
+            }
+
+
+        });
+        
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <!--如果是IE 就以标准渲染-->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <!-- 视窗——————响应式布局 -->
+  <meta name='viewport' content='width=device-width,initial-scale=1.0,maximum-scale=5.0,user-scalable=yes'>
+  <!-- <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" /> -->
+  <!--当前页面的三要素-->
+  <title>运维系统</title>
+  <meta name="description" content="聚能优电" />
+  <meta http-equiv="keywords" content="聚能优电" />
+  <!-- 登录拦截函数 -->
+  <script type="text/javascript" src="./js/verify.js"></script>
+  <!-- js公共函数 -->
+  <script type="text/javascript" src="./js/common/commonfuntion.js"></script>
+  <!-- css -->
+  <link rel="stylesheet" type="text/css" href="./css/common/common.css" />
+  <link rel="stylesheet" type="text/css" href="./css/index.css" />
+  <style>
+    .innerwrap li #ywnum {
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      width: 22px;
+      height: 22px;
+      line-height: 22px;
+      text-align: center;
+      border-radius: 100%;
+      background: #FF1E4D;
+      color: #fff;
+      font-size: 12px;
+      transform: scale(0.8);
+      letter-spacing: 1px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container" class="index">
+    <div class="index_01">
+      <!--主屏内容-->
+      <div class="index_screen">
+        <!--头部-->
+        <div class="top_bg" id="top_bg">
+          <div class="top_main">
+            <div class="logo">
+              <img src="./images/logo.svg" alt="">
+            </div>
+            <div class="menumore">
+              <div class="user_img" id="logout">
+                <img src="images/head.svg" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <select name="" id="selectpj" class="arrowdown">
+            <!-- <option value="0">全部项目</option>
+            <option value="">项目一</option>
+            <option value="">项目二</option> -->
+          </select>
+        </div>
+        <!-- 实时功率 -->
+        <div class="ssgl">
+          <p>实时负载功率</p>
+          <div class="c_number">
+            <div><span>0</span></div>
+            <div><span>0</span></div>
+            <div><span>0</span></div>
+            <div><span>.</span></div>
+            <div><span>0</span></div>
+            <div><span>0</span></div>
+            <div><span>kW</span></div>
+          </div>
+        </div>
+        <!-- 其他三个参数 -->
+        <div class="qtsg">
+          <ul>
+            <li>
+              <p style="text-align:center;">运行电站数</p>
+              <div class="qtdiv" id="yxdzs" style="text-align:center;">0</div>
+            </li>
+            <li>
+              <div class="divborder">
+              </div>
+              <div class="divcon">
+                <p>总用电量(MWh)</p>
+                <div class="qtdiv" id="zfdl">0000.00</div>
+              </div>
+            </li>
+            <li>
+              <p>当日用电量(kWh)</p>
+              <div class="qtdiv" id="jrfdl">0000.00</div>
+            </li>
+          </ul>
+        </div>
+        <div class="innerwrap" id="contentWrap">
+          <ul>
+            <li onClick="window.location.href='mainmonitor.html'">
+              <div class="zhjk xmfenlei">
+                <img src="./images/zhjk.svg" alt="" />
+                <p>综合监控</p>
+              </div>
+            </li>
+            <li onClick="window.location.href='history.html'">
+              <div class="lsqx xmfenlei">
+                <img src="./images/lsqx.svg" alt="" />
+                <p>历史曲线</p>
+              </div>
+            </li>
+          </ul>
+          <ul>
+            <li onClick="window.location.href='alarm.html'">
+              <div class="gjjl xmfenlei">
+                <img src="./images/gjjl.svg" alt="" />
+                <p>告警记录</p>
+              </div>
+            </li>
+            <li onClick="window.location.href='order.html'">
+              <div id="ywnum"></div>
+              <div class="ywgd xmfenlei">
+                <img src="./images/ywgd.svg" alt="" />
+                <p>运维管理</p>
+              </div>
+            </li>
+          </ul>
+          <ul>
+            <li onClick="window.location.href='videomonitor.html'">
+              <div class="zhjk xmfenlei">
+                <img src="./images/spjk.svg" alt="" />
+                <p>视频监控</p>
+              </div>
+            </li>
+            <li onClick="window.location.href='datastatics.html'">
+              <div class="zhjk xmfenlei">
+                <img src="./images/sjtj.svg" alt="" />
+                <p>数据统计</p>
+              </div>
+            </li>
+          </ul>
+          <ul>
+            <li id="cwtj" onClick="window.location.href='promanage.html'">
+              <div class="zhjk xmfenlei">
+                <img src="./images/xmgl.svg" alt="" />
+                <p>项目管理</p>
+              </div>
+            </li>
+            <li onClick="window.location.href='assetmain.html'">
+              <div class="zhjk xmfenlei">
+                <img src="./images/zcgl.svg" alt="" />
+                <p>资产管理</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function (win, doc) {
+      var docEl = doc.documentElement || document.body; //获取HTML标签
+      var container = doc.getElementById("container"); //container元素
+      //判断是移动端设备还是PC,移动 就采用'orientationchange',横竖屏事件，PC端就采用onresize，窗口改变时间
+      var resize = "onorientationchange" in win ? "orientationchange" : "resize";
+
+      function rem() {
+        docEl.style.fontSize = 100 * (container.clientWidth / 750) + "px";
+      }
+      //监听'DOMContent事件:DOM加载完成执行,如果DOMContent事件，那么执行rem函数
+      doc.addEventListener("DOMContentLoaded", rem, false);
+      //win下监听resize事件,如果resize事件，那么执行rem函数
+      win.addEventListener(resize, rem, false);
+    })(window, document);
+  </script>
+  <!-- js -->
+  <script type="text/javascript" src="./js/jquery-3.4.1.js"></script>
+  <script type="text/javascript" src="./layer/layer.js"></script>
+  <script>
+    $(document).ready(function () {
+      var params = {
+        userNameOrEmailAddress: window.localStorage.getItem("useraccount"),
+        password: window.localStorage.getItem("password"),
+        rememberClient: false
+      };
+      params = JSON.stringify(params);
+      $.ajax({
+        url: "http://112.74.169.99:21021/api/TokenAuth/Authenticate",
+        data: params,
+        type: "post",
+        dataType: "json",
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader("Content-Type", "application/json");
+          xhr.setRequestHeader("Accept", "application/json, text/plain, */*");
+        },
+        success: function (res) {
+          if (res.success) {
+            window.localStorage.setItem("accessToken", res.result.accessToken);
+          }
+        },
+        error: function (res) {
+          window.location.href = "login.html";
+        }
+      })
+      var contentWrap = $("#contentWrap").html;
+      var thelimits = window.localStorage.getItem("surname");
+      if (thelimits == 1) {
+        $("#contentWrap").html(' ');
+        $("#contentWrap").html(`<ul>
+            <li onClick="window.location.href='mainmonitor.html'">
+              <div class="zhjk xmfenlei">
+                <img src="./images/zhjk.svg" alt="" />
+                <p>综合监控</p>
+              </div>
+            </li>
+
+            <li onClick="window.location.href='history.html'">
+              <div class="lsqx xmfenlei">
+                <img src="./images/lsqx.svg" alt="" />
+                <p>历史曲线</p>
+              </div>
+            </li>
+          </ul>
+          <ul>
+            <li onClick="window.location.href='alarm.html'">
+              <div class="gjjl xmfenlei">
+                <img src="./images/gjjl.svg" alt="" />
+                <p>告警记录</p>
+              </div>
+            </li>
+            <li onClick="window.location.href='order.html'">
+              <div id="ywnum"></div>
+              <div class="ywgd xmfenlei">
+                <img src="./images/ywgd.svg" alt="" />
+                <p>运维管理</p>
+              </div>
+            </li>
+          </ul>
+
+          <ul>
+            <li onClick="window.location.href='videomonitor.html'">
+              <div class="zhjk xmfenlei">
+                <img src="./images/spjk.svg" alt="" />
+                <p>视频监控</p>
+              </div>
+            </li>
+          </ul>`);
+      } else if (thelimits != 1 && thelimits != 0) {
+        $("#contentWrap").html(' ');
+        $("#contentWrap").html(`<ul>
+            <li onClick="window.location.href='mainmonitor.html'">
+              <div class="zhjk xmfenlei">
+                <img src="./images/zhjk.svg" alt="" />
+                <p>综合监控</p>
+              </div>
+            </li>
+
+            <li onClick="window.location.href='history.html'">
+              <div class="lsqx xmfenlei">
+                <img src="./images/lsqx.svg" alt="" />
+                <p>历史曲线</p>
+              </div>
+            </li>
+          </ul>`);
+      }
+      $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "http://112.74.169.99:21021/api/services/app/DevOpsService/GetUndoOrderCount?userid=" + userid,
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+          xhr.setRequestHeader("Authorization", accessToken);
+          xhr.setRequestHeader('.AspNetCore.Culture', 'zh-Hans');
+        },
+        success: function (res) {
+          if (res.success) {
+            if (res.result == 0) {
+              $("#ywnum").css("display", "none");
+            } else {
+              $("#ywnum").html(" ");
+              $("#ywnum").html(res.result);
+            }
+          }
+        },
+        error: function (err) {
+          console.log("项目数据请求失败");
+        }
+      });
+      $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "http://112.74.169.99:21021/api/services/app/ProjectService/GetProjectInfosByUserid?userid=" +
+          userid,
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+          xhr.setRequestHeader("Authorization", accessToken);
+          xhr.setRequestHeader('.AspNetCore.Culture', 'zh-Hans');
+        },
+        success: function (res) {
+          var onoff = 0;
+          var defaulttimer;
+          var changetimer;
+          $("#selectpj").html(' ');
+          $("#selectpj").html(eachproject(res.result));
+          // 获取项目数据
+          if (onoff == 0) {
+            // 首次进入页面 渲染项目个数 请求用户的所有项目数据的参数
+            var defaultid = $("#selectpj option:selected").attr('value');
+            updateData(); // 首次加载立即请求数据
+            defaulttimer = setInterval(updateData, 1000); // 首次加载之后，每1s重新请求一次数据
+            function updateData() { // 请求数据
+              $.ajax({
+                type: "get",
+                dataType: "json",
+                url: 'http://112.74.169.99:21021/api/TokenAuth/GetAppIndexData?id=' + defaultid +
+                  '&userid=' + userid,
+                success: function (res) {
+                  var realpower0 = commonfomat5(res.result.realpower).split(''); // 实时功率
+                  var numpj0 = res.result.projectnum; // 运行电站数
+                  var tgeneration0 = commonfomat2(res.result.tgeneration); // 总用电量
+                  var dgeneration0 = commonfomat2(res.result.dgeneration); // 当日用电量
+                  // 初始化 清空数据
+                  $(".ssgl span").get(0).innerHTML = ' ';
+                  $(".ssgl span").get(1).innerHTML = ' ';
+                  $(".ssgl span").get(2).innerHTML = ' ';
+                  $(".ssgl span").get(3).innerHTML = ' ';
+                  $(".ssgl span").get(4).innerHTML = ' ';
+                  $(".ssgl span").get(5).innerHTML = ' ';
+                  if (realpower0[5] == '.') {
+                    $(".ssgl span").get(0).innerHTML = '0';
+                    $(".ssgl span").get(1).innerHTML = realpower0[0];
+                    $(".ssgl span").get(2).innerHTML = realpower0[1];
+                    $(".ssgl span").get(3).innerHTML = realpower0[2];
+                    $(".ssgl span").get(4).innerHTML = realpower0[3];
+                    $(".ssgl span").get(5).innerHTML = realpower0[4];
+                  } else {
+                    if (realpower0[1] == '.') {
+                      $(".ssgl span").get(0).innerHTML = '0';
+                      $(".ssgl span").get(1).innerHTML = '0';
+                      $(".ssgl span").get(2).innerHTML = realpower0[0];
+                      $(".ssgl span").get(3).innerHTML = realpower0[1];
+                      $(".ssgl span").get(4).innerHTML = realpower0[2];
+                      $(".ssgl span").get(5).innerHTML = realpower0[3];
+                    } else if (realpower0[2] == '.') {
+                      $(".ssgl span").get(0).innerHTML = '0';
+                      $(".ssgl span").get(1).innerHTML = realpower0[0];
+                      $(".ssgl span").get(2).innerHTML = realpower0[1];
+                      $(".ssgl span").get(3).innerHTML = realpower0[2];
+                      $(".ssgl span").get(4).innerHTML = realpower0[3];
+                      $(".ssgl span").get(5).innerHTML = realpower0[4];
+                    } else {
+                      $(".ssgl span").get(0).innerHTML = realpower0[0];
+                      $(".ssgl span").get(1).innerHTML = realpower0[1];
+                      $(".ssgl span").get(2).innerHTML = realpower0[2];
+                      $(".ssgl span").get(3).innerHTML = realpower0[3];
+                      $(".ssgl span").get(4).innerHTML = realpower0[4];
+                      $(".ssgl span").get(5).innerHTML = realpower0[5];
+                    }
+                  }
+                  $("#yxdzs").html(numpj0); // 运行电站数
+                  $("#zfdl").html(tgeneration0); // 总用电量
+                  $("#jrfdl").html(dgeneration0); // 当日用电量
+                },
+                error: function (err) {
+                  console.log("首页数据 请求失败");
+                }
+              });
+            }
+          }
+          // 下拉框下拉选择操作
+          $("#selectpj").change(function () {
+            // console.log($(this));
+            onoff = 1;
+            clearInterval(defaulttimer);
+            clearInterval(changetimer);
+            var optionschangeid = $("#selectpj option:selected").attr('value');
+            updateChangeData(); // 首次加载立即请求数据
+            changetimer = setInterval(updateChangeData, 1000); // 首次加载之后，每1s重新请求一次数据
+            function updateChangeData() {
+              $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: 'http://112.74.169.99:21021/api/TokenAuth/GetAppIndexData?id=' +
+                  optionschangeid + '&userid=' + userid,
+                beforeSend: function (xhr) {
+                  xhr.setRequestHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+                  xhr.setRequestHeader("Authorization", accessToken);
+                  xhr.setRequestHeader('.AspNetCore.Culture', 'zh-Hans');
+                },
+                success: function (res) {
+                  var realpower = commonfomat5(res.result.realpower).split(''); // 实时功率
+                  var numpj = res.result.projectnum; // 运行电站数
+                  var dgeneration = commonfomat2(res.result.dgeneration); // 当日发电量
+                  var tgeneration = commonfomat2(res.result.tgeneration); // 总发电量
+                  // 初始化 清空数据
+                  $(".ssgl span").get(0).innerHTML = ' ';
+                  $(".ssgl span").get(1).innerHTML = ' ';
+                  $(".ssgl span").get(2).innerHTML = ' ';
+                  $(".ssgl span").get(3).innerHTML = ' ';
+                  $(".ssgl span").get(4).innerHTML = ' ';
+                  $(".ssgl span").get(5).innerHTML = ' ';
+                  if (realpower[5] == '.') {
+                    $(".ssgl span").get(0).innerHTML = '0';
+                    $(".ssgl span").get(1).innerHTML = realpower[0];
+                    $(".ssgl span").get(2).innerHTML = realpower[1];
+                    $(".ssgl span").get(3).innerHTML = realpower[2];
+                    $(".ssgl span").get(4).innerHTML = realpower[3];
+                    $(".ssgl span").get(5).innerHTML = realpower[4];
+                  } else {
+                    if (realpower[1] == '.') {
+                      $(".ssgl span").get(0).innerHTML = '0';
+                      $(".ssgl span").get(1).innerHTML = '0';
+                      $(".ssgl span").get(2).innerHTML = realpower[0];
+                      $(".ssgl span").get(3).innerHTML = realpower[1];
+                      $(".ssgl span").get(4).innerHTML = realpower[2];
+                      $(".ssgl span").get(5).innerHTML = realpower[3];
+                    } else if (realpower[2] == '.') {
+                      $(".ssgl span").get(0).innerHTML = '0';
+                      $(".ssgl span").get(1).innerHTML = realpower[0];
+                      $(".ssgl span").get(2).innerHTML = realpower[1];
+                      $(".ssgl span").get(3).innerHTML = realpower[2];
+                      $(".ssgl span").get(4).innerHTML = realpower[3];
+                      $(".ssgl span").get(5).innerHTML = realpower[4];
+                    } else {
+                      $(".ssgl span").get(0).innerHTML = realpower[0];
+                      $(".ssgl span").get(1).innerHTML = realpower[1];
+                      $(".ssgl span").get(2).innerHTML = realpower[2];
+                      $(".ssgl span").get(3).innerHTML = realpower[3];
+                      $(".ssgl span").get(4).innerHTML = realpower[4];
+                      $(".ssgl span").get(5).innerHTML = realpower[5];
+                    }
+                  }
+                  $("#yxdzs").html(numpj); // 运行电站数
+                  $("#zfdl").html(tgeneration); // 总用电量
+                  $("#jrfdl").html(dgeneration); // 当日用电量
+                },
+                error: function (res) {
+                  console.log("切换设备数据 请求失败");
+                }
+              })
+            }
+          });
+        },
+        error: function (err) {
+          console.log("项目数据请求失败");
+        }
+      });
+      $("#logout").click(function () {
+        layer.confirm('确定要退出吗？', {
+          title: "退出框",
+          btn: ['确定', '取消'] //按钮
+        }, function (index) {
+          window.localStorage.removeItem('accessToken');
+          window.localStorage.removeItem('userName');
+          window.localStorage.removeItem('name');
+          window.localStorage.removeItem('id');
+          window.localStorage.removeItem('surname');
+          // localStorage.clear();
+          layer.close(index);
+          layer.msg('退出成功', {
+            icon: 1,
+            time: 1000 //1秒关闭（如果不配置，默认是3秒）
+          }, function () {
+            window.location.href = 'login.html';
+          });
+        });
+      });
+      // 四舍五入到小数点后两位
+      function changeTwoDecimal(x) {
+        var f_x = parseFloat(x);
+        if (isNaN(f_x)) {
+          alert('function:changeTwoDecimal->parameter error');
+          return false;
+        }
+        f_x = Math.round(f_x * 100) / 100;
+        return f_x;
+      }
+      // 小数点后两位补0
+      function getFloatStr(num) {
+        num += '';
+        num = num.replace(/[^0-9|\.]/g, ''); //清除字符串中的非数字非.字符
+        if (/^0+/) //清除字符串开头的0
+          num = num.replace(/^0+/, '');
+        if (!/\./.test(num)) //为整数字符串在末尾添加.00
+          num += '.00';
+        if (/^\./.test(num)) //字符以.开头时,在开头添加0
+          num = '0' + num;
+        num += '00'; //在字符串末尾补零
+        num = num.match(/\d+\.\d{2}/)[0];
+        return num;
+      };
+      // 运维工单
+      // $("#ywgd").click(function () {
+      //   layer.msg('在开发中...', {
+      //     icon: 5,
+      //     time: 1000 //2秒关闭（如果不配置，默认是3秒）
+      //   });
+      // });
+      // 数据统计
+      // $("#sjtj").click(function () {
+      //   layer.msg('在开发中...', {
+      //     icon: 5,
+      //     time: 1000 //2秒关闭（如果不配置，默认是3秒）
+      //   });
+      // });
+      // 财务统计
+      // $("#cwtj").click(function () {
+      //   layer.msg('在开发中...', {
+      //     icon: 5,
+      //     time: 1000 //2秒关闭（如果不配置，默认是3秒）
+      //   });
+      // });
+      function eachproject(obj) {
+        var str = '';
+        if (obj.constructor == Array) {
+          str += `<option value="0">全部项目</option>`;
+          for (var i = 0, len = obj.length; i < len; i++) {
+            str += `<option value="` + obj[i].id + `">` + obj[i].projectNameCN + `</option>`;
+          }
+          return str;
+        }
+      }
+      // 判断是否有小数点
+      function isDot(num) {
+        var result = (num.toString()).indexOf(".");
+        if (result != -1) {
+          // alert("含有小数点");
+          return true;
+        } else {
+          // alert("不含小数点");
+          return false;
+        }
+      }
+      // 小数点后两位补0
+      function getFloatStr(num) {
+        num += '';
+        num = num.replace(/[^0-9|\.]/g, ''); //清除字符串中的非数字非.字符
+        if (/^0+/) //清除字符串开头的0
+          num = num.replace(/^0+/, '');
+        if (!/\./.test(num)) //为整数字符串在末尾添加.00
+          num += '.00';
+        if (/^\./.test(num)) //字符以.开头时,在开头添加0
+          num = '0' + num;
+        num += '00'; //在字符串末尾补零
+        num = num.match(/\d+\.\d{2}/)[0];
+        return num;
+      };
+      // 四舍五入到小数点后两位
+      function changeTwoDecimal(x) {
+        var f_x = parseFloat(x);
+        if (isNaN(f_x)) {
+          alert('function:changeTwoDecimal->parameter error');
+          return false;
+        }
+        f_x = Math.round(f_x * 100) / 100;
+        return f_x;
+      }
+
+      function getFloat5(x) {
+        if (x != '.') {
+          var f = Math.round(x * 100000) / 100000;
+          var s = f.toString();
+          var rs = s.indexOf('.');
+          if (rs <= 0) {
+            rs = s.length;
+            s += '.';
+          }
+          while (s.length <= rs + 5) {
+            s += '0';
+          }
+          return s;
+        } else {
+          return '000.00';
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

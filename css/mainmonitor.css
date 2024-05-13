@@ -1,0 +1,261 @@
+@charset "utf-8";
+
+#container.mainmonitor {
+  max-width: 750px;
+  height: 100%;
+  margin: auto;
+  overflow-x: hidden;
+  background-color: rgb(0, 28, 65);
+  /*解决ios上滑动不流畅*/
+  -webkit-overflow-scrolling: touch;
+}
+
+#container.mainmonitor::-webkit-scrollbar {
+  /*隐藏滚轮*/
+  display: none;
+  width: 0px;
+}
+
+#container .mainmonitor_01 {
+  height: 100%;
+  width: 100%;
+}
+
+/*主屏幕*/
+.mainmonitor_screen {
+  height: 100%;
+  margin: 0 5%;
+  width: 90%;
+  position: relative;
+  overflow-x: hidden;
+  /*解决ios上滑动不流畅*/
+  -webkit-overflow-scrolling: touch;
+}
+
+.mainmonitor_screen::-webkit-scrollbar {
+  /*隐藏滚轮*/
+  display: none;
+  width: 0px;
+}
+
+
+/* 题目 */
+.mainmonitor_screen .m_title {
+  position: fixed;
+  width: 90%;
+  height: 0.6rem;
+  top: 0;
+  left: 0;
+  font-weight: bolder;
+  font-size: 0.36rem;
+  padding: 0.5rem 5% 0.4rem 5%;
+  z-index: 5;
+  letter-spacing: 2.25px;
+  color: #fff;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  background-color: rgb(0, 28, 65);
+}
+
+.mainmonitor_screen .m_title .back {
+  height: 70%;
+  margin-right: 0.4rem;
+}
+
+.mainmonitor_screen .m_title .back img {
+  height: 100%;
+}
+
+
+/* 项目列表 */
+.mainmonitor_screen .m_list {
+  margin-top: 1.55rem;
+  width: 100%;
+}
+
+.mainmonitor_screen .m_list .l_con {
+  padding: 10px 20px 20px;
+  box-shadow: 0 6px 12px 0 rgba(0, 16, 40, 0.33);
+  background: #112957;
+  margin:0 0 4% 0;
+  border-radius: 4px;
+  
+}
+.mainmonitor_screen .m_list .l_con.l_list{
+  position:relative;
+}
+
+.mainmonitor_screen .m_list .l_con.alldata ul{
+  width:100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* alldata */
+.mainmonitor_screen .m_list .l_con.alldata ul li{
+  flex:1;
+}
+.mainmonitor_screen .m_list .l_con.alldata ul li p{
+  height: auto;
+  font-family: MicrosoftYaHei;
+  font-size: 12px;
+  color: #435A7A;
+  letter-spacing: 0.75px;
+}
+.mainmonitor_screen .m_list .l_con.alldata ul.alldata{
+  margin-bottom:15px;
+  font-weight: bold;
+}
+
+
+.mainmonitor_screen .m_list .l_con.alldata ul.listxm{
+  margin-bottom:15px;
+  margin-top:10px;
+}
+
+
+.mainmonitor_screen .m_list .l_con.alldata ul li .ztdiv{
+  height: auto;
+  font-family: MicrosoftYaHei;
+  font-size: 12px;
+  color: #CDDDF3;
+  letter-spacing: 0.75px;
+  margin-top:5px;
+}
+
+.mainmonitor_screen .m_list .l_con .xmlist {
+  width: 100%;
+  font-size: 0.28rem;
+  color: #0167ff;
+  height: 0.65rem;
+  letter-spacing: 1.75px;
+  
+}
+.mainmonitor_screen .m_list .l_con .xmicon{
+  position: absolute;
+  width:5px;
+  line-height: 0.7rem;
+  height:0.7rem;
+  left:0;
+  top:12px;
+  display: flex;
+  align-items: center;
+  
+}
+
+.mainmonitor_screen .m_list .l_con .xmicon .xmcon{
+  background: #0167FF;
+  width:100%;
+  height:18px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.mainmonitor_screen .m_list .l_con .xmtit {
+  line-height: 0.7rem;
+  font-family: MicrosoftYaHei;
+  font-size: 16px;
+  color: #D0E0FF;
+  letter-spacing: 2px;
+  /* padding:5px; */
+  margin-bottom: 15px;
+}
+
+
+
+.mainmonitor_screen .m_list .l_con .xmdata {
+  width: 100%;
+  height: 0.8rem;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  color: #666;
+  font-size: 0.32rem;
+  
+}
+
+.mainmonitor_screen .m_list .l_con .xmdata .a_con{
+  font-family: MicrosoftYaHei;
+  font-size: 14px;
+  color: #66768D;
+  letter-spacing: 0.35px;
+
+}
+
+.mainmonitor_screen .m_list .l_con.l_list .xmdata{
+  border-top: 1px dashed #203C71;
+  padding-top:10px;
+}
+
+.mainmonitor_screen .m_list .l_con .xmdata span {
+  margin-right: 0.5rem;
+  font-size: 0.28rem;
+  color: #7F94B2;
+  letter-spacing: 0;
+}
+
+
+
+.mainmonitor_screen .m_list .l_con .xmdata span.d_status {
+  padding: 0.05rem 0.2rem;
+  border-radius: 10px;
+  letter-spacing: 0.03rem;
+  color: #fff;
+  font-size: 0.24rem;
+}
+
+.mainmonitor_screen .m_list .l_con .xmdata span.d_status.normal {
+  background: #13E285;
+}
+
+.mainmonitor_screen .m_list .l_con .xmdata span.d_status.unnormal {
+  background: #d42c2c;
+}
+
+.mainmonitor_screen .m_list .l_con .xmdata span.d_status.unstart {
+  background: #d0d062;
+}
+
+.mainmonitor_screen .m_list .l_con .xmaddress {
+  width: 100%;
+  height: 0.8rem;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  color: #666;
+  opacity: 0.8;
+  font-size: 0.4rem;
+}
+
+.mainmonitor_screen .m_list .l_con .xmaddress div {
+
+  margin-right: 0.2rem;
+  font-size: 0.3rem;
+  color: #66768D;
+  letter-spacing: 0.35px;
+
+}
+
+.mainmonitor_screen .m_list .l_con .xmaddress img {
+  width: 0.3rem;
+  margin-top: 0.1rem;
+}
+
+.mainmonitor_screen .m_list .l_con .xmdetail {
+  width: 100%;
+  position: relative;
+  height: 0.9rem;
+  padding-top: 0.4rem;
+}
+
+.mainmonitor_screen .m_list .l_con .xmdetail p {
+  position: absolute;
+  color: #fff;
+  padding: 0.15rem 0.4rem;
+  border: 1px solid rgba(1,103,255,0.3);
+  border-radius: 31px;
+  font-family: MicrosoftYaHei;
+  font-size: 14px;
+  color: #0167FF;
+  letter-spacing: 1.75px;
+  }

@@ -1,0 +1,2241 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <!--如果是IE 就以标准渲染-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <!-- 视窗——————响应式布局 -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+
+    <!--当前页面的三要素-->
+    <title>运维系统</title>
+    <meta name="description" content="聚能优电" />
+    <meta http-equiv="keywords" content="聚能优电" />
+    <script type="text/javascript" src="./js/verify.js"></script>
+    <script type="text/javascript" src="./js/common/commonfuntion.js"></script>
+
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=7a44cb76d3cf44a85fe8394f46048349&plugin=AMap.Geocoder"></script>
+    <!-- css -->
+    <!-- <link rel="stylesheet" type="text/css" href="./css/ywzt.css" /> -->
+    <link rel="stylesheet" type="text/css" href="./css/common/common.css" />
+    <link rel="stylesheet" type="text/css" href="./css/jquery-accordion-menu.css" />
+    <link rel="stylesheet" type="text/css" href="./css/mainmonitor_sz.css" />
+    <style>
+
+        #ywnum  #ywnumwrap.ywnum{
+            width:100%;
+            font-size:0px;
+        }
+        #ywnum  #ywnumwrap.ywnum p{
+            font-size: 12px;
+            display:inline-block;
+            width:50%;
+        }
+        #ywnum  #ywnumwrap.ywnum p span{
+            display:inline-block;
+            font-size: 12px;
+            height:30px;
+            line-height:30px;
+            font-weight: bold;
+            font-family: MicrosoftYaHei;
+            color: #CDDDF3;
+        }
+        #ywnum  #ywnumwrap.ywnum p span:first-child{
+            margin-left: 5px;
+            width:35%;
+        }
+
+    </style>
+    
+
+</head>
+
+<body>
+    <div id="container" class="mainmonitor_sz">
+        <div class="mainmonitor_sz_01">
+            <!--主屏内容-->
+            <div class="mainmonitor_sz_screen">
+                <div class="m_title">
+                    <a href="JavaScript:history.go(-1);" class="back">
+                        <img src="./images/back.svg" alt="" />
+                    </a>
+                    <span class="tit" id="projectNameCN"></span>
+                </div>
+
+                <div class="m_content">
+                    <header class="tabHead" id="tabHead">
+                        <span class="active" style="width:25%"><i>项目状态</i></span>
+                        <span style="width:25%"><i>一次系统图</i></span>
+                        <span style="width:25%"><i>数据报表</i></span>
+                    </header>
+                    <article class="khfxWarp khfxWarpaa" id="khfxWarp" style="background: #112957;box-shadow: 0 6px 12px 0 rgba(0,16,40,0.33);border-radius: 4px;">
+                        <div class="khfxPane xmzt khfxPaneaa" id="firstkhfxPane">
+                            <div class="zt1 ztdetail firstdetail" id="ywnum">
+
+                                <div style="font-size: 0.20rem;color: #8a95a5;font-weight: bold;letter-spacing: 0.88px;padding-left:10px;">
+                                    <div id="showadd" style="display:block;"></div>
+                                    <div id="showtime"></div>
+                                </div>
+
+                                <div class="tit_tit" id="tit_tit">
+                                    <img src="./images/titicon.svg" alt="" />
+                                    <span>运维人员</span>
+                                </div>
+                                <div class="ywnum" id="ywnumwrap">
+                                </div>
+                            </div>
+
+
+                            <div class="zt2 ztdetail firstdetail">
+                                
+                                <div class="tit_tit" id="tit_tit">
+                                    <img src="./images/titicon.svg" alt="" />
+                                    <span>数据总览</span>
+                                </div>
+
+                                <ul>
+                                    <li>
+                                        <p>负载功率</p>
+                                        <div class="ztdiv">
+                                            <span id="dbitap0"></span><span>kW</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>当日用电量</p>
+                                        <div class="ztdiv">
+                                            <span id="trrp0"></span><span>kWh</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>发电功率</p>
+                                        <div class="ztdiv">
+                                            <span id="cyjpowerGeneration0">0</span><span>kW</span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <ul>
+                                    <li>
+                                        <p>PCS功率</p>
+                                        <div class="ztdiv">
+                                            <span id="pcstap0"></span><span>kW</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>SOC</p>
+                                        <div class="ztdiv">
+                                            <span id="bmssoc0">0</span><span>%</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>SOH</p>
+                                        <div class="ztdiv">
+                                            <span id="bmssoh0"></span><span>%</span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                            </div>
+
+                            <div class="zt2 ztdetail" style="margin-top: 0.3rem;">
+                                <div class="tit_tit">
+                                    <img src="./images/titicon.svg" alt="" />
+                                    <span>柴油机</span>
+                                </div>
+
+                                <ul>
+                                    <li style="flex-basis: 25%;">
+                                        <p>发电功率</p>
+                                        <div class="ztdiv">
+                                            <span id="powerGeneration">0</span><span>kW</span>
+                                        </div>
+                                    </li>
+
+                                    <li style="flex-basis: 50%;">
+                                        <p>燃油消耗量</p>
+                                        <div class="ztdiv">
+                                            <span id="dPlus">0</span><span>L</span>
+                                        </div>
+                                    </li>
+                                    
+                                    <li style="flex-basis: 25%;">
+                                        <p>油耗</p>
+                                        <div class="ztdiv">
+                                            <span id="na">0</span><span></span>
+                                        </div>
+                                    </li>
+                                    
+                                </ul>
+                                <ul>
+                                    <li style="flex-basis: 25%;">
+                                        <p>燃油位</p>
+                                        <div class="ztdiv">
+                                            <span id="fuelLevel">0</span><span>%</span>
+                                        </div>
+                                    </li>
+                                    <li style="flex-basis: 50%;">
+                                        <p>总发电量</p>
+                                        <div class="ztdiv">
+                                            <span id="positiveKWh">0</span><span>kWh</span>
+                                        </div>
+                                    </li>
+                                    <li style="flex-basis: 25%;">
+                                        <p>功率因素</p>
+                                        <div class="ztdiv">
+                                            <span id="generationPowerFactor"></span><span></span>
+                                        </div>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+
+                            <div class="zt2 ztdetail" style="margin-top: 0.3rem;">
+                                <div class="tit_tit">
+                                    <img src="./images/titicon.svg" alt="" />
+                                    <span>电表</span>
+                                </div>
+
+                                <ul>
+                                    <li>
+                                        <p>总有功功率</p>
+                                        <div class="ztdiv">
+                                            <span id="itap">0</span><span>kW</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>正向有功总电量</p>
+                                        <div class="ztdiv">
+                                            <span id="tpap">0</span><span>kWh</span>
+                                        </div>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+
+                            <div class="zt2 ztdetail" style="margin-top: 0.3rem;">
+                                <div class="tit_tit">
+                                    <img src="./images/titicon.svg" alt="" />
+                                    <span>储能变流器</span>
+                                </div>
+
+                                <ul>
+                                    <li>
+                                        <p>总有功功率</p>
+                                        <div class="ztdiv">
+                                            <span id="tap">0</span><span>kW</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>总视在功率</p>
+                                        <div class="ztdiv">
+                                            <span id="tApparentP">0</span><span>kVA</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>总无功功率</p>
+                                        <div class="ztdiv">
+                                            <span id="trp">0</span><span>kVar</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                
+                            </div>
+
+                            <div class="zt2 ztdetail" style="margin-top: 0.3rem;">
+                                
+                                <div class="tit_tit">
+                                    <img src="./images/titicon.svg" alt="" />
+                                    <span>储能电池</span>
+                                </div>
+                                
+                                <ul>
+                                    <li>
+                                        <p>SOC</p>
+                                        <div class="ztdiv">
+                                            <span id="soc">0</span><span>%</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>总电压</p>
+                                        <div class="ztdiv">
+                                            <span id="group_V">0</span><span>V</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>总电流</p>
+                                        <div class="ztdiv">
+                                            <span id="group_I">0</span><span>A</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="zt2 ztdetail" style="margin-top: 0.3rem;">
+                                <div class="tit_tit">
+                                    <img src="./images/titicon.svg" alt="" />
+                                    <span>温湿度</span>
+                                </div>
+                                
+                                <ul>
+                                    <li>
+                                        <p>EMS温度</p>
+                                        <div class="ztdiv">
+                                            <span id="temperature">0</span><span>℃</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>环境温度</p>
+                                        <div class="ztdiv">
+                                            <span id="environmentalT">0</span><span>℃</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>模块温度</p>
+                                        <div class="ztdiv">
+                                            <span id="cabinetT">0</span><span>℃</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="zt2 ztdetail" style="margin-top: 0.3rem;">
+                                
+                                <div class="tit_tit">
+                                    <img src="./images/titicon.svg" alt="" />
+                                    <span>设备状态</span>
+                                </div>
+                                
+                                <ul>
+                                    <li>
+                                        <p>交流调度</p>
+                                        <div class="ztdiv jldt">
+                                            <span class="onoff" id="jldd"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>直流调度</p>
+                                        <div class="ztdiv">
+                                            <span class="onoff" id="zldd"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>并网</p>
+                                        <div class="ztdiv">
+                                            <span class="onoff" id="bw"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>离网</p>
+                                        <div class="ztdiv">
+                                            <span class="onoff" id="lw"></span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <ul>
+                                    <li>
+                                        <p>等待开机</p>
+                                        <div class="ztdiv jldt">
+                                            <span class="onoff" id="ddkj"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>离网运行</p>
+                                        <div class="ztdiv zldd">
+                                            <span class="onoff" id="lwyx"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>并网切离网</p>
+                                        <div class="ztdiv pcstxzt">
+                                            <span class="onoff" id="bwqlw"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>并网运行</p>
+                                        <div class="ztdiv bmstxzt">
+                                            <span class="onoff" id="bwyx"></span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <ul>
+                                    <li>
+                                        <p>自动模式</p>
+                                        <div class="ztdiv jldt">
+                                            <span class="onoff" id="zdms"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>手动模式</p>
+                                        <div class="ztdiv zldd">
+                                            <span class="onoff" id="sdms"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>紧急停机</p>
+                                        <div class="ztdiv pcstxzt">
+                                            <span class="onoff" id="jjtj"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>保养模式</p>
+                                        <div class="ztdiv bmstxzt">
+                                            <span class="onoff" id="byms"></span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <ul>
+                                    <li>
+                                        <p>分闸运行</p>
+                                        <div class="ztdiv jldt">
+                                            <span class="onoff" id="fzyx"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>合闸运行</p>
+                                        <div class="ztdiv zldd">
+                                            <span class="onoff" id="hzyx"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>停机</p>
+                                        <div class="ztdiv pcstxzt">
+                                            <span class="onoff" id="tj"></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p></p>
+                                        <div class="ztdiv pcstxzt">
+                                            <span class="onoff"></span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                            </div>
+
+                            <div class="ztdetail_wrap" id="ssgl_wrap" style="margin-top:20px;">
+                                <div id="ssfdglqx" style="width:100%;height:250px;" class="charts_div"></div>
+                                <div id="sspcsglqx" style="width:100%;height:250px;" class="charts_div"></div>
+                                <div id="ssfzglqx" style="width:100%;height:250px;" class="charts_div"></div>
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="khfxPane xmzt khfxPaneaa" id="secondkhfxPane">
+                            <div class="formbody">
+                                <div class="layoutmap">
+
+                                    <div class="layoutimage bordernull" title="柴油机" id="cyjclick" style="left:5%; top:5%; width:13.5%;">
+                                        <img src="./images/chaiyoujib.svg" alt="" style="width:100%;position: absolute;left: 50%;top: 50%;transform:
+                                            translate(-50%, -50%);z-index: 2;" />
+                                    </div>
+                                    <div class="infobox chaiyouji" style="left:6%; top:19%;z-index: 2;padding:0;">
+                                        <div class="pcontent">
+                                            <p class="ptitle">U(V):</p>
+                                            <div id="yj_sxdy0"></div>
+                                        </div>
+                                        <div class="pcontent">
+                                            <p class="ptitle">P(kW):</p>
+                                            <div id="yj_rp0"></div>
+                                        </div>
+                                        
+                                        <div class="pcontent">
+                                            <p class="ptitle">频率(Hz):</p>
+                                            <div id="yj_sxpl0"></div>
+                                        </div>
+                                        
+                                    </div>
+
+
+                                    <div id="leftwrap0"></div>
+
+                                    <div onclick="window.location.href='#';" class="layoutimage bordernull" title="负载"
+                                        style="left: 80%; top:5%; width:13.5%;z-index: 2;">
+                                        <img src="./images/fuzaib.svg" alt=""
+                                            style="width:100%;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);" />
+                                    </div>
+
+                                    <div class="infobox mainfuzai" style="left:77%; top:19%;z-index: 2;">
+                                        <div class="pcontent">
+                                            <p class="ptitle">P(kW):</p>
+                                            <div id="load0"></div>
+                                        </div>
+                                    </div>
+
+                                    <div id="leftload_wrap0"></div>
+                                    <div id="rightload_wrap0"></div>
+
+
+                                    <div id="pcs00"></div>
+
+
+                                    <div class="layoutimage bordernull" title="PCS"
+                                        style="left:44%; top:25%; width:13.5%;z-index: 2;" id="pcsclick">
+                                        <img src="./images/pcsb.svg" alt=""
+                                            style="width:100%;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);" />
+                                    </div>
+                                    <div class="infobox mainpcs1" style="left:41%; top:40%;z-index: 2;">
+                                        <div class="pcontent">
+                                            <p class="ptitle">U(V):</p>
+                                            <div id="pcs_sxdy0"></div>
+                                        </div>
+                                        <div class="pcontent">
+                                            <p class="ptitle">I(A):</p>
+                                            <div id="pcs_sxdl0"></div>
+                                        </div>
+                                        <div class="pcontent">
+                                            <span>P(kW):</span><span id="pcs_rp0"></span>
+                                        </div>
+                                        <div class="pcontent">
+                                            <p class="ptitle">频率(Hz):</p>
+                                            <div id="pcs_sxpl0"></div>
+                                        </div>
+                                    </div>
+
+                                    
+
+                                    <div id="bmsclick" class="layoutimage bordernull" title="BMS"
+                                        style="left:44%; top:59%; width:13.5%;z-index: 2;">
+                                        <img src="./images/bmsb.svg" alt=""
+                                            style="width:100%;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);" />
+                                    </div>
+                                    <div class="infobox mainbms1" style="left:41%; top:73%;z-index: 2;">
+                                        <div class="pcontent">
+                                            <p class="ptitle">SOC:</p>
+                                            <div id="bms_soc0"></div>
+                                        </div>
+                                        <div class="pcontent">
+                                            <p class="ptitle">U(V):</p>
+                                            <div id="bms_dy0"></div>
+                                        </div>
+                                        <div class="pcontent">
+                                            <p class="ptitle">最大电压(mv):</p>
+                                            <div id="bms_mtosdy0"></div>
+                                        </div>
+                                        <div class="pcontent">
+                                            <p class="ptitle">最小电压(mv):</p>
+                                            <div id="bms_ltosmdy0"></div>
+                                        </div>
+                                        <div class="pcontent">
+                                            <p class="ptitle">电流(A):</p>
+                                            <div id="group_I0"></div>
+                                        </div>
+                                    </div>
+
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="khfxPane xmzt khfxPaneaa" id="thirdkhfxPane" style="width: 90%;padding:0 5% 0.4rem;">
+                            <div class="select_wrap">
+                                <select id="selectsb" value=""></select>
+                            </div>
+
+                            <div class="tablist" id="tablist">
+                                <div class="list listcon">
+                                    <div class="nyztab">
+                                        <span class="active">一周</span>
+                                        <span>月份</span>
+                                        <span>一年</span>
+                                    </div>
+                                    <div class="nyz">
+                                        <span class="nyzcon theweek weekyear" id="theweek"></span>
+                                        <span class="nyzcon themounth" id="themounth">
+                                            <div class="selectmonth_wrap">
+                                                <select id="selectmonth" value="">
+                                                </select>
+                                                <!-- <img src="./images/xiala.svg" alt=""> -->
+                                            </div>
+                                            <div class="mounth_wrap" id="thedetailmounth"></div>
+                                        </span>
+                                        <span class="nyzcon theyear weekyear" id="theyear"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function (win, doc) {
+            var docEl = doc.documentElement || document.body; //获取HTML标签
+
+            var container = doc.getElementById("container"); //container元素
+            //判断是移动端设备还是PC,移动 就采用'orientationchange',横竖屏事件，PC端就采用onresize，窗口改变时间
+            var resize =
+                "onorientationchange" in win ? "orientationchange" : "resize";
+
+            function rem() {
+                docEl.style.fontSize = 100 * (container.clientWidth / 750) + "px";
+            }
+
+            //监听'DOMContent事件:DOM加载完成执行,如果DOMContent事件，那么执行rem函数
+            doc.addEventListener("DOMContentLoaded", rem, false);
+
+            //win下监听resize事件,如果resize事件，那么执行rem函数
+            win.addEventListener(resize, rem, false);
+        })(window, document);
+    </script>
+    <!-- js -->
+    <script type="text/javascript" src="./js/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="js/echarts.js"></script>
+    <script type="text/javascript" src="./layer/layer.js"></script>
+    <script>
+        $(document).ready(function () {
+            // var index = layer.load(0, {
+            //     shade: [0.8, '#fff']
+            // }); //0.1透明度的白色背景
+            var projectid = GetQueryString('projectid');
+            // var linechartid = GetQueryString('linechartid');
+            var projectNameCN = GetQueryString('projectNameCN');
+            var description = GetQueryString('description');
+            
+            $("#projectNameCN").html(' ');
+            $("#projectNameCN").html(projectNameCN);
+
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "http://112.74.169.99:21021/api/services/app/ProjectService/GetYWProjectMemberListByProjectId?id=" + projectid,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+                    xhr.setRequestHeader("Authorization", accessToken);
+                    xhr.setRequestHeader('.AspNetCore.Culture', 'zh-Hans');
+                },
+                success: function (res) {
+                    console.log(res);
+                    $("#ywnumwrap").html(` `);
+                    $("#ywnumwrap").html( showywnum(res.result) );
+                },
+                error: function (err) {
+                    console.log("首次请求数据 请求失败");
+                }
+            });
+
+            function showywnum(obj) {
+                var str = '';
+                if (obj.constructor==Array) {
+                    if(obj.length == 0){
+                        str += `<p style="font-weight: bold;font-family: MicrosoftYaHei;font-size: 14px;color: #CDDDF3;margin-left:18px;"><span>无</span></p>`
+                    }else {
+                        for(var i = 0, len = obj.length; i < len; i++){
+                            str += `<p><span>` + obj[i].userName + `</span><span>` + obj[i].phoneNumber + `</span></p>`
+                        }
+                    }
+                    return str
+                }
+                return obj;
+            }
+
+            
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "http://112.74.169.99:21021/api/TokenAuth/GetProjectData?projectid=" + projectid,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Accept", "application/json, text/javascript, */*; q=0.01" );
+                    xhr.setRequestHeader("Authorization", accessToken);
+                    xhr.setRequestHeader('.AspNetCore.Culture', 'zh-Hans');
+                },
+                success: function (res) {
+                    var data = res.result;
+
+
+                    // 获取经纬度地址
+                    var longitude = res.result[0].longitude.toString();
+                    var latitude = res.result[0].latitude.toString();
+                    var newlong = ToDigital(longitude.substring(0,3), longitude.substring(3,5), longitude.substring(5,7));
+                    var newlat = ToDigital(latitude.substring(0,2), latitude.substring(2,4), latitude.substring(4,6));
+
+
+                    function ToDigital(strDu, strFen, strMiao) {
+                        strDu = (typeof (strDu) == "undefined" || strDu == "") ? 0 : parseFloat(strDu);
+                        strFen = (typeof (strFen) == "undefined" || strFen == "") ? 0 : parseFloat(strFen) / 60;
+                        strMiao = (typeof (strMiao) == "undefined" || strMiao == "") ? 0 : parseFloat(strMiao) / 3600;
+                        var digital = strDu + strFen + strMiao;
+                        if (digital == 0) {
+                            return "";
+                        } else {
+                            return digital;
+                        }
+                    }
+
+                    var lnglat = [newlong,newlat];
+                    function convertFrom(lnglat, type){
+                        AMap.convertFrom(lnglat, type, function (status, result) {
+                            if (result.info === 'ok') {
+                                var geocoder = new AMap.Geocoder();
+                                var lnglats = [result.locations[0].lng, result.locations[0].lat]
+                                geocoder.getAddress(lnglats, function(status, address) {
+                                    if (status === 'complete' && address.info === 'OK') {
+                                        console.log(address.regeocode.formattedAddress);
+                                        $("#showadd").html(address.regeocode.formattedAddress);
+                                    }
+                                })
+                            }
+                        });
+                    }
+                    convertFrom(lnglat,'gps');
+
+
+
+                    if (data.length == 0) {
+                        layer.open({
+                            type: 1,
+                            content: '<div>' + '通讯异常' +
+                                '</div>',
+                            btn: '确定',
+                            btnAlign: 'c', //按钮居中
+                            shade: 0, //不显示遮罩
+                            yes: function () {
+                                layer.closeAll();
+                                // layer.close(index);
+                            }
+                        });
+                    } else {
+                        let time = data[0].creationTime.split('T');
+
+                        $("#showtime").html(' ');
+                        $("#showtime").html(description + ' 数据更新时间:' + time[1].substring(0,8));
+
+
+                        // 数据总览
+                        $("#dbitap0").html( dealnumber(data[5].loadTAP) ); // 负载功率(电表总有功功率)
+                        $("#trrp0").html( dealnumber(data[4].trrp) ); // 当日用电量
+
+                        $("#cyjpowerGeneration0").html( dealnumber(data[1].powerGeneration) ); // 发电功率(柴油机)
+                        $("#pcstap0").html( dealnumber(data[2].tap) ); // PCS总有功功率(pcs)
+                        
+                        $("#bmssoc0").html( dealnumber(data[3].soc) ); // soc(bms)
+                        $("#bmssoh0").html( dealnumber(data[3].soh) ); // soh(bms)
+
+                        // 柴油机
+                        $("#powerGeneration").html(data[1].powerGeneration); // 发电功率
+                        $("#fuelLevel").html(data[1].fuelLevel); // 燃油位
+                        $("#na").html(data[1].na); // 油耗
+                        $("#dPlus").html(data[1].dPlus); // 燃油消耗量
+                        $("#positiveKWh").html(data[1].positiveKWh); // 总发电量
+                        $("#generationPowerFactor").html(data[1].generationPowerFactor); // 功率因素
+
+                        // 电表
+                        $("#itap").html(data[4].itap);  //总有功功率
+                        $("#tpap").html(data[4].tpap);  //正向有功总电量
+
+                        // 储能变流器 PCS
+                        $("#tap").html(data[2].tap); // PCS总有功功率
+                        $("#tApparentP").html(data[2].tApparentP); // PCS总视在功率
+                        $("#trp").html(data[2].trp); // PCS总无功功率
+
+                        // 储能电池 BMS
+                        $("#soc").html(data[3].soc); // SOC
+                        $("#group_V").html(data[3].group_V); // 总电压
+                        $("#group_I").html(data[3].group_I); // 总电流
+
+                        // 温湿度
+                        $("#temperature").html( dealnumber(data[0].temperature) ); //EMS温度
+                        $("#environmentalT").html( dealnumber(data[2].environmentalT) ); //环境温度
+                        $("#cabinetT").html( dealnumber(data[2].cabinetT) ); //模块温度
+
+                        // 设备状态
+                        if (data[2].acDispatch === 0) {
+                            // 交流调度
+                            $("#jldd").attr('class', 'onoff zton');
+                            // 直流调度
+                            $("#zldd").attr('class', 'onoff ztoff');
+                        } else if(data[2].acDispatch === 1) {
+                            // 交流调度
+                            $("#jldd").attr('class', 'onoff ztoff');
+                            // 直流调度
+                            $("#zldd").attr('class', 'onoff zton');
+                        }
+                        if (data[2].gridState === 0) {
+                            // 并网
+                            $("#bw").attr('class', 'onoff zton');
+                            // 离网
+                            $("#lw").attr('class', 'onoff ztoff');
+                        } else if(data[2].gridState === 1) {
+                            // 并网
+                            $("#bw").attr('class', 'onoff ztoff');
+                            // 离网
+                            $("#lw").attr('class', 'onoff zton');
+                        }
+
+                        // 等待开机 离网运行 并网切离网 并网运行
+                        if (data[0].workMode === 1) {
+                            $("#ddkj").attr('class', 'onoff zton');
+                            $("#lwyx").attr('class', 'onoff ztoff');
+                            $("#bwqlw").attr('class', 'onoff ztoff');
+                            $("#bwyx").attr('class', 'onoff ztoff');
+                        } else if(data[0].workMode === 2) {
+                            $("#ddkj").attr('class', 'onoff ztoff');
+                            $("#lwyx").attr('class', 'onoff zton');
+                            $("#bwqlw").attr('class', 'onoff ztoff');
+                            $("#bwyx").attr('class', 'onoff ztoff');
+                        } else if(data[0].workMode === 3) {
+                            $("#ddkj").attr('class', 'onoff ztoff');
+                            $("#lwyx").attr('class', 'onoff ztoff');
+                            $("#bwqlw").attr('class', 'onoff zton');
+                            $("#bwyx").attr('class', 'onoff ztoff');
+                        } else if(data[0].workMode === 4) {
+                            $("#ddkj").attr('class', 'onoff ztoff');
+                            $("#lwyx").attr('class', 'onoff ztoff');
+                            $("#bwqlw").attr('class', 'onoff ztoff');
+                            $("#bwyx").attr('class', 'onoff zton');
+                        }
+
+
+
+                        // 自动模式 手动模式 紧急停机
+                        if (data[0].runMode === 1) {
+                            $("#zdms").attr('class', 'onoff zton');
+                            $("#sdms").attr('class', 'onoff ztoff');
+                            $("#jjtj").attr('class', 'onoff ztoff');
+                        } else if(data[0].runMode === 2) {
+                            $("#zdms").attr('class', 'onoff ztoff');
+                            $("#sdms").attr('class', 'onoff zton');
+                            $("#jjtj").attr('class', 'onoff ztoff');
+                        } else if(data[0].runMode === 3) {
+                            $("#zdms").attr('class', 'onoff ztoff');
+                            $("#sdms").attr('class', 'onoff ztoff');
+                            $("#jjtj").attr('class', 'onoff zton');
+                        }
+
+                        // 保养模式
+                        if (data[0].mainTainMode === 1) {
+                            $("#byms").attr('class', 'onoff ztoff');
+                        } else if(data[0].mainTainMode === 2) {
+                            $("#byms").attr('class', 'onoff zton');
+                        }
+
+
+
+                        // 分闸运行 合闸运行 停机
+                        let ynstopMode = data[1].stopMode;
+                        let yntransferToGenerator = data[1].transferToGenerator;
+                        if((ynstopMode == 0) && (yntransferToGenerator == 0)){
+                            $("#fzyx").attr('class', 'onoff zton');
+                            $("#hzyx").attr('class', 'onoff ztoff');
+                            $("#tj").attr('class', 'onoff ztoff');
+                        }else if((ynstopMode == 0) && (yntransferToGenerator == 1)){
+                            $("#fzyx").attr('class', 'onoff ztoff');
+                            $("#hzyx").attr('class', 'onoff zton');
+                            $("#tj").attr('class', 'onoff ztoff');
+                        }else if(ynstopMode === 1){
+                            $("#fzyx").attr('class', 'onoff ztoff');
+                            $("#hzyx").attr('class', 'onoff ztoff');
+                            $("#tj").attr('class', 'onoff zton');
+                        }
+
+                        // 一次系统图 数据
+                        // 负载数据
+                        let load0 = data[4].itap;
+                        $("#load0").html( dealnumber(load0) );
+
+                        // 油机数据
+                        let yj_rp0 = data[1].powerGeneration;
+                        $("#yj_rp0").html( dealnumber(yj_rp0) );
+
+                        let yj_sxdy0 = dealnumber(data[1].generating12V) + '/' + dealnumber(data[1].generating23V) + '/' + dealnumber(data[1].generating31V);
+                        $("#yj_sxdy0").html( yj_sxdy0 );
+
+                        $("#yj_sxpl0").html( dealnumber(data[1].generationFrequency) );
+
+                        // pcs
+                        let pcs_sxdy0 = data[2].abacv + "/" + data[2].bcacv+ "/" + data[2].caacv;
+                        $("#pcs_sxdy0").html( dealnumber(pcs_sxdy0) );
+                        
+                        let pcs_sxdl0 = data[2].aaci + "/" + data[2].baci+ "/" + data[2].caci;
+                        $("#pcs_sxdl0").html( dealnumber(pcs_sxdl0) );
+
+                        let pcs_rp0 = data[2].tap;
+                        $("#pcs_rp0").html( dealnumber(pcs_rp0) );
+
+                        $("#pcs_sxpl0").html( dealnumber(data[2].acFrequency));
+
+                            // bms
+                        $("#bms_soc0").html( dealnumber(data[3].soc) );
+
+                        $("#bms_dy0").html( dealnumber(data[3].group_V) );
+
+                        // 单体最高电压值 
+                        $("#bms_mtosdy0").html( dealnumber(data[3].mvosU1) );
+                        // 单体最低电压值
+                        $("#bms_ltosmdy0").html( dealnumber(data[3].lvosU1) );
+
+                        // 电流
+                        $("#group_I0").html(data[3].group_I);
+
+
+                        //左边负载方向判断---第一次请求
+                        if(load0 === 0){
+                            $("#leftload_wrap0").html(`
+                                <div id="gdownline11" class="hp hpthin" style="left:50%; top:14%;  width:37%;z-index: 1;"></div>
+                            `);
+                        }else{
+                            $("#leftload_wrap0").html(`
+                                <div id="gdownline11" class="hp hpthin goright" style="left:50%; top:14%;  width:37%;z-index: 1;"></div>
+                            `);
+                        }
+
+
+                        // 油机左边1段方向的判断---第一次请求
+                        if(yj_rp0 === 0){
+                            $("#leftwrap0").html(`
+                                <div id="leftline" class="hp hpthin" style="left:7%; top:14%;  width:44%; z-index: 1;"></div>
+                            `);
+                        }else{
+                            $("#leftwrap0").html(`
+                                <div id="leftline" class="hp hpthin goright" style="left:7%; top:14%;  width:44%; z-index: 1;"></div>
+                            `);
+                        }
+
+
+                        // 左边pcs方向判断---第一次请求
+                        if(pcs_rp0 < 0){
+                            $("#pcs00").html(`
+                                <div id="pcsline0" class="vp vpthin gotop" style="left:50%; top:14%;  height:55%;z-index: 1;"></div>
+                            `);
+                        }else if(pcs_rp0 > 0){
+                            $("#pcs00").html(`
+                                <div id="pcsline0" class="vp vpthin gotop" style="left:50%; top:14%;  height:55%;z-index: 1;"></div>
+                            `);
+                        }else if(pcs_rp0 === 0){
+                            $("#pcs00").html(`
+                                <div id="pcsline0" class="vp vpthin" style="left:50%; top:14%;  height:55%;z-index: 1;"></div>
+                            `);
+                        }
+
+                        setInterval(updateData,3000);
+                    }
+
+                },
+                error: function (err) {
+                    console.log("首次请求数据 请求失败");
+                }
+            });
+            
+
+
+
+
+
+
+            $("#cyjclick").click(function(){
+                window.location.href='./mainmonitor_cyj.html?projectid=' + projectid;
+            });
+
+
+            $("#pcsclick").click(function(){
+                window.location.href='./mainmonitor_pcs.html?projectid=' + projectid;
+            });
+
+            $("#bmsclick").click(function(){
+                window.location.href='./mainmonitor_bms.html?projectid=' + projectid;
+            });
+
+
+            // 功率曲线
+            let fdy = [];
+            let fdseries = [];
+
+            let pcsy = [];
+            let pcsseries = [];
+
+            let fzy = [];
+            let fzseries = [];
+
+            let ssfdglqx = echarts.init(document.getElementById('ssfdglqx'));
+            let sspcsglqx = echarts.init(document.getElementById('sspcsglqx'));
+            let ssfzglqx = echarts.init(document.getElementById('ssfzglqx'));
+            
+
+            // 实时发电功率第一次请求曲线
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                async:false,
+                url: "http://112.74.169.99:21021/api/services/app/ControlDataService/GetListDGDataByProjectID?id=" + projectid,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+                    xhr.setRequestHeader("Authorization", accessToken);
+                    xhr.setRequestHeader('.AspNetCore.Culture', 'zh-Hans');
+                },
+                success: function (userdata) {
+
+                    if (userdata.success) {
+                        userdata.result = userdata.result.slice(0,1);
+
+                        for (let i = 0; i < userdata.result.length; i++) {
+                            let ydataaa = [];
+                            for (let j = 0; j < userdata.result[i].length; j++) {
+                                if (i === 0) {
+                                    let creationTime = userdata.result[i][j].creationTime;
+                                    fdy.push(creationTime);
+                                }
+                                ydataaa.push(userdata.result[i][j].data);
+                            }
+                            let seriesdatalist = {};
+                            seriesdatalist.type = 'line';
+                            seriesdatalist.symbol = 'none';
+                            seriesdatalist.data = ydataaa;
+
+                            fdseries.push(seriesdatalist);
+                        }
+                        
+
+                        let fdglone = {
+                            backgroundColor: '#112957',
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            legend: {
+                                type: 'scroll',
+                                icon: 'circle',
+                                itemGap: 10,
+                                top: '10%',
+                                bottom: '8%',
+                                left: 'center',
+                                itemWidth: 8,
+                                textStyle: {
+                                    color: '#6E7889',
+                                    fontSize: '9'
+                                }
+                            },
+                            title: {
+                                text: '实时发电功率',
+                                textStyle: {
+                                    fontWeight: 'bolder',
+                                    color: '#C2D4F1',
+                                    fontSize:'14'
+                                },
+                                top: '10',
+                                left: '20',
+                            },
+                            grid: {
+                                left: '5%',
+                                right: '10%',
+                                bottom: '5%',
+                                top: '25%',
+                                containLabel: true,
+                            },
+                            xAxis: [
+                                {
+                                    type: 'category',
+                                    boundaryGap: true,
+                                    data: fdy,
+                                    axisTick: {
+                                    show: false,
+                                    },
+                                    axisLine: { //坐标轴轴线相关设置
+                                    onZero: true,
+                                    lineStyle: {
+                                        color: '#233E6A'
+                                    }
+
+                                    },
+                                    axisLabel: {
+                                        color: '#4E6387',
+                                        fontSize:'9'
+                                    },
+
+                                },
+                            ],
+                            yAxis: [
+                                {
+                                    type: 'value',
+                                    axisTick: {
+                                    show: false,
+                                    },
+                                    splitLine: {//坐标轴在gird区域中的分割线
+                                    lineStyle: {
+                                        color: 'rgba(37,64,107,0.5)',
+                                        type: 'dashed'
+                                    },
+                                    },
+                                    axisLine: {//坐标轴轴线相关设置
+                                    onZero: true,
+                                    lineStyle: {
+                                        color: '#233E6A'
+                                    }
+                                    },
+                                    axisLabel: {//  坐标轴刻度标签相关设置
+                                        color: '#4E6387',
+                                        fontSize:'9'
+                                    },
+                                    scale: true,
+                                },
+                            ],
+                            series: fdseries,
+
+                        };
+                        
+
+                        ssfdglqx.setOption(fdglone);
+                    }
+
+                        
+                }
+            });
+            
+            // 实时pcs功率第一次请求曲线
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                async:false,
+                url: "http://112.74.169.99:21021/api/services/app/ControlDataService/GetListPCSDataByProjectID?id=" + projectid,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+                    xhr.setRequestHeader("Authorization", accessToken);
+                    xhr.setRequestHeader('.AspNetCore.Culture', 'zh-Hans');
+                },
+                success: function (userdata) {
+
+                    if (userdata.success) {
+                        userdata.result = userdata.result.slice(0,1);
+                        for (let i = 0; i < userdata.result.length; i++) {
+                            let ydataaa = [];
+                            for (let j = 0; j < userdata.result[i].length; j++) {
+                                if (i === 0) {
+                                    let creationTime = userdata.result[i][j].creationTime;
+                                    pcsy.push(creationTime);
+                                }
+                                ydataaa.push(userdata.result[i][j].data);
+                            }
+                            let seriesdatalist = {};
+                            seriesdatalist.type = 'line';
+                            seriesdatalist.symbol = 'none';
+                            seriesdatalist.data = ydataaa;
+
+                            pcsseries.push(seriesdatalist);
+                        }
+
+                        let pcsglone = {
+                            backgroundColor: '#112957',
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            legend: {
+                                type: 'scroll',
+                                icon: 'circle',
+                                itemGap: 10,
+                                top: '10%',
+                                bottom: '8%',
+                                left: 'center',
+                                itemWidth: 8,
+                                textStyle: {
+                                    color: '#6E7889',
+                                    fontSize: '9'
+                                }
+                            },
+                            title: {
+                                text: '实时PCS功率',
+                                textStyle: {
+                                    fontWeight: 'bolder',
+                                    color: '#C2D4F1',
+                                    fontSize:'14'
+                                },
+                                top: '10',
+                                left: '20',
+                            },
+                            grid: {
+                                left: '5%',
+                                right: '10%',
+                                bottom: '5%',
+                                top: '25%',
+                                containLabel: true,
+                            },
+                            xAxis: [
+                                {
+                                    type: 'category',
+                                    boundaryGap: true,
+                                    data: pcsy,
+                                    axisTick: {
+                                    show: false,
+                                    },
+                                    axisLine: { //坐标轴轴线相关设置
+                                    onZero: true,
+                                    lineStyle: {
+                                        color: '#233E6A'
+                                    }
+                                    },
+                                    axisLabel: {
+                                        color: '#4E6387',
+                                        fontSize:'9'
+                                    },
+
+                                },
+                            ],
+                            yAxis: [
+                                {
+                                    type: 'value',
+                                    axisTick: {
+                                        show: false,
+                                    },
+                                    splitLine: {//坐标轴在gird区域中的分割线
+                                        lineStyle: {
+                                            color: 'rgba(37,64,107,0.5)',
+                                            type: 'dashed'
+                                        },
+                                    },
+                                    axisLine: {//坐标轴轴线相关设置
+                                        onZero: true,
+                                        lineStyle: {
+                                            color: '#233E6A'
+                                        }
+                                    },
+                                    axisLabel: {//  坐标轴刻度标签相关设置
+                                        color: '#4E6387',
+                                        fontSize:'9'
+                                    },
+                                    scale: true,
+                                },
+                            ],
+                            series: pcsseries,
+
+                        };
+
+                        sspcsglqx.setOption(pcsglone);
+
+                    }
+                }
+            });
+
+            // 实时负载功率第一次请求曲线
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                async:false,
+                url: "http://112.74.169.99:21021/api/services/app/ControlDataService/GetListDLTDataByProjectID?id=" + projectid,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+                    xhr.setRequestHeader("Authorization", accessToken);
+                    xhr.setRequestHeader('.AspNetCore.Culture', 'zh-Hans');
+                },
+                success: function (userdata) {
+
+                    if (userdata.success) {
+                        userdata.result = userdata.result.slice(0,1);
+
+                        for (let i = 0; i < userdata.result.length; i++) {
+                            let ydataaafz0 = [];
+                            for (let j = 0; j < userdata.result[i].length; j++) {
+                                if (i === 0) {
+                                let creationTimefz0 = userdata.result[i][j].creationTime;
+                                fzy.push(creationTimefz0);
+                                }
+                                ydataaafz0.push(userdata.result[i][j].data);
+                            }
+                            let seriesdatalistfz0 = {};
+                            seriesdatalistfz0.type = 'line';
+                            seriesdatalistfz0.symbol = 'none';
+                            seriesdatalistfz0.data = ydataaafz0;
+
+                            fzseries.push(seriesdatalistfz0);
+                        }
+
+                        let fzglone = {
+                            backgroundColor: '#112957',
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            legend: {
+                                type: 'scroll',
+                                icon: 'circle',
+                                itemGap: 10,
+                                top: '10%',
+                                bottom: '8%',
+                                left: 'center',
+                                itemWidth: 8,
+                                textStyle: {
+                                    color: '#6E7889',
+                                    fontSize: '9'
+                                }
+                            },
+                            title: {
+                                text: '实时负载功率',
+                                textStyle: {
+                                fontWeight: 'bolder',
+                                    color: '#C2D4F1',
+                                    fontSize:'14'
+                                },
+                                top: '10',
+                                left: '20',
+                            },
+                            grid: {
+                                left: '5%',
+                                right: '10%',
+                                bottom: '5%',
+                                top: '25%',
+                                containLabel: true,
+                            },
+                            xAxis: [
+                                {
+                                    type: 'category',
+                                    boundaryGap: true,
+                                    data: fzy,
+                                    axisTick: {
+                                        show: false,
+                                    },
+                                    axisLine: { //坐标轴轴线相关设置
+                                        onZero: true,
+                                        lineStyle: {
+                                            color: '#233E6A'
+                                        }
+                                    },
+                                    axisLabel: {
+                                        color: '#4E6387',
+                                        fontSize:'9'
+                                    },
+
+                                },
+                            ],
+                            yAxis: [
+                                {
+                                    type: 'value',
+                                    axisTick: {
+                                        show: false,
+                                    },
+                                    splitLine: {//坐标轴在gird区域中的分割线
+                                        lineStyle: {
+                                            color: 'rgba(37,64,107,0.5)',
+                                            type: 'dashed'
+                                        },
+                                    },
+                                    axisLine: {//坐标轴轴线相关设置
+                                        onZero: true,
+                                        lineStyle: {
+                                            color: '#233E6A',
+                                        }
+                                    },
+                                    axisLabel: {//  坐标轴刻度标签相关设置
+                                        color: '#4E6387',
+                                        fontSize:'9'
+                                    },
+                                    scale: true,
+                                },
+                            ],
+                            series: fzseries,
+
+                        };
+
+                        ssfzglqx.setOption(fzglone);
+
+                    }
+                    
+                }
+            });
+
+
+
+
+            // tab选项卡切换
+            $(".tabHead span").on("click", function () {
+                var $this = $(this);
+                var itemIndex = $this.index();
+                $(this).addClass("active").siblings(".tabHead span").removeClass("active");
+                $(".khfxPane").eq(itemIndex).show().siblings(".khfxPane").hide();
+            });
+
+            // 请求数据报表数据
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "http://112.74.169.99:21021/api/services/app/ReportService/GetReportDLTDGDataByDay?type=1&groupid=1&projectid=" + projectid,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+                    xhr.setRequestHeader("Authorization", accessToken);
+                    xhr.setRequestHeader('.AspNetCore.Culture', 'zh-Hans');
+                },
+                success: function (res) {
+                    if(res.success == true){
+                        let dataall = res.result;
+                        
+
+                        $.ajax({
+                            type: "GET",
+                            dataType: "json",
+                            url: "http://112.74.169.99:21021/api/services/app/DeviceGroupService/GetDeviceGroupsByProjectID?id=" + projectid,
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+                                xhr.setRequestHeader("Authorization", accessToken);
+                                xhr.setRequestHeader('.AspNetCore.Culture', 'zh-Hans');
+                            },
+                            success: function (res) {
+                                
+                                if(res.success == true){
+                                    let data = res.result;
+                                    $("#selectsb").html( selectsbeach(data) );
+                                    $("#theweek").html( selectsbeachcon(dataall) );
+                                    
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+            
+            // 设备下拉框切换
+            $("#selectsb").change(function () {
+                let choicesb = $("#selectsb option:selected").attr('value');
+                $(".tablist .listcon").eq(choicesb).show().siblings(".tablist .listcon").hide();
+                let thetype;
+                if(choicesb == 0){thetype = 1;}
+                else{thetype = 0;}
+
+                var choicewmy = $(this).parent().next().find('.nyztab span');
+                $(choicewmy).each(function(index,item){
+                    if($(item).hasClass('active')){
+
+                        if(index == 0){ //一周
+                            $.ajax({
+                                type: "GET",
+                                dataType: "json",
+                                url: "http://112.74.169.99:21021/api/services/app/ReportService/GetReportDLTDGDataByDay?type="+thetype+"&groupid="+choicesb+"&projectid=" + projectid,
+                                beforeSend: function (xhr) {
+                                    xhr.setRequestHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+                                    xhr.setRequestHeader("Authorization", accessToken);
+                                    xhr.setRequestHeader('.AspNetCore.Culture', 'zh-Hans');
+                                },
+                                success: function (res) {
+                                    if(res.success == true){
+                                        $("#theweek").html('');
+                                        $("#theweek").html( selectsbeachcon(res.result) );
+                                    }
+                                }
+                            });
+
+                        }else if(index == 1){//月份
+                            var index2 = layer.load(0, {
+                                shade: [0.8, '#fff']
+                            }); //0.1透明度的白色背景
+                            var mouthchose = Number($("#selectmonth option:selected").attr('value')) + 1;
+
+                            $.ajax({
+                                type: "GET",
+                                dataType: "json",
+                                url: "http://112.74.169.99:21021/api/services/app/ReportService/GetReportDLTDGDataByMonth?type="+thetype+"&groupid="+choicesb+"&projectid="+projectid+"&month="+ mouthchose,
+                                beforeSend: function (xhr) {
+                                    xhr.setRequestHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+                                    xhr.setRequestHeader("Authorization", accessToken);
+                                    xhr.setRequestHeader('.AspNetCore.Culture', 'zh-Hans');
+                                },
+                                success: function (res) {
+                                    if(res.success == true){
+                                        let data = res.result;
+
+                                        $("#thedetailmounth").html('');
+                                        $("#thedetailmounth").html(selectsbeachcon(data));
+                                        layer.close(index2);
+                                        
+
+                                    }
+                                }
+                            });
+
+                        }
+                    }
+
+                })
+
+
+
+            });
+
+
+
+             // 周月年切换选项卡切换
+             $(".tablist .listcon .nyztab >span").on("click", function () {
+                var groupid = $(this).parents('#tablist').prev().find('select').val();
+                let thetype;
+                if(groupid == 0){
+                    thetype = 1;
+                }else{
+                    thetype = 0;
+                }
+                var itemIndex = $(this).index();
+                $(this).addClass("active").siblings(".tablist .listcon .nyztab >span").removeClass("active"); 
+                let nyzcon = $(this).parent().next().find(".nyzcon");
+                nyzcon.eq(itemIndex).show().siblings(nyzcon).hide();
+
+                if(itemIndex == 1){// 月份选项卡的数据
+                    let nowmonth = Mounthnow();
+                    $.ajax({
+                        type: "GET",
+                        dataType: "json",
+                        url: "http://112.74.169.99:21021/api/services/app/ReportService/GetReportDLTDGDataByMonth?type="+thetype+"&groupid="+groupid+"&projectid="+projectid+"&month="+ nowmonth,
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+                            xhr.setRequestHeader("Authorization", accessToken);
+                            xhr.setRequestHeader('.AspNetCore.Culture', 'zh-Hans');
+                        },
+                        success: function (res) {
+                            if(res.success == true){
+                                let data = res.result;
+                                $("#thedetailmounth").html('');
+                                $("#thedetailmounth").html(selectsbeachcon(data));
+                                $("#selectmonth").html(selectmontheach(nowmonth));
+                                
+                            }
+                        }
+                    });
+
+                }else if(itemIndex == 2){// 年选项卡的数据
+                    console.log("年选项卡的数据");
+                }
+
+            });
+
+
+            // 月份下拉框切换
+            $("#selectmonth").change(function () {
+
+                var index1 = layer.load(0, {
+                    shade: [0.8, '#fff']
+                }); //0.1透明度的白色背景
+
+                var mouthchose = Number($("#selectmonth option:selected").attr('value')) + 1;
+                var groupid = $(this).parents('#tablist').prev().find("select").val();
+                let thetype;
+                if(groupid == 0){thetype = 1;}
+                else{thetype = 0;}
+
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: "http://112.74.169.99:21021/api/services/app/ReportService/GetReportDLTDGDataByMonth?type="+thetype+"&groupid="+groupid+"&projectid="+projectid+"&month="+ mouthchose,
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+                        xhr.setRequestHeader("Authorization", accessToken);
+                        xhr.setRequestHeader('.AspNetCore.Culture', 'zh-Hans');
+                    },
+                    success: function (res) {
+                        if(res.success == true){
+                            let data = res.result;
+                            $("#thedetailmounth").html('');
+                            $("#thedetailmounth").html(selectsbeachcon(data));
+                            layer.close(index1);
+                        }
+                    }
+                });
+                
+            });
+
+
+
+
+
+
+
+            let num_index = 0;
+
+            let load01 = 0,load02 = 0;
+            let yj_left1=0,yj_left2=0;
+            let pcs1_rp0=0,pcs2_rp0=0;
+
+            function updateData() { // 请求数据
+                num_index++;
+                var onoff = isPositiveNum(num_index / 15); //一分钟增加一次数据
+
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: "http://112.74.169.99:21021/api/TokenAuth/GetProjectData?projectid=" + projectid,
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+                        xhr.setRequestHeader("Authorization", accessToken);
+                        xhr.setRequestHeader('.AspNetCore.Culture', 'zh-Hans');
+                    },
+                    success: function (res) {
+                        var data = res.result;
+                        let time = data[0].creationTime.split('T');
+
+                        $("#showtime").html(' ');
+                        $("#showtime").html(description + ' 数据更新时间:' + time[1].substring(0,8));
+
+                        // 数据总览
+                        $("#dbitap0").html( dealnumber(data[5].loadTAP) ); // 负载功率(电表总有功功率)
+                        $("#trrp0").html( dealnumber(data[4].trrp) ); // 当日用电量
+
+                        $("#cyjpowerGeneration0").html( dealnumber(data[1].powerGeneration) ); // 发电功率(柴油机)
+                        $("#pcstap0").html( dealnumber(data[2].tap) ); // PCS总有功功率(pcs)
+                        
+                        $("#bmssoc0").html( dealnumber(data[3].soc) ); // soc(bms)
+                        $("#bmssoh0").html( dealnumber(data[3].soh) ); // soh(bms)
+
+                        // 柴油机
+                        $("#powerGeneration").html(data[1].powerGeneration); // 发电功率
+                        $("#fuelLevel").html(data[1].fuelLevel); // 燃油位
+                        $("#na").html(data[1].na); // 油耗
+                        $("#dPlus").html(data[1].dPlus); // 燃油消耗量
+                        $("#positiveKWh").html(data[1].positiveKWh); // 总发电量
+                        $("#generationPowerFactor").html(data[1].generationPowerFactor); // 功率因素
+
+                        // 电表
+                        $("#itap").html(data[4].itap);  //总有功功率
+                        $("#tpap").html(data[4].tpap);  //正向有功总电量
+
+                        // 储能变流器 PCS
+                        $("#tap").html(data[2].tap); // PCS总有功功率
+                        $("#tApparentP").html(data[2].tApparentP); // PCS总视在功率
+                        $("#trp").html(data[2].trp); // PCS总无功功率
+
+                        // 储能电池 BMS
+                        $("#soc").html(data[3].soc); // SOC
+                        $("#group_V").html(data[3].group_V); // 总电压
+                        $("#group_I").html(data[3].group_I); // 总电流
+
+                        // 温湿度
+                        $("#temperature").html( dealnumber(data[0].temperature) ); //EMS温度
+                        $("#environmentalT").html( dealnumber(data[2].environmentalT) ); //环境温度
+                        $("#cabinetT").html( dealnumber(data[2].cabinetT) ); //模块温度
+
+                        // 设备状态
+                        if (data[2].acDispatch === 0) {
+                            // 交流调度
+                            $("#jldd").attr('class', 'onoff zton');
+                            // 直流调度
+                            $("#zldd").attr('class', 'onoff ztoff');
+                        } else if(data[2].acDispatch === 1) {
+                            // 交流调度
+                            $("#jldd").attr('class', 'onoff ztoff');
+                            // 直流调度
+                            $("#zldd").attr('class', 'onoff zton');
+                        }
+                        if (data[2].gridState === 0) {
+                            // 并网
+                            $("#bw").attr('class', 'onoff zton');
+                            // 离网
+                            $("#lw").attr('class', 'onoff ztoff');
+                        } else if(data[2].gridState === 1) {
+                            // 并网
+                            $("#bw").attr('class', 'onoff ztoff');
+                            // 离网
+                            $("#lw").attr('class', 'onoff zton');
+                        }
+
+                        // 等待开机 离网运行 并网切离网 并网运行
+                        if (data[0].workMode === 1) {
+                            $("#ddkj").attr('class', 'onoff zton');
+                            $("#lwyx").attr('class', 'onoff ztoff');
+                            $("#bwqlw").attr('class', 'onoff ztoff');
+                            $("#bwyx").attr('class', 'onoff ztoff');
+                        } else if(data[0].workMode === 2) {
+                            $("#ddkj").attr('class', 'onoff ztoff');
+                            $("#lwyx").attr('class', 'onoff zton');
+                            $("#bwqlw").attr('class', 'onoff ztoff');
+                            $("#bwyx").attr('class', 'onoff ztoff');
+                        } else if(data[0].workMode === 3) {
+                            $("#ddkj").attr('class', 'onoff ztoff');
+                            $("#lwyx").attr('class', 'onoff ztoff');
+                            $("#bwqlw").attr('class', 'onoff zton');
+                            $("#bwyx").attr('class', 'onoff ztoff');
+                        } else if(data[0].workMode === 4) {
+                            $("#ddkj").attr('class', 'onoff ztoff');
+                            $("#lwyx").attr('class', 'onoff ztoff');
+                            $("#bwqlw").attr('class', 'onoff ztoff');
+                            $("#bwyx").attr('class', 'onoff zton');
+                        }
+
+
+
+                        // 自动模式 手动模式 紧急停机
+                        if (data[0].runMode === 1) {
+                            $("#zdms").attr('class', 'onoff zton');
+                            $("#sdms").attr('class', 'onoff ztoff');
+                            $("#jjtj").attr('class', 'onoff ztoff');
+                        } else if(data[0].runMode === 2) {
+                            $("#zdms").attr('class', 'onoff ztoff');
+                            $("#sdms").attr('class', 'onoff zton');
+                            $("#jjtj").attr('class', 'onoff ztoff');
+                        } else if(data[0].runMode === 3) {
+                            $("#zdms").attr('class', 'onoff ztoff');
+                            $("#sdms").attr('class', 'onoff ztoff');
+                            $("#jjtj").attr('class', 'onoff zton');
+                        }
+
+                        // 保养模式
+                        if (data[0].mainTainMode === 1) {
+                            $("#byms").attr('class', 'onoff ztoff');
+                        } else if(data[0].mainTainMode === 2) {
+                            $("#byms").attr('class', 'onoff zton');
+                        }
+
+                        // 分闸运行 合闸运行 停机
+                        let ynstopMode = data[1].stopMode;
+                        let yntransferToGenerator = data[1].transferToGenerator;
+                        if((ynstopMode == 0) && (yntransferToGenerator == 0)){
+                            $("#fzyx").attr('class', 'onoff zton');
+                            $("#hzyx").attr('class', 'onoff ztoff');
+                            $("#tj").attr('class', 'onoff ztoff');
+                        }else if((ynstopMode == 0) && (yntransferToGenerator == 1)){
+                            $("#fzyx").attr('class', 'onoff ztoff');
+                            $("#hzyx").attr('class', 'onoff zton');
+                            $("#tj").attr('class', 'onoff ztoff');
+                        }else if(ynstopMode === 1){
+                            $("#fzyx").attr('class', 'onoff ztoff');
+                            $("#hzyx").attr('class', 'onoff ztoff');
+                            $("#tj").attr('class', 'onoff zton');
+                        }
+
+
+                        fdy.push(time[1]);
+                        pcsy.push(time[1]);
+                        fzy.push(time[1]);
+                        
+                        fdseries[0].data.push( dealnumber(data[1].powerGeneration) );
+                        pcsseries[0].data.push( dealnumber(data[2].tap) );
+                        fzseries[0].data.push( dealnumber(data[4].itap) );
+
+                        // 实时发电功率
+                        let fdglone = {
+                            backgroundColor: '#112957',
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            legend: {
+                                type: 'scroll',
+                                icon: 'circle',
+                                itemGap: 10,
+                                top: '10%',
+                                bottom: '8%',
+                                left: 'center',
+                                itemWidth: 8,
+                                textStyle: {
+                                    color: '#6E7889',
+                                    fontSize: '9'
+                                }
+                            },
+                            title: {
+                                text: '实时发电功率',
+                                textStyle: {
+                                    fontWeight: 'bolder',
+                                    color: '#C2D4F1',
+                                    fontSize:'14'
+                                },
+                                top: '10',
+                                left: '20',
+                            },
+                            grid: {
+                                left: '5%',
+                                right: '10%',
+                                bottom: '5%',
+                                top: '25%',
+                                containLabel: true,
+                            },
+                            xAxis: [
+                                {
+                                    type: 'category',
+                                    boundaryGap: true,
+                                    data: fdy,
+                                    axisTick: {
+                                    show: false,
+                                    },
+                                    axisLine: { //坐标轴轴线相关设置
+                                    onZero: true,
+                                    lineStyle: {
+                                        color: '#233E6A'
+                                    }
+
+                                    },
+                                    axisLabel: {
+                                        color: '#4E6387',
+                                        fontSize:'9'
+                                    },
+
+                                },
+                            ],
+                            yAxis: [
+                                {
+                                    type: 'value',
+                                    axisTick: {
+                                    show: false,
+                                    },
+                                    splitLine: {//坐标轴在gird区域中的分割线
+                                    lineStyle: {
+                                        color: 'rgba(37,64,107,0.5)',
+                                        type: 'dashed'
+                                    },
+                                    },
+                                    axisLine: {//坐标轴轴线相关设置
+                                    onZero: true,
+                                    lineStyle: {
+                                        color: '#233E6A'
+                                    }
+                                    },
+                                    axisLabel: {//  坐标轴刻度标签相关设置
+                                        color: '#4E6387',
+                                        fontSize:'9'
+                                    },
+                                    scale: true,
+                                },
+                            ],
+                            series: fdseries,
+                        };
+                        ssfdglqx.setOption(fdglone);
+
+
+                        // 实时pcs功率
+                        let pcsglone = {
+                            backgroundColor: '#112957',
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            legend: {
+                                type: 'scroll',
+                                icon: 'circle',
+                                itemGap: 10,
+                                // data: name,
+                                top: '10%',
+                                bottom: '8%',
+                                left: 'center',
+                                itemWidth: 8,
+                                textStyle: {
+                                    color: '#6E7889',
+                                    fontSize: '9'
+                                }
+                            },
+                            title: {
+                                text: '实时PCS功率',
+                                textStyle: {
+                                    fontWeight: 'bolder',
+                                    color: '#C2D4F1',
+                                    fontSize:'14'
+                                },
+                                top: '10',
+                                left: '20',
+                            },
+                            grid: {
+                                left: '5%',
+                                right: '10%',
+                                bottom: '5%',
+                                top: '25%',
+                                containLabel: true,
+                            },
+                            xAxis: [
+                                {
+                                    type: 'category',
+                                    boundaryGap: true,
+                                    data: pcsy,
+                                    axisTick: {
+                                    show: false,
+                                    },
+                                    axisLine: { //坐标轴轴线相关设置
+                                    onZero: true,
+                                    lineStyle: {
+                                        color: '#233E6A'
+                                    }
+
+                                    },
+                                    axisLabel: {
+                                        color: '#4E6387',
+                                        fontSize:'9'
+                                    },
+
+                                },
+                            ],
+                            yAxis: [
+                                {
+                                    type: 'value',
+                                    axisTick: {
+                                    show: false,
+                                    },
+                                    splitLine: {//坐标轴在gird区域中的分割线
+                                    lineStyle: {
+                                        color: 'rgba(37,64,107,0.5)',
+                                        type: 'dashed'
+                                    },
+                                    },
+                                    axisLine: {//坐标轴轴线相关设置
+                                    onZero: true,
+                                    lineStyle: {
+                                        color: '#233E6A'
+                                    }
+                                    },
+                                    axisLabel: {//  坐标轴刻度标签相关设置
+                                        color: '#4E6387',
+                                        fontSize:'9'
+                                    },
+                                    scale: true,
+                                },
+                            ],
+                            series: pcsseries,
+                        };
+                        sspcsglqx.setOption(pcsglone);
+
+                        // 实时负载功率
+                        let fzglone = {
+                            backgroundColor: '#112957',
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            legend: {
+                                type: 'scroll',
+                                icon: 'circle',
+                                itemGap: 10,
+                                // data: name,
+                                top: '10%',
+                                bottom: '8%',
+                                left: 'center',
+                                itemWidth: 8,
+                                textStyle: {
+                                    color: '#6E7889',
+                                    fontSize: '9'
+                                }
+                            },
+                            title: {
+                                text: '实时负载功率',
+                                textStyle: {
+                                    fontWeight: 'bolder',
+                                    color: '#C2D4F1',
+                                    fontSize:'14'
+                                },
+                                top: '10',
+                                left: '20',
+                            },
+                            grid: {
+                                left: '5%',
+                                right: '10%',
+                                bottom: '5%',
+                                top: '25%',
+                                containLabel: true,
+                            },
+                            xAxis: [
+                                {
+                                    type: 'category',
+                                    boundaryGap: true,
+                                    data: fzy,
+                                    axisTick: {
+                                    show: false,
+                                    },
+                                    axisLine: { //坐标轴轴线相关设置
+                                    onZero: true,
+                                    lineStyle: {
+                                        color: '#233E6A'
+                                    }
+
+                                    },
+                                    axisLabel: {
+                                        color: '#4E6387',
+                                        fontSize:'9'
+                                    },
+
+                                },
+                            ],
+                            yAxis: [
+                                {
+                                    type: 'value',
+                                    axisTick: {
+                                    show: false,
+                                    },
+                                    splitLine: {//坐标轴在gird区域中的分割线
+                                    lineStyle: {
+                                        color: 'rgba(37,64,107,0.5)',
+                                        type: 'dashed'
+                                    },
+                                    },
+                                    axisLine: {//坐标轴轴线相关设置
+                                    onZero: true,
+                                    lineStyle: {
+                                        color: '#233E6A'
+                                    }
+                                    },
+                                    axisLabel: {//  坐标轴刻度标签相关设置
+                                        color: '#4E6387',
+                                        fontSize:'9'
+                                    },
+                                    scale: true,
+                                },
+                            ],
+                            series: fzseries,
+
+                        };
+                        ssfzglqx.setOption(fzglone);                        
+
+
+
+
+                        // 一次系统图 数据
+                        // 负载数据
+                        let load0 = data[5].loadTAP;
+                        $("#load0").html( dealnumber(load0) );
+
+                        // 油机数据
+                        let yj_rp0 = data[1].powerGeneration;
+                        $("#yj_rp0").html( dealnumber(yj_rp0) );
+
+                        let yj_sxdy0 = dealnumber(data[1].generating12V) + '/' + dealnumber(data[1].generating23V) + '/' + dealnumber(data[1].generating31V);
+                        $("#yj_sxdy0").html( yj_sxdy0 );
+
+                        $("#yj_sxpl0").html( dealnumber(data[1].generationFrequency) );
+
+                        // pcs
+                        let pcs_sxdy0 = data[2].abacv + "/" + data[2].bcacv+ "/" + data[2].caacv;
+                        $("#pcs_sxdy0").html( dealnumber(pcs_sxdy0) );
+                        
+                        let pcs_sxdl0 = data[2].aaci + "/" + data[2].baci+ "/" + data[2].caci;
+                        $("#pcs_sxdl0").html( dealnumber(pcs_sxdl0) );
+
+                        let pcs_rp0 = data[2].tap;
+                        $("#pcs_rp0").html( dealnumber(pcs_rp0) );
+
+                        $("#pcs_sxpl0").html( dealnumber(data[2].acFrequency));
+
+                            // bms
+                        $("#bms_soc0").html( dealnumber(data[3].soc) );
+
+                        $("#bms_dy0").html( dealnumber(data[3].group_V) );
+
+                        // 单体最高电压值 
+                        $("#bms_mtosdy0").html( dealnumber(data[3].mvosU1) );
+                        // 单体最低电压值
+                        $("#bms_ltosmdy0").html( dealnumber(data[3].lvosU1) );
+
+                        // 电流
+                        $("#group_I0").html(data[3].group_I);
+
+                        //左边负载方向判断---第n次请求
+                        if(num_index === 1){
+                            load01 = data[5].loadTAP;
+                            if(load01 === 0){
+                                $("#leftload_wrap0").html(`
+                                <div id="gdownline11" class="hp hpthin" style="left:50%; top:14%;  width:37%;z-index: 1;"></div>
+                                `);
+                            }else {
+                                $("#leftload_wrap0").html(`
+                                <div id="gdownline11" class="hp hpthin goright" style="left:50%; top:14%;  width:37%;z-index: 1;"></div>
+                                `);
+                            }
+                        }else{
+                            load02 = data[5].loadTAP;
+                            let load01_sign = Math.sign(load01);
+                            let load02_sign = Math.sign(load02);
+                            if(load01_sign !== load02_sign){
+                                if(load02 === 0){
+                                    $("#leftload_wrap0").html(`
+                                        <div id="gdownline11" class="hp hpthin" style="left:50%; top:14%;  width:37%;z-index: 1;"></div>
+                                    `);
+                                }else {
+                                    $("#leftload_wrap0").html(`
+                                        <div id="gdownline11" class="hp hpthin goright" style="left:50%; top:14%;  width:37%;z-index: 1;"></div>
+                                    `);
+                                }
+                            }
+                            load02 = data[5].loadTAP;
+                        }
+
+                        // 油机左边1端方向判断---第n次请求
+                        if(num_index === 1){
+                            yj_left1 = data[1].powerGeneration;
+                            if(yj_left1 === 0){
+                                $("#leftwrap0").html(`
+                                    <div id="leftline" class="hp hpthin" style="left:7%; top:14%;  width:44%; z-index: 1;"></div>
+                                `);
+                            }else {
+                                $("#leftwrap0").html(`
+                                    <div id="leftline" class="hp hpthin goright" style="left:7%; top:14%;  width:44%; z-index: 1;"></div>
+                                `);
+                            }
+                        }else{
+                            yj_left2 = data[1].powerGeneration;
+                            let yj_left1_sign = Math.sign(yj_left1);
+                            let yj_left2_sign = Math.sign(yj_left2);
+                            if(yj_left1_sign !== yj_left2_sign){
+                                if(yj_left2 === 0){
+                                    $("#leftwrap0").html(`
+                                        <div id="leftline" class="hp hpthin" style="left:7%; top:14%;  width:44%; z-index: 1;"></div>
+                                    `);
+                                }else {
+                                    $("#leftwrap0").html(`
+                                        <div id="leftline" class="hp hpthin goright" style="left:7%; top:14%;  width:44%; z-index: 1;"></div>
+                                    `);
+                                }
+                            }
+                            yj_left2 = data[1].powerGeneration;
+                        }
+
+
+                        // 左边pcs方向判断---第n次请求
+                        if(num_index === 1){
+                            pcs1_rp0 = data[2].tap;
+                            if(pcs1_rp0 < 0){
+                                $("#pcs00").html(`
+                                    <div id="pcsline0" class="vp vpthin gotop" style="left:50%; top:14%;  height:55%;z-index: 1;"></div>
+                                `);
+                            }else if(pcs1_rp0 > 0){
+                                $("#pcs00").html(`
+                                    <div id="pcsline0" class="vp vpthin godown" style="left:50%; top:14%;  height:55%;z-index: 1;"></div>
+                                `);
+                            }else if(pcs1_rp0 === 0){
+                                $("#pcs00").html(`
+                                    <div id="pcsline0" class="vp vpthin" style="left:50%; top:14%;  height:55%;z-index: 1;"></div>
+                                `);
+                            }
+                        }else {
+                            pcs2_rp0 = data[2].tap;
+                            let pcs1_rp0_sign = Math.sign(pcs1_rp0);
+                            let pcs2_rp0_sign = Math.sign(pcs2_rp0);
+                            if(pcs1_rp0_sign !== pcs2_rp0_sign){
+                                if(pcs2_rp0 < 0){
+                                    $("#pcs00").html(`
+                                        <div id="pcsline0" class="vp vpthin gotop" style="left:50%; top:14%;  height:55%;z-index: 1;"></div>
+                                    `);
+                                }else if(pcs2_rp0 > 0){
+                                    $("#pcs00").html(`
+                                        <div id="pcsline0" class="vp vpthin godown" style="left:50%; top:14%;  height:55%;z-index: 1;"></div>
+                                    `);
+                                }else if(pcs2_rp0 == 0){
+                                    $("#pcs00").html(`
+                                        <div id="pcsline0" class="vp vpthin" style="left:50%; top:14%;  height:55%;z-index: 1;"></div>
+                                    `);
+                                }
+                            }
+                            pcs2_rp0 = data[2].tap;
+
+                        }
+
+
+
+                    },
+                    error: function (err) {
+                        console.log("数据请求失败");
+                    }
+                });
+            }
+
+            function selectsbeach(obj) {
+                var str = '';
+
+                if (obj.constructor==Array) {
+                    str += `<option value="0" >所有设备</option>`;
+                    for(var i = 0, len = obj.length; i < len; i++){
+                        str += `<option value="`+obj[i].id+`">`+obj[i].groupName+`</option>`
+                    }
+                    return str;
+                }
+               
+                return obj;
+            }
+
+            function selectmontheach(nowmonth) {
+                var str = '';
+
+                for(var i = 0, len = nowmonth; i < len; i++){
+                    let showmonth;
+                    if(i==0){showmonth="一月"}
+                    else if(i==1){showmonth="二月"}
+                    else if(i==2){showmonth="三月"}
+                    else if(i==3){showmonth="四月"}
+                    else if(i==4){showmonth="五月"}
+                    else if(i==5){showmonth="六月"}
+                    else if(i==6){showmonth="七月"}
+                    else if(i==7){showmonth="八月"}
+                    else if(i==8){showmonth="九月"}
+                    else if(i==9){showmonth="十月"}
+                    else if(i==10){showmonth="十一月"}
+                    else if(i==11){showmonth="十二月"}
+
+                        
+                    if( i!=(nowmonth-1) ){
+                        str += `<option value="` + i + `">` + showmonth + `</option>`;
+                        
+                    }else if(i==(nowmonth-1)){
+                        str += `<option value="` + i + `" selected>` + showmonth + `</option>`;
+                    }
+                }
+                return str;
+
+            }
+
+            function selectsbeachcon(data) {
+                var str = ``;
+                        
+                for(var i=0;i<data.length;i++){
+                    str += `
+                    <div class="conlist">
+                        <div class="listup">
+                            <span></span><span>`+Mounthdate(data[i].time)+`</span>
+                        </div>
+                        <div class="listdown">
+                            <ul>
+                                <li>
+                                    <p>燃油消耗</p>
+                                    <div class="ztdiv">
+                                        <span>`+data[i].usedAcc+`</span><span>L</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p>发电量</p>
+                                    <div class="ztdiv">
+                                        <span>`+data[i].positiveKWh+`</span><span>kWh</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p>用电量</p>
+                                    <div class="ztdiv">
+                                        <span>`+data[i].tpap+`</span><span>kWh</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    <p>系统效率</p>
+                                    <div class="ztdiv">
+                                        <span>`+data[i].systemEfficiency+`</span><span></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p>单位油耗</p>
+                                    <div class="ztdiv">
+                                        <span>`+data[i].unitConsumption+`</span><span></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p>停电次数</p>
+                                    <div class="ztdiv">
+                                        <span>`+data[i].projectPowerFailure+`</span><span></span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>`;
+                } //for循环结束
+                return str;
+            }// 函数结束
+
+
+
+            // 判断是否为数字
+            function isNumber(val) {
+                if (val == "" || isNaN(val)) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            function numToText(obj){
+                if(obj == 0){
+                    obj = 无效;
+                }else if(obj == 1){
+                    obj = 有效;
+                }
+                return obj;
+            }
+            
+        });
+    </script>
+</body>
+
+</html>

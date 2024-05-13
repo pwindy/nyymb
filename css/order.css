@@ -1,0 +1,42 @@
+@charset "utf-8";
+
+#container.order {
+  max-width: 750px;
+  height: 100%;
+  margin: auto;
+  overflow-x: hidden;
+  background: -webkit-linear-gradient(top,
+      rgb(1, 103, 255),
+      rgb(237, 244, 255),
+      #fff);
+  /*解决ios上滑动不流畅*/
+  -webkit-overflow-scrolling: touch;
+}
+
+#container.order::-webkit-scrollbar {
+  /*隐藏滚轮*/
+  display: none;
+  width: 0px;
+}
+
+#container .order_01 {
+  height: 100%;
+  width: 100%;
+}
+
+/*主屏幕*/
+.order_screen {
+  height: 100%;
+  margin: 0 5%;
+  width: 90%;
+  position: relative;
+  overflow-x: hidden;
+  /*解决ios上滑动不流畅*/
+  -webkit-overflow-scrolling: touch;
+}
+
+.order_screen::-webkit-scrollbar {
+  /*隐藏滚轮*/
+  display: none;
+  width: 0px;
+}

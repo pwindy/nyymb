@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <!--如果是IE 就以标准渲染-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <!-- 视窗——————响应式布局 -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+
+    <!--当前页面的三要素-->
+    <title>运维系统</title>
+    <meta name="description" content="聚能优电" />
+    <meta http-equiv="keywords" content="聚能优电" />
+    <script type="text/javascript" src="../js/verify.js"></script>
+    <script type="text/javascript" src="./js/common/commonfuntion.js"></script>
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="../css/common/common.css" />
+    <link rel="stylesheet" type="text/css" href="../css/mainmonitor_szcyj.css" />
+
+</head>
+
+<body>
+    <div id="container" class="szcyj">
+        <div class="szcyj_01">
+            <!--主屏内容-->
+            <div class="szcyj_screen">
+                <div class="m_title">
+                    <a href="JavaScript:history.go(-1);" class="back">
+                        <img src="../images/back.svg" alt="">
+                    </a>
+                    <span class="tit">柴油机</span>
+                </div>
+
+                
+                <div class="m_content">
+
+
+                    
+                    <div class="sb_tit">
+                        <span>设备名称:</span>
+                        <select id="select" value="" class="arrowdown">
+                        </select>
+                    </div>
+                    <div id="targetdom">
+
+                    
+                        <!-- <div class="ceshi" style="padding: 0.4rem 0 0.6rem 0; font-size:0.28rem;color: #97B0D4;">
+                            <span style="display:inline-block; padding:0.1rem 0.3rem;border: 1px solid #fff;border-radius:10px;margin-right:10px;cursor: pointer;" id="ceshikaiji">开机</span>
+                            <span style="display:inline-block; padding:0.1rem 0.3rem;border: 1px solid #fff;border-radius:10px;cursor: pointer;" id="ceshiguanji">关机</span>
+                        </div> -->
+                    </div>
+                    <div class="fdjcs cslist">
+                        <div class="fdjcs_tit list_tit">
+                            <span class="tit_con">发电机参数</span>
+                        </div>
+                        <ul class="list_con" id="fdjcs_con">
+                        </ul>
+                    </div>
+                    <div class="sbztcs cslist">
+                        <div class="sbztcs_tit list_tit">
+                            <!-- <span class="tit_icon"></span> -->
+                            <span class="tit_con">设备状态</span>
+                        </div>
+                        <ul class="list_con" id="sbztcs_con">
+                            <!-- <li><span class="con_left">通讯状态</span><span class="con_right">正常</span></li>
+                            <li><span class="con_left">断路器状态</span><span class="con_right">合闸</span></li> -->
+                        </ul>
+                    </div>
+
+                    <div class="jlxxcs cslist">
+                        <div class="jlxxcs_tit list_tit">
+                            <!-- <span class="tit_icon"></span> -->
+                            <span class="tit_con">交流信息</span>
+                        </div>
+                        <ul class="list_con" id="jlxxcs_con">
+                            <!-- <li><span class="con_left">发电有功功率</span><span class="con_right">119.56</span></li>
+                            <li><span class="con_left">L1相发电有功功率</span><span class="con_right">41.46</span></li>
+                            <li><span class="con_left">L2相发电有功功率</span><span class="con_right">37.24</span></li>
+                            <li><span class="con_left">L3相发电有功功率</span><span class="con_right">39.56</span></li>
+                            <li><span class="con_left">发电视在功率</span><span class="con_right">119.2</span></li>
+                            <li><span class="con_left">L1相发电视在功率</span><span class="con_right">41.8</span></li>
+                            <li><span class="con_left">L2相发电视在功率</span><span class="con_right">36.9</span></li>
+                            <li><span class="con_left">L3相发电视在功率</span><span class="con_right">39.74</span></li>
+                            <li><span class="con_left">发电无功功率</span><span class="con_right">2.88</span></li>
+                            <li><span class="con_left">L1相发电无功功率</span><span class="con_right">1.52</span></li>
+                            <li><span class="con_left">L2相发电无功功率</span><span class="con_right">0.64</span></li>
+                            <li><span class="con_left">L3相发电无功功率</span><span class="con_right">1.3</span></li> -->
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        (function (win, doc) {
+            var docEl = doc.documentElement || document.body; //获取HTML标签
+
+            var container = doc.getElementById("container"); //container元素
+            //判断是移动端设备还是PC,移动 就采用'orientationchange',横竖屏事件，PC端就采用onresize，窗口改变时间
+            var resize =
+                "onorientationchange" in win ? "orientationchange" : "resize";
+
+            function rem() {
+                docEl.style.fontSize = 100 * (container.clientWidth / 750) + "px";
+            }
+
+            //监听'DOMContent事件:DOM加载完成执行,如果DOMContent事件，那么执行rem函数
+            doc.addEventListener("DOMContentLoaded", rem, false);
+
+            //win下监听resize事件,如果resize事件，那么执行rem函数
+            win.addEventListener(resize, rem, false);
+        })(window, document);
+    </script>
+    <!-- js -->
+    <script type="text/javascript" src="../js/jquery-3.4.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            var projectid = GetQueryString('projectid');
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: 'http://112.74.169.99:21021/api/services/app/DeviceService/GetADeviceInfoListByProjectId?id='+projectid+'&typeid=4',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Accept",
+                        "application/json, text/javascript, */*; q=0.01");
+                    xhr.setRequestHeader("Authorization", accessToken);
+                    xhr.setRequestHeader('.AspNetCore.Culture', 'zh-Hans');
+                },
+                success: function (res) {
+                    var onoff = 0;
+                    var defaulttimer;
+                    var changetimer;
+                    // console.log("柴油机数据 请求成功");
+                    var data = res.result;
+                    // var data = [];
+                    if (data.length === 0) {
+                        $(".m_content").html("暂无数据").css({
+                            "font-size": "0.5rem",
+                            "text-align": "center",
+                            "color": "#fff",
+                            "margin-top": "2.5rem"
+                        });
+                    } else {
+                        $("#select").html(eachoption(data));
+                        if (onoff == 0) {
+                            var optionsdefaultid = $("#select option:selected").attr('valueid');
+                            updateData(); // 首次加载立即请求数据
+                            defaulttimer = setInterval(updateData, 1000); // 首次加载之后，每1s重新请求一次数据
+                            function updateData() { // 请求数据
+                                $.ajax({
+                                    type: "GET",
+                                    dataType: "json",
+                                    url: 'http://112.74.169.99:21021/api/services/app/ControlDataService/GetNewDGDataByID?Id=' +
+                                        optionsdefaultid,
+                                    beforeSend: function (xhr) {
+                                        xhr.setRequestHeader("Accept",
+                                            "application/json, text/javascript, */*; q=0.01"
+                                        );
+                                        xhr.setRequestHeader("Authorization",
+                                            accessToken);
+                                        xhr.setRequestHeader('.AspNetCore.Culture',
+                                            'zh-Hans');
+                                    },
+                                    success: function (res) {
+                                        // console.log("首次加载设备数据 请求成功");
+                                        $("#targetdom").html('');
+                                        $('#targetdom').html(`
+                                            <div class="ceshi" style="padding: 0.4rem 0 0.2rem 0; font-size:0.28rem;color: #97B0D4;">
+                                                <span style="display:inline-block; padding:0.1rem 0.3rem;border: 1px solid #fff;border-radius:10px;margin-right:10px;" id="ceshikaiji">开机</span>
+                                                <span style="display:inline-block; padding:0.1rem 0.3rem;border: 1px solid #fff;border-radius:10px;" id="ceshiguanji">关机</span>
+                                            </div>
+                                        `)
+                                        $("#fdjcs_con").html('');
+                                        $("#fdjcs_con").html(eachfdjcs(res));
+                                        $("#sbztcs_con").html('');
+                                        $("#sbztcs_con").html(eachsbztcs(res));
+                                        $("#jlxxcs_con").html('');
+                                        $("#jlxxcs_con").html(eachjlxxcs(res));
+
+                                        // 开机测试
+                                        $("#ceshikaiji").click(function(){
+                                            $.ajax({
+                                                type: "GET",
+                                                dataType: "json",
+                                                url: 'http://112.74.169.99:21021/api/TokenAuth/DGControl?devid=' + optionsdefaultid + '&type=0',
+                                                beforeSend: function (xhr) {
+                                                    xhr.setRequestHeader("Accept",
+                                                        "application/json, text/javascript, */*; q=0.01"
+                                                    );
+                                                    xhr.setRequestHeader("Authorization",
+                                                        accessToken);
+                                                    xhr.setRequestHeader('.AspNetCore.Culture',
+                                                        'zh-Hans');
+                                                },
+                                                success: function(){},
+                                                error: function(){}
+                                            })
+                                        })
+
+                                        // 关机测试
+                                        $("#ceshiguanji").click(function(){
+                                            $.ajax({
+                                                type: "GET",
+                                                dataType: "json",
+                                                url: 'http://112.74.169.99:21021/api/TokenAuth/DGControl?devid=' + optionsdefaultid + '&type=1',
+                                                beforeSend: function (xhr) {
+                                                    xhr.setRequestHeader("Accept",
+                                                        "application/json, text/javascript, */*; q=0.01"
+                                                    );
+                                                    xhr.setRequestHeader("Authorization",
+                                                        accessToken);
+                                                    xhr.setRequestHeader('.AspNetCore.Culture',
+                                                        'zh-Hans');
+                                                },
+                                                success: function(){},
+                                                error: function(){}
+                                            })
+                                        })
+
+
+
+
+                                    },
+                                    error: function (res) {
+                                        console.log("首次加载设备数据 请求失败");
+                                    }
+                                });
+                            }
+                        }
+
+
+
+                        // 切换下拉框操作
+                        $("#select").change(function () {
+                            onoff = 1;
+                            clearInterval(defaulttimer);
+                            clearInterval(changetimer);
+                            var optionschangeid = $("#select option:selected").attr(
+                                'valueid');
+                            updateChangeData(); // 首次加载立即请求数据
+                            changetimer = setInterval(updateChangeData,
+                                1000); // 首次加载之后，每1s重新请求一次数据
+                            function updateChangeData() {
+                                $.ajax({
+                                    type: "GET",
+                                    dataType: "json",
+                                    url: 'http://112.74.169.99:21021/api/services/app/ControlDataService/GetNewDGDataByID?Id=' +
+                                        optionschangeid,
+                                    beforeSend: function (xhr) {
+                                        xhr.setRequestHeader("Accept",
+                                            "application/json, text/javascript, */*; q=0.01"
+                                        );
+                                        xhr.setRequestHeader("Authorization",
+                                            accessToken);
+                                        xhr.setRequestHeader(
+                                            '.AspNetCore.Culture',
+                                            'zh-Hans');
+                                    },
+                                    success: function (res) {
+                                        $("#targetdom").html('');
+                                        $('#targetdom').html(`
+                                            <div class="ceshi" style="padding: 0.4rem 0 0.2rem 0; font-size:0.28rem;color: #97B0D4;">
+                                                <span style="display:inline-block; padding:0.1rem 0.3rem;border: 1px solid #fff;border-radius:10px;margin-right:10px;" id="ceshikaiji">开机</span>
+                                                <span style="display:inline-block; padding:0.1rem 0.3rem;border: 1px solid #fff;border-radius:10px;" id="ceshiguanji">关机</span>
+                                            </div>
+                                        `)
+
+                                        $("#fdjcs_con").html('');
+                                        $("#fdjcs_con").html(eachfdjcs(res));
+                                        $("#sbztcs_con").html('');
+                                        $("#sbztcs_con").html(eachsbztcs(res));
+                                        $("#jlxxcs_con").html('');
+                                        $("#jlxxcs_con").html(eachjlxxcs(res));
+
+
+                                        // 开机测试
+                                        $("#ceshikaiji").click(function(){
+                                            $.ajax({
+                                                type: "GET",
+                                                dataType: "json",
+                                                url: 'http://112.74.169.99:21021/api/TokenAuth/DGControl?devid=' + optionschangeid + '&type=0',
+                                                beforeSend: function (xhr) {
+                                                    xhr.setRequestHeader("Accept",
+                                                        "application/json, text/javascript, */*; q=0.01"
+                                                    );
+                                                    xhr.setRequestHeader("Authorization",
+                                                        accessToken);
+                                                    xhr.setRequestHeader('.AspNetCore.Culture',
+                                                        'zh-Hans');
+                                                },
+                                                success: function(){},
+                                                error: function(){}
+                                            })
+                                        })
+
+                                        // 关机测试
+                                        $("#ceshiguanji").click(function(){
+                                            $.ajax({
+                                                type: "GET",
+                                                dataType: "json",
+                                                url: 'http://112.74.169.99:21021/api/TokenAuth/DGControl?devid=' + optionschangeid + '&type=1',
+                                                beforeSend: function (xhr) {
+                                                    xhr.setRequestHeader("Accept",
+                                                        "application/json, text/javascript, */*; q=0.01"
+                                                    );
+                                                    xhr.setRequestHeader("Authorization",
+                                                        accessToken);
+                                                    xhr.setRequestHeader('.AspNetCore.Culture',
+                                                        'zh-Hans');
+                                                },
+                                                success: function(){},
+                                                error: function(){}
+                                            })
+                                        })
+
+
+
+
+
+
+                                    },
+                                    error: function (res) {
+                                        console.log("切换设备数据 请求失败");
+                                    }
+                                });
+                            }
+                        });
+                    }
+                },
+                error: function (res) {
+                    console.log("柴油机数据 请求失败");
+                }
+            });
+
+            function eachoption(obj) {
+                var str = '';
+                if (obj.constructor == Array) {
+                    for (var i = 0, len = obj.length; i < len; i++) {
+                        var option_value = obj[i].devCN;
+                        var option_valueid = obj[i].id;
+                        str += `<option value="` + option_value + `" valueid="` +
+                            option_valueid + `">` +
+                            option_value + `
+                        </option>`;
+
+                    }
+                    return str;
+                }
+            }
+            // 发电机参数
+            function eachfdjcs(obj) {
+                var str = '';
+                str += `<li><span class="con_left">燃料液位(%)</span><span class="con_right">` + obj.result
+                    .fuelLevel +
+                    `</span></li>`;
+                str += `<li><span class="con_left">油压(bar)</span><span class="con_right">` + obj.result
+                    .oilPressure +
+                    `</span></li>`;
+                str += `<li><span class="con_left">温度(℃)</span><span class="con_right">` + obj.result
+                    .temperature +
+                    `</span></li>`;
+                str += `<li><span class="con_left">发动机转速(r/min)</span><span class="con_right">` +
+                    obj.result.rpm +
+                    `</span></li>`;
+                str += `<li><span class="con_left">发电机频率(Hz)</span><span class="con_right">` + obj.result
+                        .generationFrequency +
+                    `</span></li>`;
+                str += `<li><span class="con_left">发电功率因数</span><span class="con_right">` + obj.result
+                        .generationPowerFactor +
+                    `</span></li>`;
+                return str;
+            }
+
+            // 设备状态
+            function eachsbztcs(obj) {
+                if(obj.result.isonline == 0){
+                    obj.result.isonline = "断开"
+                }else{
+                    obj.result.isonline = "正常"
+                }
+
+                if (obj.result.circuitBreakerStatus == 0) {
+                    obj.result.circuitBreakerStatus = "断开"
+
+                } else{
+                    obj.result.circuitBreakerStatus = "合闸"
+                }
+                obj.result.circuitBreakerStatus = 0 ? '断开' : '合闸';
+                var str = '';
+                str += `<li><span class="con_left">通讯状态</span><span class="con_right">` + obj.result
+                    .isonline +
+                    `</span></li>`;
+                str += `<li><span class="con_left">断路器状态</span><span class="con_right">` + obj.result
+                    .circuitBreakerStatus +
+                    `</span></li>`;
+                return str;
+            }
+            // 交流信息
+            function eachjlxxcs(obj) {
+                var str = '';
+                str += `<li><span class="con_left">发电有功功率(kW)</span><span class="con_right">` + obj.result
+                    .powerGeneration +
+                    `</span></li>`;
+                str += `<li><span class="con_left">L1相发电有功功率(kW)</span><span class="con_right">` + obj.result
+                    .aPowerGeneration +
+                    `</span></li>`;
+                str += `<li><span class="con_left">L2相发电有功功率(kW)</span><span class="con_right">` + obj.result
+                    .bPowerGeneration +
+                    `</span></li>`;
+                str += `<li><span class="con_left">L3相发电有功功率(kW)</span><span class="con_right">` + obj.result
+                    .cPowerGeneration +
+                    `</span></li>`;
+                str += `<li><span class="con_left">发电视在功率(kVA)</span><span class="con_right">` + obj.result
+                    .generatorTotalVA +
+                    `</span></li>`;
+                str += `<li><span class="con_left">L1相发电视在功率(kVA)</span><span class="con_right">` + obj.result
+                    .generatorL1VA +
+                    `</span></li>`;
+                str += `<li><span class="con_left">L2相发电视在功率(kVA)</span><span class="con_right">` + obj.result
+                    .generatorL2VA +
+                    `</span></li>`;
+                str += `<li><span class="con_left">L3相发电视在功率(kVA)</span><span class="con_right">` + obj.result
+                    .generatorL3VA +
+                    `</span></li>`;
+                str += `<li><span class="con_left">发电无功功率(kVar)</span><span class="con_right">` + obj.result
+                    .reactivePowerGeneration +
+                    `</span></li>`;
+                str += `<li><span class="con_left">L1相发电无功功率(kVar)</span><span class="con_right">` + obj.result
+                    .aReactivePowerGeneration +
+                    `</span></li>`;
+                str += `<li><span class="con_left">L2相发电无功功率(kVar)</span><span class="con_right">` + obj.result
+                    .bReactivePowerGeneration +
+                    `</span></li>`;
+                str += `<li><span class="con_left">L3相发电无功功率(kVar)</span><span class="con_right">` + obj.result
+                    .cReactivePowerGeneration +
+                    `</span></li>`;
+                str += `<li><span class="con_left">L1相发电功率因数</span><span class="con_right">` + obj.result
+                    .aGenerationPowerFactor +
+                    `</span></li>`;
+                str += `<li><span class="con_left">L2相发电功率因数</span><span class="con_right">` + obj.result
+                    .bGenerationPowerFactor +
+                    `</span></li>`;
+                str += `<li><span class="con_left">L3相发电功率因数</span><span class="con_right">` + obj.result
+                    .cGenerationPowerFactor +
+                    `</span></li>`;
+                str += `<li><span class="con_left">L1相电流(发电电流A)(A)</span><span class="con_right">` + obj.result
+                    .generatingCurrentA +
+                    `</span></li>`;
+                str += `<li><span class="con_left">L2相电流(发电电流B)(A)</span><span class="con_right">` + obj.result
+                    .generatingCurrentB +
+                    `</span></li>`;
+                str += `<li><span class="con_left">L3相电流(发电电流C)(A)</span><span class="con_right">` + obj.result
+                    .generatingCurrentC +
+                    `</span></li>`;
+                str += `<li><span class="con_left">L1-N相电压(发电压1)(V)</span><span class="con_right">` + obj.result
+                    .generatingV1 +
+                    `</span></li>`;
+                str += `<li><span class="con_left">L2-N相电压(发电压2)(V)</span><span class="con_right">` + obj.result
+                    .generatingV2 +
+                    `</span></li>`;
+                str += `<li><span class="con_left">L3-N相电压(发电压3)(V)</span><span class="con_right">` + obj.result
+                    .generatingV3 +
+                    `</span></li>`;
+                str += `<li><span class="con_left">L1-L2线电压(发电12线压)(V)</span><span class="con_right">` +
+                    obj.result.generating12V +
+                    `</span></li>`;
+                str += `<li><span class="con_left">L2-L3线电压(发电23线压)(V)</span><span class="con_right">` +
+                    obj.result.generating23V + 
+                    `</span></li>`;
+                str += `<li><span class="con_left">L3-L1线电压(发电31线压)(V)</span><span class="con_right">` +
+                    obj.result.generating31V + 
+                    `</span></li>`;
+                return str;
+            }
+        });
+    </script>
+
+</body>
+
+</html>

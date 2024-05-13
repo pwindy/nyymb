@@ -1,0 +1,115 @@
+@charset "utf-8";
+
+#container.aldetail {
+    max-width: 750px;
+    height: 100%;
+    margin: auto;
+    overflow-x: hidden;
+    background-color: rgb(0, 28, 67);
+    /*解决ios上滑动不流畅*/
+    -webkit-overflow-scrolling: touch;
+}
+
+#container.aldetail::-webkit-scrollbar {
+    /*隐藏滚轮*/
+    display: none;
+    width: 0px;
+}
+
+#container .aldetail_01 {
+    height: 100%;
+    width: 100%;
+}
+
+/*主屏幕*/
+.aldetail_screen {
+    height: 100%;
+    margin: 0 5%;
+    width: 90%;
+    position: relative;
+    overflow-x: hidden;
+    /*解决ios上滑动不流畅*/
+    -webkit-overflow-scrolling: touch;
+}
+
+.aldetail_screen::-webkit-scrollbar {
+    /*隐藏滚轮*/
+    display: none;
+    width: 0px;
+}
+
+/* 题目 */
+.aldetail_screen .m_title {
+    color: #FFFFFF;
+    position: fixed;
+    width: 90%;
+    height: 0.6rem;
+    top: 0;
+    left: 0;
+    font-weight: bolder;
+    font-size: 0.36rem;
+    padding: 0.5rem 5% 0.4rem 5%;
+    background-color: rgb(0, 28, 67);
+    z-index: 5;
+    letter-spacing: 2.25px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.aldetail_screen .m_title .back {
+    height: 70%;
+    margin-right: 0.4rem;
+}
+
+.aldetail_screen .m_title .back img {
+    height: 100%;
+}
+
+.aldetail_screen #con_tit {
+    width: 100%;
+    margin-top: 1.55rem;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    font-size: 0.32rem;
+    color: #0167FF;
+    letter-spacing: 0;
+}
+
+
+/* 内容部分 */
+.aldetail_screen .m_content {
+    width: 100%;
+}
+
+.aldetail_screen .m_content .data_wrap {
+    width: 100%;
+}
+
+.aldetail_screen .m_content .data_wrap div.datalista {
+    width: 100%;
+    height: 1.2rem;
+    border-bottom: 1px dotted #1B3150;
+    display: block;
+
+}
+
+.aldetail_screen .m_content .data_wrap div.datalista span {
+    font: 0.28rem SourceHanSansCN-Regular;
+    height: 1.2rem;
+    line-height: 1.2rem;
+    letter-spacing: 1px;
+}
+
+.aldetail_screen .m_content .data_wrap div.datalista span.dataleft {
+    float: left;
+    width: 35%;
+    color: #66768D;
+}
+
+.aldetail_screen .m_content .data_wrap div.datalista span.dataright {
+    float: right;
+    width: 60%;
+    color: #7F94B2;
+    text-align: right;
+}
